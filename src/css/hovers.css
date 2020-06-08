@@ -1,0 +1,280 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Square-effect */
+.square-effect1 {
+  background: #000;
+  background: -moz-linear-gradient(-45deg, #000000 0%, #000000 25%, #1e539e 50%, #00adda 75%, #a1a4a7 100%);
+  background: -webkit-linear-gradient(-45deg, #000000 0%, #000000 25%, #1e539e 50%, #00adda 75%, #a1a4a7 100%);
+  background: linear-gradient(135deg, #000000 0%, #000000 25%, #1e539e 50%, #00adda 75%, #a1a4a7 100%);
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  transition: .5s all;
+}
+.square-effect1 .square-bar1 {
+  width: 100%; 
+  float: left;
+  position: relative;
+  mix-blend-mode: screen;
+}
+.square-effect1:hover {
+  background-position: 100% 100%;
+}
+
+/* Float-shadow */
+.float-shadow .enquer-box1 {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.float-shadow .enquer-box1:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.float-shadow:hover .enquer-box1, .float-shadow:focus .enquer-box1, .float-shadow:active .enquer-box1 {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.float-shadow:hover .enquer-box1:before, .float-shadow:focus .enquer-box1:before, .float-shadow:active .enquer-box1:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+/* Float-shadow */
+.float-shadow .treatment-box1 {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.float-shadow .treatment-box1:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.float-shadow:hover .treatment-box1, .float-shadow:focus .treatment-box1, .float-shadow:active .treatment-box1 {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.float-shadow:hover .treatment-box1:before, .float-shadow:focus .treatment-box1:before, .float-shadow:active .treatment-box1:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+/*scroll-effect1*/
+.scroll-effect1 {
+	width: 100%;
+	height: 48px;
+	margin: auto;
+	position: relative;
+	z-index: 99;
+}
+.scroll-effect1 a span {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 30px;
+	height: 50px;
+	margin-left: -15px;
+	border: 1px solid #fff;
+	border-radius: 16px;
+	box-sizing: border-box;
+}
+.scroll-effect1 a span:before {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	content: '';
+	width: 1px;
+	height: 6px;
+	background: #ffffff;
+	border-radius: 50%;
+	-webkit-animation: sdb10 2s infinite;
+	animation: sdb10 2s infinite;
+	box-sizing: border-box;
+}
+@-webkit-keyframes sdb10 {
+ 0% {
+ -webkit-transform: translate(0, 0);
+ opacity: 0;
+}
+ 40% {
+ opacity: 1;
+}
+ 80% {
+ -webkit-transform: translate(0, 20px);
+ opacity: 0;
+}
+ 100% {
+ opacity: 0;
+}
+}
+@keyframes sdb10 {
+ 0% {
+ transform: translate(0, 0);
+ opacity: 0;
+}
+ 40% {
+ opacity: 1;
+}
+ 80% {
+ transform: translate(0, 20px);
+ opacity: 0;
+}
+ 100% {
+ opacity: 0;
+}
+}
+/*play-hover*/
+.video-play-button {
+	position: relative;
+	display: block;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	margin: 0 auto 0;
+}
+.video-play-button:after {
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	display: block;
+	width: 70px;
+	height: 70px;
+	background: rgba(0,173,218,0.60);
+	border-radius: 50%;
+	-webkit-animation: pulse-border 1500ms ease-out infinite;
+	animation: pulse-border 1500ms ease-out infinite;
+}
+.video-play-button:before {
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	display: block;
+	width: 54px;
+	height: 54px;
+	background: rgba(0,173,218,0.60);
+	border-radius: 50%;
+	-webkit-animation: pulse-border 1500ms ease-out infinite;
+	animation: pulse-border 1500ms ease-out infinite;
+}
+.video-play-button:after, .video-play-button:before {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	left: 50%;
+	top: 50%;
+	z-index: -9;
+}
+ @-webkit-keyframes pulse-border {
+ 0% {
+ -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+ transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+ opacity: 1;
+}
+ 100% {
+ -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+ transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+ opacity: 0;
+}
+}
+ @keyframes pulse-border {
+ 0% {
+ -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+ transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+ opacity: 1;
+}
+ 100% {
+ -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+ transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+ opacity: 0;
+}
+}
+.gester-wrapp .video-play-button {
+	width: 50px;
+	height: 50px;
+}
+/*map-color*/
+.map-color {
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+/*Smartphone css*/
+@media screen and (max-width: 480px) {
+
+}
+
+@media screen and (min-width:481px) and (max-width:600px) {
+
+}
+
+@media screen and (min-width:601px) and (max-width:767px) {
+
+}
+
+@media screen and (min-width:768px) and (max-width:900px) {
+.video-play-button { width:38px; height:38px;}
+.video-play-button:after { width:60px; height:60px;}
+.video-play-button:before { width:44px;	height:44px;}
+}
+
+@media screen and (min-width:901px) and (max-width:1024px) {
+.video-play-button { width:43px; height:43px;}
+.video-play-button:after { width:65px; height:65px;}
+.video-play-button:before { width:49px;	height:49px;}
+}
+
+@media screen and (min-width:1025px) and (max-width:1240px) {
+
+}

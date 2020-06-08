@@ -1,0 +1,63 @@
+﻿.float-panel { width:100%; transition:all 0.7s;}
+.fixed { border:none; animation:slide-down 0.7s;}
+.fixed .fa-gg { transform:rotate(360deg);}
+.fixed { width:100% !important; float:none; margin:auto !important; padding:8px 0 8px; left:0; right:0; background:rgba(250,250,250,1); border-bottom:1px solid #999; z-index:999999}
+.scroll { width:100%; text-align:right; float:none; margin:0 auto 0; position:relative;}
+.fixed .toggle-text1 { float:none;}
+.fixed .linker-row1 { width:145px;}
+.fixed .linker-row2 { margin:21px 49px 0;}
+.fixed .linker-row3 { margin:35px 0 0;}
+
+@keyframes slide-down {  
+0% { transform:translateY(-100%);}
+100% { transform:translateY(0);}
+}
+/* ---------------- For Animation on Scroll ---------------- */
+.slideanim { visibility: hidden; visibility: visible\9;/*For old IE browsers IE6-8 */ }
+.slideanim.slide { visibility: visible; animation: slide 1s; }
+.slideanim::after { /* useful when its child elements are float:left; */
+content: ""; display: table; clear: both; }
+@keyframes slide {
+0% { transform:translateY(50%);}
+100% { transform:translateY(0);}
+}
+
+/*Smartphone css*/
+@media screen and (max-width: 480px) {
+.float-panel { transform:none; transition:none;}
+.fixed { width:100% !important; background:none; border-bottom:none; position:relative !important; box-shadow:none !important; animation:none !important; padding:0 !important;}
+.scroll { width:100%; position:relative;}
+.fixed .toggle { float:left;}
+.fixed .header-bar3 { float:left !important;}
+}
+
+@media screen and (min-width:481px) and (max-width:600px) {
+.float-panel { transform:none; transition:none;}
+.fixed { width:100% !important; background:none; border-bottom:none; position:relative !important; box-shadow:none !important; animation:none !important; padding:0 !important;}
+.scroll { width:100%; position:relative;}
+.fixed .toggle { float:left;}
+.fixed .header-bar3 { float:left !important;}
+}
+
+@media screen and (min-width:601px) and (max-width:767px) {
+.float-panel { transform:none; transition:none;}
+.fixed { width:100% !important; background:none; border-bottom:none; position:relative !important; box-shadow:none !important; animation:none !important; padding:0 !important;}
+.scroll { width:100%; position:relative;}
+.fixed .toggle { float:left;}
+.fixed .header-bar3 { float:left !important;}
+}
+
+@media screen and (min-width:768px) and (max-width:900px) {
+.fixed { width:100% !important; background:none; border-bottom:none; margin:auto !important; position:relative !important; box-shadow:none !important; animation:none !important; text-align:center; padding:0 !important;}
+.scroll { width:100%; padding:0; position:relative;}
+}
+
+@media screen and (min-width:901px) and (max-width:1024px) {
+.fixed { width:100% !important; background:none; border-bottom:none; margin:auto !important; position:relative !important; box-shadow:none !important; animation:none !important; text-align:center; padding:0 !important;}
+.scroll { width:100%; padding:0; position:relative;}
+}
+
+@media screen and (min-width:1025px) and (max-width:1240px) {
+.fixed { width:94% !important; float:none !important; margin:0 auto 0;}
+.scroll { width:94%; float:left; position:relative;}
+}

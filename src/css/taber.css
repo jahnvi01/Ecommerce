@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tab-row1 {
+	margin: 0 0 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	width: 100%;
+	border-bottom: 3px solid #f4f7fb;
+}
+.tab-row1 li {
+	width: auto;
+	float: none;
+	font-size: 18px;
+	color: #1d2439;
+	border-bottom: 3px solid rgba(255,255,255,0);
+	display: inline-block;
+	cursor: pointer;
+	margin: 0 0.5% 0;
+	padding: 0 20px 10px 0;
+	font-weight:600;
+	font-family: 'Poppins', sans-serif;
+}
+.tab-row1 li:hover {
+	border-bottom: 3px solid #3ab7c9;
+}
+.tab-row1 li.active {
+	border-bottom: 3px solid #3ab7c9;
+}
+.tab-row2 {
+	width: 100%;
+	float: left;
+	overflow: auto;
+	margin: 0 auto 0;
+}
+.tab-bar2 {
+	width: 100%;
+	float: left;
+	padding: 20px 0 20px;
+	display: none;
+}
+.tab-icon1 {
+	width: 55px;
+	float: none;
+	transform: translateY(-50%);
+	margin: 0 auto 0;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	left: 0;
+}
+
+.profi-wrapp .tab-row1 { text-align:left;}
+
+/*Smartphone css*/
+@media screen and (max-width: 480px) {
+.tab-row1 { width:100%; margin:0 0 30px;}
+.tab-row1 li { font-size:9.5px; width:48.5%; margin:0 1% 2% 0; padding:16px 2% 16px 2%;}
+.tab-row1 li:nth-child(2n) { margin:0;}
+.tab-bar2 { width:100%; padding:25px 0 25px;}
+}
+
+@media screen and (min-width:481px) and (max-width:600px) {
+.tab-row1 { width:100%; margin:0 0 30px;}
+.tab-row1 li { width:48.5%; margin:0 1% 2% 0; padding:16px 2% 16px 2%;}
+.tab-row1 li:nth-child(2n) { margin:0;}
+.tab-bar2 { width:100%; padding:25px 0 25px;}
+}
+
+@media screen and (min-width:601px) and (max-width:767px) {
+.tab-row1 { width:100%; margin:0 0 30px;}
+.tab-row1 li { width:48%; margin:0 0 2%;}
+.tab-row1 li:nth-child(2n) { float:right;}
+.tab-row1 li:nth-child(3) { margin-bottom:0;}
+.tab-row1 li:last-child { margin-bottom:0;}
+.tab-bar2 { width:100%; padding:25px 0 25px;}
+}
+
+@media screen and (min-width:768px) and (max-width:900px) {
+.tab-row1 li { font-size:10.5px; padding:16px 1.8% 16px;}
+}
+
+@media screen and (min-width:901px) and (max-width:1024px) {
+.tab-row1 li { font-size:11.5px; padding:16px 2.8% 16px;}
+}
+
+@media screen and (min-width:1025px) and (max-width:1240px) {
+.tab-row1 li { font-size:11.5px; padding:16px 3.8% 16px;}
+}

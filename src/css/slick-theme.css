@@ -1,0 +1,56 @@
+@charset 'UTF-8';
+/* Slider */
+.slick-loading .slick-list {  }
+
+/* Icons */
+
+/* Arrows */
+.slick-prev, .slick-next { font-size: 0; line-height: 0; position: absolute; top: 50%; display: block; width: 13px; height: 21px; padding: 0; margin-top: -10px\9; /*lte IE 8*/ -webkit-transform: translate(0, -50%); -ms-transform: translate(0, -50%); transform: translate(0, -50%); cursor: pointer; color: transparent; border: none; outline: none; background: transparent; z-index:99;}
+.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before { opacity: .25; }
+.slick-prev:before, .slick-next:before { font-family: 'slick'; font-size: 20px; line-height: 1; opacity: .75; color: white; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.slick-prev { left: -2%; background:url(../images/impoer-arrow1.png) no-repeat center / 100% 100%;}
+.slick-next { right: -2%; background:url(../images/impoer-arrow2.png) no-repeat center / 100% 100%;}
+[dir='rtl'] .slick-prev { right: -25px; left: auto; }
+[dir='rtl'] .slick-prev:before { content: 'â†’'; }
+[dir='rtl'] .slick-next { right: auto; left: -25px; }
+[dir='rtl'] .slick-next:before { content: 'â†'; }
+/* Dots */
+.slick-slider { padding-left:0;}
+.slick-dots { width:100%; text-align:center; position:absolute; right:0; bottom:-40px; left:0; display:block; margin:0 auto 0; list-style:none;}
+.slick-dots li { position: relative; display:inline-block; width:10px; height:10px; margin:0 4px 0; cursor:pointer;}
+.slick-dots li:last-child { margin-bottom:0;}
+.slick-dots li button { font-size:0; line-height:0; display:block; width:10px; height:10px; padding:5px; cursor:pointer; color: transparent; border:0; outline:none; background:transparent;}
+.slick-dots li button:hover, .slick-dots li button:focus { outline: none; }
+.slick-dots li button:hover:before, .slick-dots li button:focus:before { background:#ce5327;}
+.slick-dots li button:before { background:rgba(0,129,131,0.50); position: absolute; top: 0; left: 0; width:10px; height:10px; content: 'â€¢'; text-align: center; color: black; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; border-radius:50%;}
+.slick-dots li.slick-active button:before { color: black; background:#ce5327;}
+
+/*Smartphone css*/
+@media screen and (max-width: 480px) {
+
+}
+
+@media screen and (min-width:481px) and (max-width:600px) {
+
+}
+
+@media screen and (min-width:601px) and (max-width:767px) {
+
+}
+
+@media screen and (min-width:768px) and (max-width:900px) {
+.slick-prev, .slick-next { width:9px; height:17px;}
+.slick-prev { left:-2%;}
+.slick-next { right:-2%;}
+}
+
+@media screen and (min-width:901px) and (max-width:1024px) {
+.slick-prev, .slick-next { width:11px; height:19px;}
+.slick-prev { left:-2%;}
+.slick-next { right:-2%;}
+}
+
+@media screen and (min-width:1025px) and (max-width:1240px) {
+.slick-prev { left:-2%;}
+.slick-next { right:-2%;}
+}

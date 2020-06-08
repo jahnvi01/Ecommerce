@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+   
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -10,8 +11,62 @@
     <title>My Store</title>
   </head>
   <body>
+    <script src="js/sticky.js"></script>
 
+    <!--Slider-js-script-->
+    <script src="js/slider.js"></script>
+    
+    <!--Active-js-script-->
+    <!-- <script src="js/active.js"></script> -->
+    
+    <!--autocomplete-js-script-->
+    <script src="js/autocomplete.js"></script>
+    
+    <!--Dropdown-js-script-->
+    <script src="js/dropdown.js"></script>
     <div id="root"></div>
-
+    <script>
+      $(".tab-bar2").hide();
+    $(".tab-bar2:first").show();
+    $(".tab-row1 li").click(function() {
+    $(".tab-bar2").hide();
+    var activeTab = $(this).attr("rel"); 
+    $("#"+activeTab).fadeIn();		
+    $(".tab-row1 li").removeClass("active");
+    $(this).addClass("active");
+      });
+  </script>
+  
+  <!--Top-to-back-js-script-->
+  <script>
+    $(function() {
+    $('a[href*="#"]:not([href="#"])').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+    var target = $(this.hash);
+    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+    if (target.length) {
+    $('html, body').animate({
+    scrollTop: target.offset().top
+    }, 2000);
+    return false;
+    }
+      }
+    });
+    });
+  </script>
+  
+  <!--Wow-script-->
+  <script>
+    wow = new WOW(
+    {
+    animateClass: 'animated',
+    offset: 100,
+    callback: function(box) {
+    console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+    }
+    }
+      );
+    wow.init();
+  </script>
   </body>
 </html>

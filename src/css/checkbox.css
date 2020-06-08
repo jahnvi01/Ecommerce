@@ -1,0 +1,201 @@
+.checkbox1 {
+	width: 40%;
+	float: left;
+	margin: 38px 0 0;
+}
+.checkbox1 a {
+	color: #ffffff;
+}
+.checkbox2 {
+	width: 59%;
+	float: right;
+	margin: 38px 0 0;
+}
+.checkbox2 a {
+	color: #ffffff;
+}
+.checkbox1, .checkbox2 {
+	text-align: left;
+	font-size: 14.3px;
+	color: #ffffff;
+	line-height: 21px;
+}
+.checkbox1 span, .checkbox2 span {
+	display: block;
+	position: relative;
+	top: -4px;
+	font-family: 'sofiapro-regular-font';
+}
+input[type=checkbox].css-checkbox {
+	position: absolute;
+	z-index: -1000;
+	left: -1000px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+	margin: 0 0 0;
+	padding: 0 0 0 26px;
+	height: 14px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	cursor: pointer;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+	background-position: 0 -14px;
+}
+label.css-label {
+	background-image: url(../images/checkbox-thumb1.png);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.checkbox3 { width:100%; text-align:left; float:left; margin:0 0 13px; font-size:14px; color:#ffffff; line-height:20px;}
+.checkbox3 a { color:#ffffff;}
+.checkbox3 span { display: inherit; position: relative; top:-5px;}
+
+.contac-wrapp .checkbox3 { font-size:12px; color:#898989; margin:0 0 5px;}
+.contac-wrapp .checkbox3 a { color:#898989;}
+.contac-wrapp .checkbox3 span { top:-2px;}
+
+
+/*Smartphone css*/
+@media screen and (max-width: 480px) {
+.checkbox1 {
+	width: 100%;
+	text-align: center;
+	margin: 28px 0 0;
+}
+.checkbox2 {
+	width: 100%;
+	text-align: center;
+	margin: 14px 0 0;
+}
+.checkbox1, .checkbox2, .checkbox3, .checkbox4 {
+	font-size: 12.3px;
+	line-height: 19px;
+}
+.checkbox1 span, .checkbox2 span {
+	display: inherit;
+	top: 0;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+	background-position: 0 1px;
+	display: initial;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+	background-position: 0 -17px;
+}
+label.css-label {
+	background-image: url(../images/checkbox-thumb1.png);
+}
+
+.sidbar-wrapp input[type=checkbox].css-checkbox + label.css-label { display:inline-block; background-position:0 0;}
+.checkbox3 span {
+	display: inherit;
+	top: -2px;
+}
+.contac-wrapp input[type=checkbox].css-checkbox + label.css-label { display:inline-block; background-position:0 0;}
+}
+ @media screen and (min-width:481px) and (max-width:600px) {
+.checkbox1 {
+	width: 100%;
+	text-align: center;
+	margin: 28px 0 0;
+}
+.checkbox2 {
+	width: 100%;
+	text-align: center;
+	margin: 14px 0 0;
+}
+.checkbox1, .checkbox2, .checkbox3, .checkbox4 {
+	font-size: 12.3px;
+	line-height: 19px;
+}
+.checkbox1 span, .checkbox2 span {
+	display: inherit;
+	top: 0;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+	background-position: 0 1px;
+	display: initial;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+	background-position: 0 -17px;
+}
+label.css-label {
+	background-image: url(../images/checkbox-thumb1.png);
+}
+
+.sidbar-wrapp input[type=checkbox].css-checkbox + label.css-label { display:inline-block; background-position:0 0;}
+.checkbox3 span {
+	display: inherit;
+	top: -2px;
+}
+.contac-wrapp input[type=checkbox].css-checkbox + label.css-label { display:inline-block; background-position:0 0;}
+}
+ @media screen and (min-width:601px) and (max-width:767px) {
+.checkbox1 {
+	width: 100%;
+	text-align: center;
+	margin: 28px 0 0;
+}
+.checkbox2 {
+	width: 100%;
+	text-align: center;
+	margin: 14px 0 0;
+}
+.checkbox1, .checkbox2, .checkbox3, .checkbox4 {
+	font-size: 12.3px;
+	line-height: 19px;
+}
+.checkbox1 span, .checkbox2 span {
+	display: inherit;
+	top: 0;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+	background-position: 0 1px;
+	display: initial;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+	background-position: 0 -17px;
+}
+label.css-label {
+	background-image: url(../images/checkbox-thumb1.png);
+}
+
+.sidbar-wrapp input[type=checkbox].css-checkbox + label.css-label { display:inline-block; background-position:0 0;}
+.checkbox3 span {
+	display: inherit;
+	top: -2px;
+}
+.contac-wrapp input[type=checkbox].css-checkbox + label.css-label { display:inline-block; background-position:0 0;}
+}
+ @media screen and (min-width:768px) and (max-width:900px) {
+.checkbox1 { margin:18px 0 0;}
+.checkbox2 { margin:18px 0 0;}
+.checkbox1, .checkbox2 {
+	font-size: 12.3px;
+	line-height: 19px;
+}
+}
+ @media screen and (min-width:901px) and (max-width:1024px) {
+.checkbox1 { margin:28px 0 0;}
+.checkbox2 { margin:28px 0 0;}
+.checkbox1, .checkbox2 {
+	font-size: 13.3px;
+	line-height: 20px;
+}
+}
+ @media screen and (min-width:1025px) and (max-width:1240px) {
+}

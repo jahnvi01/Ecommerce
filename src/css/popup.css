@@ -1,0 +1,27 @@
+.trigger { outline:none; cursor:pointer; transition:all 0.25s ease-out 0s;}
+.dialog--open .dialog-inner ::-webkit-input-placeholder{color:#292826}.dialog--open .dialog-inner ::-moz-placeholder{color:#292826}.dialog--open .dialog-inner :-ms-input-placeholder{color:#292826}.dialog--open .dialog-inner :-moz-placeholder{color:#292826}.dialog,.dialog__overlay{width:100%;height:100%;top:0;left:0;}.dialog{position:fixed;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;pointer-events:none;z-index:999999;}.dialog__overlay{position:absolute;z-index:1;background:rgba(51,187,201,.9);opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s;-webkit-backface-visibility:hidden}.dialog--open .dialog__overlay{opacity:1;pointer-events:auto;-webkit-transition-duration:.8s;transition-duration:.8s}.dialog__content{width:50%;max-width:560px;min-width:290px;text-align:center;position:relative;z-index:5;opacity:0;padding:0;background:0 0}.dialog--open .dialog__content{pointer-events:auto}.dialog h2{font-size:30px;font-weight:500;color:#292826;margin:0 0 25px}.dialog--close .dialog__overlay{-webkit-transition-duration:.5s;transition-duration:.5s}.dialog.dialog--open .dialog__content{opacity:1}.morph-shape{position:absolute;width:calc(100% + 4px);height:calc(100% + 4px);top:-3px;left:-3px;z-index:-1}.morph-shape svg rect{stroke:#fff;stroke-width:2px;stroke-dasharray:1680}.dialog--open .morph-shape svg rect{-webkit-animation:anim-dash .6s forwards;animation:anim-dash .6s forwards}.dialog-inner{opacity:0;background:#fff}.dialog--open .dialog-inner{padding:50px 8%;overflow:auto;opacity:1;-webkit-transition:opacity .85s .35s;transition:opacity .85s .35s}.dialog--open .dialog-inner .dialog-fild1{font-size:14px;font-weight:500;color:#292826;letter-spacing:0.6px;background:rgba(249,211,66,0.85);border-radius:40px;}.dialog--open .dialog-inner .dialog-fild2{width:48.5%;height:45px;float:left;margin-bottom:3%;padding:0 20px}.dialog--open .dialog-inner .dialog-fild2:nth-child(2n){float:right}.dialog--open .dialog-inner .dialog-btn1{ font-size:17.36px; font-weight:500; color:#292826; letter-spacing:0.8px; background:#f9d342; border:1px solid #f9d342; border-radius:40px; display:inline-block; padding:13px 26px 12px 26px; cursor:pointer; transition:all 0.25s ease-out 0s;}.dialog--open .dialog-inner .dialog-btn1:hover{color:#292826;background:#ffffff;border:1px solid #f9d342;}.close{position:absolute;top:5px;right:5px}.button1{float:left;background:0 0}.button2{width:32px;height:32px;background:#fff;border-radius:50%}.button1,.button2{border:none;cursor:pointer;outline:0}@keyframes anim-dash{0%{stroke-dashoffset:1680}100%{stroke-dashoffset:0}}@-webkit-keyframes anim-dash{0%{stroke-dashoffset:1680}100%{stroke-dashoffset:0}}@-webkit-keyframes anim-elem-1{0%{opacity:0;-webkit-transform:translate3d(-150px,0,0)}100%{opacity:1;-webkit-transform:translate3d(0,0,0)}}@keyframes anim-elem-1{0%{opacity:0;-webkit-transform:translate3d(-150px,0,0);transform:translate3d(-150px,0,0)}100%{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}}@-webkit-keyframes anim-elem-2{0%{opacity:0;-webkit-transform:translate3d(150px,0,0)}100%{opacity:1;-webkit-transform:translate3d(0,0,0)}}@keyframes anim-elem-2{0%{opacity:0;-webkit-transform:translate3d(150px,0,0);transform:translate3d(150px,0,0)}100%{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}}
+
+/*Smartphone css*/
+@media screen and (max-width: 480px) {
+.trigger:after { display:none;}
+}
+
+@media screen and (min-width:481px) and (max-width:600px) {
+.trigger:after { display:none;}
+}
+
+@media screen and (min-width:601px) and (max-width:767px) {
+.trigger:after { display:none;}
+}
+
+@media screen and (min-width:768px) and (max-width:900px) {
+.trigger:after { border:10px solid rgba(255,255,255,0.30);}
+}
+
+@media screen and (min-width:901px) and (max-width:1024px) {
+.trigger:after { border:10px solid rgba(255,255,255,0.30);}
+}
+
+@media screen and (min-width:1025px) and (max-width:1240px) {
+
+}
