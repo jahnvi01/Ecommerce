@@ -93,7 +93,7 @@ class Home extends Component {
              apiVersion:"1.0",
              token:""
           }
-        fetch('http://projects-demo.tk/dawabag/webservices/web/blogs',{
+        fetch('http://projects-demo.tk/dawabag/webservices/web/home_data',{
             method: "post",
             headers: {
               'Accept': 'application/json, text/plain, */*',
@@ -106,25 +106,25 @@ class Home extends Component {
           })
           .then(res=>res.json())
       
-          .then(res=>{this.setState({blogs:res.data.blogs||[],error:res.error||""})
+          .then(res=>{this.setState({banners:res.data.banners[0]||[],blogs:res.data.blogs[0]||[],error:res.error||""})
           console.log(this.state)       })
   
 
-          fetch('http://projects-demo.tk/dawabag/webservices/web/banners',{
-            method: "post",
-            headers: {
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            },body:JSON.stringify({
-                apiVersion:"1.0",
-             token:"",
-             imei:""
-             })
-          })
-          .then(res=>res.json())
+        //   fetch('http://projects-demo.tk/dawabag/webservices/web/banners',{
+        //     method: "post",
+        //     headers: {
+        //       'Accept': 'application/json, text/plain, */*',
+        //       'Content-Type': 'application/json'
+        //     },body:JSON.stringify({
+        //         apiVersion:"1.0",
+        //      token:"",
+        //      imei:""
+        //      })
+        //   })
+        //   .then(res=>res.json())
       
-          .then(res=>{this.setState({  banners:res.data.banners||[],error:res.error||""})
-          console.log(this.state)       })
+        //   .then(res=>{this.setState({  banners:res.data.banners||[],error:res.error||""})
+        //   console.log(this.state)       })
         
    
     }

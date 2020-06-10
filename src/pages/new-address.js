@@ -12,17 +12,80 @@ import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import $ from 'jquery';
-
+import { userAuth } from '../function/auth';
+import ShowAlert from '../function/alert';
+import { withRouter } from 'react-router-dom';
 
 class NewAddress extends Component {
-  
+
+     
+    state={
+        message:"",
+        error:"",
+      
+    }
+  add=(e)=>{
+    
+      var address1=document.getElementById("address1").value;
+      var address2=document.getElementById("address2").value;
+      var address3=document.getElementById("address3").value;
+      var fullname=document.getElementById("fullname").value;
+      var city=document.getElementById("city").value;
+      var state=document.getElementById("state").value;
+      var country=document.getElementById("country").value;
+      var postcode=document.getElementById("postcode").value;
+//       apiVersion:"1.0",
+//       userId:1,
+// addressLine1:address1,
+// addressLine2:address2,
+// addressLine3:address3,
+// fullname:fullname,
+// city:city,
+// state:state,
+// country:country,
+// pincode:postcode,
+// lat:"",
+// lng:"",
+// imei:"",
+// token:""
+      const data={
+        apiVersion:"1.0",
+        userId:1,  
+        addressLine1:"address1",
+        addressLine2:"address2",
+        addressLine3:"address3",
+        city:"city",
+        state:"state",
+        country:"country",
+        pincode:"pincode",
+        lat:"",
+        lng:"",
+        imei:"",
+      }
+
+      fetch('http://projects-demo.tk/dawabag/webservices/web/user_address_insert',{
+        method: "post",
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },body:JSON.stringify(data)
+      })
+      .then(res=>res.json())
+.then(res=>console.log(res))
+    //   .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
+    //   console.log(this.state)       })
+
+      
+  }
   render() {
- 
+    userAuth(this.props);  
     return (
 <div>
 
 <Header />
 	<LinkerWrapp />
+    
+      
     <section class="banner-wrapp inner-wrapp">
 	<div class="margin">
     	<div class="inner-row1">
@@ -54,7 +117,7 @@ class NewAddress extends Component {
                                 Full Name
                             </div>
                             <div class="newadd-bar2">
-                                <input name="" type="text" placeholder="Full Name" class="newadd-fild1 newadd-fild2" />
+                                <input name="" type="text" id="fullname" placeholder="Full Name" class="newadd-fild1 newadd-fild2" />
                             </div>
                         </div>
                         <div class="newadd-row2">
@@ -62,7 +125,7 @@ class NewAddress extends Component {
                                 Address Line 1
                             </div>
                             <div class="newadd-bar2">
-                                <input name="" type="text" placeholder="Address Line 1" class="newadd-fild1 newadd-fild2" />
+                                <input name="" type="text" id="address1" placeholder="Address Line 1" class="newadd-fild1 newadd-fild2" />
                             </div>
                         </div>
                         <div class="newadd-row2">
@@ -70,7 +133,15 @@ class NewAddress extends Component {
                                 Address Line 2
 							</div>
                             <div class="newadd-bar2">
-                                <input name="Address Line 2" type="text" placeholder="Address Line 2" class="newadd-fild1 newadd-fild2" />
+                                <input name="Address Line 2" id="address2" type="text" placeholder="Address Line 2" class="newadd-fild1 newadd-fild2" />
+                            </div>
+                        </div>
+                        <div class="newadd-row2">
+                            <div class="newadd-bar1">
+                                Address Line 3
+                            </div>
+                            <div class="newadd-bar2">
+                                <input name="" type="text" id="address3" placeholder="Address Line 3" class="newadd-fild1 newadd-fild2" />
                             </div>
                         </div>
                         <div class="newadd-row2">
@@ -78,7 +149,7 @@ class NewAddress extends Component {
                                 City / Town
                             </div>
                             <div class="newadd-bar2">
-                                <input name="City / Town" type="text" placeholder="City / Town" class="newadd-fild1 newadd-fild2" />
+                                <input name="City / Town" type="text" id="city" placeholder="City / Town" class="newadd-fild1 newadd-fild2" />
                             </div>
                         </div>
                         <div class="newadd-row2">
@@ -86,7 +157,15 @@ class NewAddress extends Component {
                                 State
                             </div>
                             <div class="newadd-bar2">
-                                <input name="State" type="text" placeholder="State" class="newadd-fild1 newadd-fild2" />
+                                <input name="State" type="text" id="state" placeholder="State" class="newadd-fild1 newadd-fild2" />
+                            </div>
+                        </div>
+                        <div class="newadd-row2">
+                            <div class="newadd-bar1">
+                               Country
+                            </div>
+                            <div class="newadd-bar2">
+                                <input name="" type="text" id="country" placeholder="Country" class="newadd-fild1 newadd-fild2" />
                             </div>
                         </div>
                         <div class="newadd-row2">
@@ -94,16 +173,17 @@ class NewAddress extends Component {
                                 Zip / Postal Code
                             </div>
                             <div class="newadd-bar2">
-                                <input name="Zip / Postal Code" type="text" placeholder="Zip / Postal Code" class="newadd-fild1 newadd-fild2" />
+                                <input name="Zip / Postal Code" id="postcode" type="text" placeholder="Zip / Postal Code" class="newadd-fild1 newadd-fild2" />
                             </div>
                         </div>
                                 
-                        <div class="newadd-row2">
+                      
+                    </form>
+                    <div class="newadd-row2">
                             <div class="newadd-bar2">
-                                <input name="submit" value="Submit" class="newadd-btn1" type="submit" />
+                                <button name="submit" onClick={(event)=>{this.add(event)}}  class="newadd-btn1" >Submit</button>
                             </div>
                         </div>
-                    </form>
             	</div>
                 
             </div>
@@ -158,4 +238,4 @@ class NewAddress extends Component {
   }
 }
 
-export default NewAddress ;
+export default withRouter(NewAddress) ;

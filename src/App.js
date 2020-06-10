@@ -37,7 +37,7 @@ class App extends Component {
 <Route  path="/new-address" component={NewAddress}></Route>
 <Route  path="/offers" component={Offers}></Route>
 <Route  path="/orders" component={Orders}></Route>
-<Route  path="/orders-summary" component={OrdersSummary}></Route>
+<Route  path="/orders-summary/:orderId" component={OrdersSummary}></Route>
 <Route  path="/products" component={Products}></Route>
 <Route  path="/search-products/:name" component={SearchProducts}></Route>
 <Route  path="/products-inner/:id" component={ProductsInner}></Route>

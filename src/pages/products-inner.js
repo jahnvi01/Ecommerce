@@ -14,7 +14,7 @@ import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
-
+import ShowAlert from '../function/alert';
 class ProductsInner extends Component {
     state={
         message:"",
@@ -56,6 +56,7 @@ class ProductsInner extends Component {
             console.log(this.state.product)
             return(
                 <div className="conten-bar1 product-wrapp">
+                      
                     <div className="product-row1">
                 	<div className="product-row2">
                     	<div className="product-bar1">

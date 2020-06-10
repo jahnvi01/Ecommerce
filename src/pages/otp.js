@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import dawabagLogo2 from '../images/dawabag-logo2.png';
-import $ from 'jquery';
-
-
+import {authentication,isAuth} from '../function/auth';
+import { withRouter } from 'react-router-dom';
+import ShowAlert from '../function/alert';
 class Otp extends Component {
 
 	state={
@@ -51,26 +51,32 @@ const data={
 	imei:"",
 
  }
-//  fetch('http://projects-demo.tk/dawabag/webservices/web/send_otp',{
-//    method: "post",
-//    headers: {
-// 	 'Accept': 'application/json, text/plain, */*',
-// 	 'Content-Type': 'application/json'
-//    },body:JSON.stringify(data)
-//  })
-//  .then(res=>res.json())
-// // .then(res=>console.log(res))
-// .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
-// 	alert(this.state.message);
-				 
-				 
-// })
+ fetch('http://projects-demo.tk/dawabag/webservices/web/verify_otp',{
+   method: "post",
+   headers: {
+	 'Accept': 'application/json, text/plain, */*',
+	 'Content-Type': 'application/json'
+   },body:JSON.stringify(data)
+ })
+ .then(res=>res.json())
+//.then(res=>console.log(res))
+.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
+	if(this.state.message==="Correct OTP."){
+		
+		authentication(res.result);
+this.props.history.push("/")
+	}	
+	else{
+		alert(this.state.message)
+	}		 
+})
 }
   render() {
  
     return (
 
 <div className="limiter">
+
 		<div className="container-login100">
         
         	<div className="login-logo">
@@ -115,4 +121,4 @@ const data={
   }
 }
 
-export default Otp
+export default withRouter(Otp);

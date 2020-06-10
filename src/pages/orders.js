@@ -11,11 +11,72 @@ import ordersIcon2 from '../images/orders-icon2.png'
 import ordersIcon3 from '../images/orders-icon3.png'
 import ordersIcon4 from '../images/orders-icon4.png'
 import ordersIcon5 from '../images/orders-icon5.png'
-
+import { userAuth } from '../function/auth';
+import ShowAlert from '../function/alert';
+import { withRouter } from 'react-router-dom';
 class Orders extends Component {
-  
-  render() {
+    state={
+        message:"",
+        error:"",
+        orders:[]
+    }
+    componentWillMount(){
+    
+        const data={
+            apiVersion:"1.0",
+            userId:1,
+            imei:"",
+            token:""
+         }
+       fetch('http://projects-demo.tk/dawabag/webservices/web/orders',{
+           method: "post",
+           headers: {
+             'Accept': 'application/json, text/plain, */*',
+             'Content-Type': 'application/json'
+           },body:JSON.stringify(data)
+         })
+         .then(res=>res.json())
 
+         .then(res=>{this.setState({orders:res.data.orders||[],error:res.error||""})
+         console.log(this.state)       })
+ 
+   }
+   showDetails=(details)=>{
+       console.log(details)
+       var details=details.map(detail=>{
+           return (
+            <li>{detail.name}</li> 
+           )
+       })
+       return details
+   }
+   showOrders=()=>{
+       if(this.state.orders.length!==0){
+       var orders=this.state.orders.map(order=>{
+return(
+    <div className="orders-bar2" key={order.id}>
+    <a href={`/orders-summary/${order.id}`}>
+<h3>{order.fname} {order.lname}</h3>
+    <h4>Order Delivered</h4>
+    <ul>
+    {this.showDetails(order.details)}
+    </ul>
+      </a>
+    <div className="orders-bar3">
+        <h6>Delivered on 16 jan</h6>
+        <a href="/cart" className="orders-btn1">Reorder</a>
+    </div>
+</div>
+
+)
+       })
+    return orders;
+    }
+   }
+
+ 
+  render() {
+userAuth(this.props);
     return (
 <div>
 
@@ -63,37 +124,8 @@ class Orders extends Component {
                 </div>
                 
                 <div className="orders-row2">
-                	<div className="orders-bar2">
-                	    <a href="/orders-summary">
-                    	<h3>Mahavir Sancheti</h3>
-                        <h4>Order Delivered</h4>
-                        <ul>
-                        	<li>PROLOMET XL 50MG TABLET 10'S</li>
-                            <li>lMETOCARD XL 50MG TAB</li>
-                        </ul>
-                        <h5>+2 more products</h5>
-                        </a>
-                        <div className="orders-bar3">
-                        	<h6>Delivered on 16 jan</h6>
-                            <a href="/cart" className="orders-btn1">Reorder</a>
-						</div>
-                    </div>
-                    <div className="orders-bar2">
-                        <a href="/orders-summary">
-                    	<h3>Mahavir Sancheti</h3>
-                        <h4>Order Delivered</h4>
-                        <ul>
-                        	<li>PROLOMET XL 50MG TABLET 10'S</li>
-                            <li>lMETOCARD XL 50MG TAB</li>
-                        </ul>
-                        <h5>+2 more products</h5>
-                        </a>
-                        <div className="orders-bar3">
-                        	<h6>Delivered on 16 jan</h6>
-                            <a href="/cart" className="orders-btn1">Reorder</a>
-						</div>
-                    </div>
-                    <div className="orders-bar2">
+                    {this.showOrders()}
+                	{/* <div className="orders-bar2">
                         <a href="orders-summary">
                     	<h3>Mahavir Sancheti</h3>
                         <h4>Order Delivered</h4>
@@ -121,7 +153,7 @@ class Orders extends Component {
                         <div className="orders-bar3">
                         	<h6>Cancelled on 16 jan</h6>
 						</div>
-                    </div>
+                    </div> */}
                 </div>
                                 
             </div>
@@ -202,4 +234,4 @@ class Orders extends Component {
   }
 }
 
-export default Orders;
+export default withRouter(Orders);

@@ -8,7 +8,7 @@ import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
-
+import {isAuth} from '../function/auth'
 
 
 class Address extends Component {
@@ -22,10 +22,11 @@ class Address extends Component {
     
         const data={
             apiVersion:"1.0",
-            userId:1,
-            token:""
+            userId:isAuth().userId,
+            token:"",
+            
          }
-       fetch('http://projects-demo.tk/dawabag/webservices/web/user_address',{
+       fetch('http://projects-demo.tk/dawabag/webservices/web/user_locations',{
            method: "post",
            headers: {
              'Accept': 'application/json, text/plain, */*',
@@ -33,12 +34,29 @@ class Address extends Component {
            },body:JSON.stringify(data)
          })
          .then(res=>res.json())
-     .then(res=>console.log(res))
-        //  .then(res=>{this.setState({addresses:res.data.user_address||[],error:res.error||""})
-        //  console.log(this.state)       })
+
+         .then(res=>{this.setState({addresses:res.data.user_address||[],error:res.error||""})
+         console.log(this.state)       })
  
    }
-   
+   showAddress=()=>{
+       if(this.state.addresses.length!==0){
+       var address=this.state.addresses.map(address=>{
+return(
+    <div class="adress-row2" key={address.id}>
+    <div class="adress-bar1"><img src={addressIcon1} alt="address icon1"/></div>
+    <div class="adress-bar2">
+        <h2>Home</h2>
+<h3>{address.u_fname} {address.u_lname}</h3>
+<p>{address.addressLine1}, {address.addressLine2},{address.addressLine3} <span>{address.city}- {address.pincode}, {address.state}</span> {address.country}</p>
+        <h4><a href="#">MODIFY</a></h4>
+    </div>
+</div>
+)
+       })
+    return address;
+    }
+   }
 
   render() {
     return (
@@ -72,15 +90,7 @@ class Address extends Component {
             
 				<div class="adress-row1">
                 
-                	<div class="adress-row2">
-                        <div class="adress-bar1"><img src={addressIcon1} alt="address icon1"/></div>
-                        <div class="adress-bar2">
-                            <h2>Home</h2>
-                            <h3>Swap Patil</h3>
-                            <p>Tulsi Shree App, Lamkhedemala, Tarwalanagr Nashik, Dindori Road, <span>Nashikik - 422003, Maharashtra.</span> +91 - 9604088945.</p>
-    						<h4><a href="#">MODIFY</a></h4>
-                        </div>
-                    </div>
+                {this.showAddress()}
                     
                     <div class="adress-row2">
                         <div class="adress-bar1"><img src={addressIcon2} alt="address icon2"/></div>

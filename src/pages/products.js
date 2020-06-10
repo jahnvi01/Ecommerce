@@ -14,6 +14,7 @@ import valid2 from '../images/valid-icon22.png'
 import valid3 from '../images/valid-icon33.png'
 import valid4 from '../images/valid-icon44.png'
 import OwlCarousel from 'react-owl-carousel';
+import ShowAlert from '../function/alert';
 class Products extends Component {
 state={
     message:"",
@@ -141,6 +142,7 @@ state={
 
 <Header />
 	<LinkerWrapp />
+    
     <section className="banner-wrapp inner-wrapp">
 	<div className="margin">
     	<div className="inner-row1">

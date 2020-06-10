@@ -11,7 +11,7 @@ import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import $ from 'jquery';
-
+import ShowAlert from '../function/alert';
 
 class Cart extends Component {
   
@@ -51,6 +51,7 @@ class Cart extends Component {
 
 <Header />
 	<LinkerWrapp />
+    
 <section className="banner-wrapp inner-wrapp">
 	<div className="margin">
     	<div className="inner-row1">

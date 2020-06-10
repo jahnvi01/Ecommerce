@@ -4,6 +4,7 @@ import loginThumb1 from '../images/login-thumb1.png';
 import cartThumb1 from '../images/cart-thumb1.png';
 import { withRouter } from 'react-router-dom';
 import {autocomplete,countries} from '../js/autocomplete'
+import {signout,isAuth} from '../function/auth';
 class LinkerWrapp extends Component {
 
 	change=()=>{
@@ -21,7 +22,7 @@ this.props.history.push(`/search-products/${name}`)
 
   render() {
 	
-	
+	console.log(isAuth())
     return (
 		<React.Fragment>
 <section className="linker-wrapp">
@@ -45,10 +46,14 @@ this.props.history.push(`/search-products/${name}`)
 		</div>
         <div className="linker-row3">
 			<div className="linker-bar3">
-            	<div className="login">
+				{!isAuth() && (	<div className="login">
                 	<p><a href="/login">Login / Signup</a></p>
                     <p><img src={loginThumb1} /></p>
-                </div>
+                </div>)}
+				{isAuth() && (	<div className="login">
+                	<p><a style={{cursor:"pointer"}} onClick={()=>signout()}>Logout</a></p>
+                    <p><img src={loginThumb1} /></p>
+                </div>)}
                 <div className="cart-box">
                 	<p><a href="/cart">Cart</a></p>
                     <p><img src={cartThumb1}/></p>
