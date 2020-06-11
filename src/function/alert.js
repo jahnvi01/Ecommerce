@@ -11,8 +11,11 @@ class ShowAlert extends Component {
   };
   showAlert=(error,message)=>{
     const args = {
-      message: error || message,
+      message: error||message,
      duration: 3,
+     style:{
+      zIndex:1000
+  }
     };
   
       if(error){

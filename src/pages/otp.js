@@ -30,10 +30,7 @@ send=(e)=>{
 	 })
 	 .then(res=>res.json())
 	// .then(res=>console.log(res))
-	.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
-		alert(this.state.message);
-					 
-					 
+	.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})					 
 	})
 }
 verify=()=>{
@@ -42,6 +39,9 @@ verify=()=>{
 	var d3=document.getElementById("d3").value;
 	var d4=document.getElementById("d4").value;
 	var mobile=	this.props.match.params.mobile; 
+	if(d1 && d2 && d4 && d3){
+
+	
 var otp=d1+d2+d3+d4;
 const data={
 	apiVersion:"1.0",
@@ -61,22 +61,24 @@ const data={
  .then(res=>res.json())
 //.then(res=>console.log(res))
 .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
-	if(this.state.message==="Correct OTP."){
+	if(res.result.message==="Correct OTP."){
 		
 		authentication(res.result);
 this.props.history.push("/")
 	}	
-	else{
-		alert(this.state.message)
-	}		 
+	 
 })
+	}
+	else{
+		this.setState({error:"Enter OTP Correctly"})
+	}
 }
   render() {
  
     return (
 
 <div className="limiter">
-
+<ShowAlert message={this.state.message} error={this.state.error} />
 		<div className="container-login100">
         
         	<div className="login-logo">
@@ -98,7 +100,7 @@ this.props.history.push("/")
 						Share OTP
 					</span>
                     
-                    <p>We have sent a temporary passcode to you at +91-7020313005</p>
+	<p>We have sent a temporary passcode to you at {this.props.match.params.mobile}</p>
                     <h6>Use a different number</h6>
                     <h5>Enter your 4-digit passcode</h5>
 

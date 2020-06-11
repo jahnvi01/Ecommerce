@@ -14,6 +14,10 @@ import valid2 from '../images/valid-icon22.png'
 import valid3 from '../images/valid-icon33.png'
 import valid4 from '../images/valid-icon44.png'
 import OwlCarousel from 'react-owl-carousel';
+import {connect} from 'react-redux';
+import { isAuth } from '../function/auth';
+import 'antd/dist/antd.css';
+import { notification } from 'antd';
 class SearchProducts extends Component {
 state={
     message:"",
@@ -74,6 +78,21 @@ state={
 	  .then(res=>res.json())
 	  .then(res=>this.setState({medicines:res.data.medicines,error:res.error||""}))
   }
+
+  addCart=(medicine)=>{
+    const args = {
+        message: "Added To Cart",
+      style:{
+          zIndex:1000
+      }
+      };
+    
+       
+          notification.success(args);
+    this.props.addCart(medicine) 
+}
+
+
   searchProducts=()=>{
     var name=this.props.match.params.name; 
   
@@ -134,6 +153,7 @@ state={
                         </OwlCarousel>
                     </div>
                 </div>
+                </Link>
                 <div className="product-bar2">
                     <h2>{medicine.genericName}</h2>
                     <h3>{medicine.unitInBox} Units in box</h3>
@@ -149,14 +169,14 @@ state={
                     <h5><span>&#8377;</span>{medicine.totalCostPurchase}</h5>
                     <div className="product-bar3">
                         <div className="product-bar44">QTY :    1</div>
-                        <a href="#" className="product-btn1">ADD TO CART</a>
+                        <button onClick={()=>{this.addCart(medicine)}} className="product-btn1">ADD TO CART</button>
                         <div className="product-bar4">
                             <h6>TOTAL AMOUNT</h6><br />
               <h5><span>&#8377;</span>{1*medicine.totalCostPurchase}</h5>
                         </div>
                     </div>
                 </div>
-                </Link>
+                
             </div>
               )
           })
@@ -315,5 +335,43 @@ state={
     );
   }
 }
+function mapStateToProps(state){
+    console.log(state.cart)
+        return {
+    
+            cart:state.cart,
+        }
+      
+    }
+      function mapDispatchToStates(dispatch){
+        return{
+       
+          addCart:(product)=>{
+            dispatch({type:"add",payload:{product,message:"Added To Cart"}})
+            if(isAuth()){
 
-export default SearchProducts;
+        	const data={
+                apiVersion:"1.0",
+                token:"",
+                userId:isAuth().userId,
+                medicineId:product.id,
+                quantity:1,
+                imei:""
+        	}
+        	// return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+        	//   method: "post",
+         	//   headers: {
+        	// 	'Accept': 'application/json, text/plain, */*',
+        	// 	'Content-Type': 'application/json'
+        	//   },body:JSON.stringify(data)
+        	// })
+        	// .then(res=>res.json())
+        	// .then(res=>console.log(res)) 
+          }
+        }
+    }
+      }
+    
+      export default connect(mapStateToProps,mapDispatchToStates)(SearchProducts);
+
+

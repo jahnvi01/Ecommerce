@@ -4,9 +4,12 @@ import loginThumb1 from '../images/login-thumb1.png';
 import cartThumb1 from '../images/cart-thumb1.png';
 import { withRouter } from 'react-router-dom';
 import {autocomplete,countries} from '../js/autocomplete'
+import {connect} from 'react-redux';
 import {signout,isAuth} from '../function/auth';
 class LinkerWrapp extends Component {
-
+componentWillMount(){
+//	this.props.getCart()
+}
 	change=()=>{
 		var name=document.getElementById("myInput").value
 		//autocomplete(name,countries)
@@ -69,4 +72,32 @@ this.props.history.push(`/search-products/${name}`)
   }
 }
 
+// function mapStateToProps(state){
+
+//     return {
+
+//         cart:state.cart,
+//     }
+  
+// }
+//   function mapDispatchToStates(dispatch){
+//     return{
+   
+//       getCart:()=>{
+// 		const data={"apiVersion":"1.0",
+// 		"imei":"",
+// 		"token":""
+// 		}
+// 		return fetch('http://projects-demo.tk/dawabag/webservices/web/medicines',{
+// 		  method: "post",
+// 		  headers: {
+// 			'Accept': 'application/json, text/plain, */*',
+// 			'Content-Type': 'application/json'
+// 		  },body:JSON.stringify(data)
+// 		})
+// 		.then(res=>res.json())
+// 		.then(res=>dispatch({type:"get",payload:res.data.medicines})) 
+// 	  }
+//     }
+//   }
 export default withRouter(LinkerWrapp);

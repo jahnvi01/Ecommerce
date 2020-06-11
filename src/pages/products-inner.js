@@ -15,6 +15,10 @@ import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import ShowAlert from '../function/alert';
+import {connect} from 'react-redux';
+import { isAuth } from '../function/auth';
+import 'antd/dist/antd.css';
+import { notification } from 'antd';
 class ProductsInner extends Component {
     state={
         message:"",
@@ -51,6 +55,20 @@ class ProductsInner extends Component {
             }
         }
     }
+
+    addCart=(medicine)=>{
+        const args = {
+            message: "Added To Cart",
+          style:{
+              zIndex:1000
+          }
+          };
+        
+           
+              notification.success(args);
+        this.props.addCart(medicine) 
+    }
+
     showProduct=()=>{
         if(this.state.product){
             console.log(this.state.product)
@@ -107,7 +125,7 @@ class ProductsInner extends Component {
                         <h5><span>&#8377;</span>{this.state.product.totalCostPurchase}</h5>
                             <div className="product-bar3">
                             	<div className="product-bar44">QTY :    1</div>
-                                <a href="#" className="product-btn1">ADD TO CART</a>
+                                <button onClick={()=>{this.addCart(this.state.product)}} className="product-btn1">ADD TO CART</button>
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
                             		<h5><span>&#8377;</span>{1*this.state.product.totalCostPurchase}</h5>
@@ -227,5 +245,43 @@ class ProductsInner extends Component {
     );
   }
 }
+function mapStateToProps(state){
+    console.log(state.cart)
+        return {
+    
+            cart:state.cart,
+        }
+      
+    }
+      function mapDispatchToStates(dispatch){
+        return{
+       
+          addCart:(product)=>{
+            dispatch({type:"add",payload:{product,message:"Added To Cart"}})
+            if(isAuth()){
 
-export default ProductsInner ;
+        	const data={
+                apiVersion:"1.0",
+                token:"",
+                userId:isAuth().userId,
+                medicineId:product.id,
+                quantity:1,
+                imei:""
+        	}
+        	// return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+        	//   method: "post",
+         	//   headers: {
+        	// 	'Accept': 'application/json, text/plain, */*',
+        	// 	'Content-Type': 'application/json'
+        	//   },body:JSON.stringify(data)
+        	// })
+        	// .then(res=>res.json())
+        	// .then(res=>console.log(res)) 
+          }
+        }
+    }
+      }
+    
+      export default connect(mapStateToProps,mapDispatchToStates)(ProductsInner);
+
+
