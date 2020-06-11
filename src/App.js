@@ -13,12 +13,13 @@ import Products from './pages/products'
 import SearchProducts from './pages/search-products'
 import ProductsInner from './pages/products-inner'
 import Profile from './pages/profile';
-import { Switch, Route} from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import Contact from './pages/contact-us'
 import About from './pages/about-us'
 import  './css/index';
 import Address from './pages/address';
 import NewAddress from './pages/new-address';
+import Config from './Config';
 
 class App extends Component {
   
@@ -28,24 +29,24 @@ class App extends Component {
     <div>
 
     <Switch>
-<Route exact path="/" component={Home}></Route>
-<Route  path="/login" component={Login}></Route>
-<Route  path="/signup" component={Signup}></Route>
-<Route  path="/otp/:mobile" component={Otp}></Route>
-<Route  path="/profile" component={Profile}></Route>
-<Route  path="/address" component={Address}></Route>
-<Route  path="/new-address" component={NewAddress}></Route>
-<Route  path="/offers" component={Offers}></Route>
-<Route  path="/orders" component={Orders}></Route>
-<Route  path="/orders-summary/:orderId" component={OrdersSummary}></Route>
-<Route  path="/products" component={Products}></Route>
-<Route  path="/search-products/:name" component={SearchProducts}></Route>
-<Route  path="/products-inner/:id" component={ProductsInner}></Route>
-<Route  path="/cart" component={Cart}></Route>
-<Route  path="/contact-us" component={Contact}></Route>
-<Route  path="/about-us" component={About}></Route>
-<Route  path="/privacy-policy" component={Privacy}></Route>
-<Route  path="/terms-and-conditions" component={Terms}></Route>
+      <Route exact path={Config.BASE_URL} exact component={Home}></Route>
+      <Route  path={Config.BASE_URL +'login'} exact component={Login}></Route>
+      <Route  path={Config.BASE_URL +'signup'} exact component={Signup}></Route>
+      <Route  path={Config.BASE_URL +'otp/:mobile'} exact component={Otp}></Route>
+      <Route  path={Config.BASE_URL +'profile'} exact component={Profile}></Route>
+      <Route  path={Config.BASE_URL +'address'} exact component={Address}></Route>
+      <Route  path={Config.BASE_URL +'new-address'} exact component={NewAddress}></Route>
+      <Route  path={Config.BASE_URL +'offers'} exact component={Offers}></Route>
+      <Route  path={Config.BASE_URL +'orders'} exact component={Orders}></Route>
+      <Route  path={Config.BASE_URL +'orders-summary/:orderId'} exact component={OrdersSummary}></Route>
+      <Route  path={Config.BASE_URL +'products'} exact component={Products}></Route>
+      <Route  path={Config.BASE_URL +'search-products/:name'} exact component={SearchProducts}></Route>
+      <Route  path={Config.BASE_URL +'products-inner/:id'} exact component={ProductsInner}></Route>
+      <Route  path={Config.BASE_URL +'cart'} exact component={Cart}></Route>
+      <Route  path={Config.BASE_URL +'contact-us'} exact component={Contact}></Route>
+      <Route  path={Config.BASE_URL +'about-us'} exact component={About}></Route>
+      <Route  path={Config.BASE_URL +'privacy-policy'} exact component={Privacy}></Route>
+      <Route  path={Config.BASE_URL +'terms-and-conditions'} exact component={Terms}></Route>
     </Switch>
     
     </div>

@@ -5,6 +5,7 @@ import cartThumb1 from '../images/cart-thumb1.png';
 import { withRouter } from 'react-router-dom';
 import {autocomplete,countries} from '../js/autocomplete'
 import {signout,isAuth} from '../function/auth';
+import Config from '../Config';
 class LinkerWrapp extends Component {
 
 	change=()=>{
@@ -47,7 +48,7 @@ this.props.history.push(`/search-products/${name}`)
         <div className="linker-row3">
 			<div className="linker-bar3">
 				{!isAuth() && (	<div className="login">
-                	<p><a href="/login">Login / Signup</a></p>
+                	<p><a href={Config.BASE_URL+'login'}>Login / Signup</a></p>
                     <p><img src={loginThumb1} /></p>
                 </div>)}
 				{isAuth() && (	<div className="login">

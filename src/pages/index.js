@@ -16,7 +16,7 @@ import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import $ from 'jquery';
 import OwlCarousel from 'react-owl-carousel';
-import Slider from 'react-slick-slider'
+import Slider from 'react-slick-slider';
 
 class Home extends Component {
   
