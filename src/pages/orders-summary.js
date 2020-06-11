@@ -39,7 +39,7 @@ componentWillMount(){
      })
      .then(res=>res.json())
 //.then(res=>console.log(res))
-     .then(res=>{this.setState({orders:res.data.order_details||"",error:res.error||""})
+     .then(res=>{this.setState({orders:res.data.order_details[0]||"",error:res.error||""})
      console.log(this.state)       })
 
 
@@ -80,8 +80,12 @@ updateData=()=>{
         });
   
 }
-showDetails=(orders)=>{
-var orders=orders.map(order=>{
+showDetails=(details)=>{
+    if(details){
+        if(details.items){
+
+ 
+var orders=details.items.map(order=>{
 return(  <div className="product-row2" key={order.medicineId}>
 <div className="product-bar1">
     <div>
@@ -104,6 +108,8 @@ return(  <div className="product-row2" key={order.medicineId}>
 )
 })
 return orders;
+}
+}
 }
 showOrder=()=>{
 
@@ -275,7 +281,9 @@ showOrder=()=>{
                 <div id="tab2" className="tab-bar2">
                     
                     <div className="product-row1">
-                    {this.showDetails(this.state.orders)}
+                    {
+                    this.showDetails(this.state.orders)
+                    }
                         </div>
                     
                 </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link ,withRouter} from 'react-router-dom'
 import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';
@@ -15,6 +15,10 @@ import valid3 from '../images/valid-icon33.png'
 import valid4 from '../images/valid-icon44.png'
 import OwlCarousel from 'react-owl-carousel';
 import ShowAlert from '../function/alert';
+import {connect} from 'react-redux';
+import { isAuth } from '../function/auth';
+import 'antd/dist/antd.css';
+import { notification } from 'antd';
 class Products extends Component {
 state={
     message:"",
@@ -51,7 +55,18 @@ state={
         }
     }
 }
-
+addCart=(medicine)=>{
+    const args = {
+        message: "Added To Cart",
+      style:{
+          zIndex:1000
+      }
+      };
+    
+       
+          notification.success(args);
+    this.props.addCart(medicine) 
+}
   componentWillMount(){
      const data={"apiVersion":"1.0",
       "imei":"",
@@ -105,6 +120,7 @@ state={
                         </OwlCarousel>
                     </div>
                 </div>
+                </Link>
                 <div className="product-bar2">
                     <h2>{medicine.genericName}</h2>
                     <h3>{medicine.unitInBox} Units in box</h3>
@@ -120,14 +136,14 @@ state={
                     <h5><span>&#8377;</span>{medicine.totalCostPurchase}</h5>
                     <div className="product-bar3">
                         <div className="product-bar44">QTY :    1</div>
-                        <a href="#" className="product-btn1">ADD TO CART</a>
+                        <button onClick={()=>{this.addCart(medicine)}} className="product-btn1">ADD TO CART</button>
                         <div className="product-bar4">
                             <h6>TOTAL AMOUNT</h6><br />
               <h5><span>&#8377;</span>{1*medicine.totalCostPurchase}</h5>
                         </div>
                     </div>
                 </div>
-                </Link>
+                
             </div>
               )
           })
@@ -142,7 +158,7 @@ state={
 
 <Header />
 	<LinkerWrapp />
-    
+    <ShowAlert message={this.state.message} error={this.state.error}/>
     <section className="banner-wrapp inner-wrapp">
 	<div className="margin">
     	<div className="inner-row1">
@@ -169,80 +185,6 @@ state={
             
 				<div className="product-row1">
 				    
-                	{/* <div className="product-row2">
-                	    <a href="/products-inner">
-                    	<div className="product-bar1">
-                        	<div className="slide-post owl-carousel">
-                            <OwlCarousel margin={3} items={1} {...this.state.options} > 
-                                <div>
-                        			<div className="product-thumb"><img src={product1} alt="product thumb1"/></div>
-                                </div>
-                                <div>
-                        			<div className="product-thumb"><img src={product1} alt="product thumb1"/></div>
-                                </div>
-                                </OwlCarousel>
-                            </div>
-                        </div>
-                        <div className="product-bar2">
-                        	<h2>Even light drinkers at risk of cancer</h2>
-                            <h3><strong>company name</strong></h3>
-                            <h3>10 Tablet(s) in Strip</h3>
-                            <div className="product-varian">
-                            	<a href="#" className="product-btn2">10 mg</a>
-                                <a href="#" className="product-btn2">20 mg</a>
-                                <a href="#" className="product-btn2">30 mg</a>
-							</div>
-                            <h4>Recommended retail price</h4>
-                            <h5 className="underline"><span>&#8377;</span>20.96</h5>
-                            <h5><span>&#8377;</span>17.96</h5>
-                            <div className="product-bar3">
-                            	<div className="product-bar44">QTY :    1</div>
-                                <a href="#" className="product-btn1">ADD TO CART</a>
-                                <div className="product-bar4">
-                                	<h6>TOTAL AMOUNT</h6><br />
-                            		<h5><span>&#8377;</span>17.96</h5>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    
-                    <div className="product-row2">
-                        <a href="/products-inner">
-                    	<div className="product-bar1">
-                        	<div className="slide-post owl-carousel">
-                            <OwlCarousel margin={3} items={1} {...this.state.options} > 
-                                <div>
-                        			<div className="product-thumb"><img src={product2} alt="product thumb2"/></div>
-                                </div>
-                                <div>
-                        			<div className="product-thumb"><img src={product2} alt="product thumb2"/></div>
-                                </div>
-                                </OwlCarousel>
-                            </div>
-                        </div>
-                        <div className="product-bar2">
-                        	<h2>AS-IT-IS Nutrition Whey Protein <span>Concentrate</span></h2>
-                            <h3>10 Sachets</h3>
-                            <h3>Other Variants</h3>
-                            <div className="product-varian">
-                            	<a href="#" className="product-btn2">40 grams</a>
-                                <a href="#" className="product-btn2">80 grams</a>
-                                <a href="#" className="product-btn2">100 grams</a>
-							</div>
-                            <h4>Recommended retail price</h4>
-                            <h5><span>&#8377;</span>17.96</h5>
-                            <div className="product-bar3">
-                            	<div className="product-bar44">QTY :    1</div>
-                                <a href="#" className="product-btn1">ADD TO CART</a>
-                                <div className="product-bar4">
-                                	<h6>TOTAL AMOUNT</h6><br />
-                            		<h5><span>&#8377;</span>17.96</h5>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div> */}
                     {this.shhowMedicines()}
                     
                 </div>
@@ -287,5 +229,41 @@ state={
     );
   }
 }
+function mapStateToProps(state){
+    console.log(state.cart)
+        return {
+    
+            cart:state.cart,
+        }
+      
+    }
+      function mapDispatchToStates(dispatch){
+        return{
+       
+          addCart:(product)=>{
+            dispatch({type:"add",payload:{product,message:"Added To Cart"}})
+            if(isAuth()){
 
-export default Products;
+        	const data={
+            apiVersion:"1.0",
+            token:"",
+            userId:isAuth().userId,
+            medicineId:product.id,
+            quantity:1,
+            imei:""
+        	}
+        	// return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+        	//   method: "post",
+         	//   headers: {
+        	// 	'Accept': 'application/json, text/plain, */*',
+        	// 	'Content-Type': 'application/json'
+        	//   },body:JSON.stringify(data)
+        	// })
+        	// .then(res=>res.json())
+        	// .then(res=>console.log(res)) 
+          }
+        }
+    }
+      }
+    
+      export default withRouter(connect(mapStateToProps,mapDispatchToStates)(Products));

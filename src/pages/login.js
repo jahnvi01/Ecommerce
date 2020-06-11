@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import dawabagLogo1 from '../images/dawabag-logo1.png';
 import { withRouter } from 'react-router-dom';
+import ShowAlert from '../function/alert';
 
 
 class Login extends Component {
@@ -14,6 +15,7 @@ class Login extends Component {
 send=(e)=>{
 	e.preventDefault();
 	var mobile=document.getElementById("mobile").value;
+	if(mobile){
 	const data={
 		apiVersion:"1.0",
 		mobile:mobile,
@@ -36,14 +38,17 @@ send=(e)=>{
 					 
 	})
 }
-
+else{
+	this.setState({error:"Enter mobile Number"})
+}
+}
 
   render() {
     return (
 
 <div className="limiter">
 		<div className="container-login100">
-        
+        <ShowAlert message={this.state.message} error={this.state.error} />
         	<div className="login-logo">
             	<div className="logo-bar1"><a href="/"><img src={dawabagLogo1}/></a></div>
                 <p> 2000+ medicines</p>
