@@ -7,6 +7,9 @@ import {autocomplete,countries} from '../js/autocomplete'
 import {connect} from 'react-redux';
 import {signout,isAuth} from '../function/auth';
 import Config from '../Config';
+import { NavLink } from 'react-router-dom';
+
+
 class LinkerWrapp extends Component {
 componentWillMount(){
 //	this.props.getCart()
@@ -51,7 +54,7 @@ this.props.history.push(`/search-products/${name}`)
         <div className="linker-row3">
 			<div className="linker-bar3">
 				{!isAuth() && (	<div className="login">
-                	<p><a href={Config.BASE_URL+'login'}>Login / Signup</a></p>
+                	<p><NavLink to={Config.BASE_URL +'login'}> Login / Signup</NavLink></p>
                     <p><img src={loginThumb1} /></p>
                 </div>)}
 				{isAuth() && (	<div className="login">

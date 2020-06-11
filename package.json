@@ -2,7 +2,7 @@
   "name": "ecommerce",
   "version": "0.1.0",
   "private": true,
-  "homepage":"/demo/",
+  "homepage": "/demo/",
   "dependencies": {
     "antd": "^4.3.3",
     "bootstrap": "^4.5.0",
