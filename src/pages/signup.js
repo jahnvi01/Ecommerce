@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import dawabagLogo2 from '../images/dawabag-logo2.png';
 import { NavLink } from 'react-router-dom';
-
+import Config from '../Config';
 
 class Signup extends Component {
 	state = {

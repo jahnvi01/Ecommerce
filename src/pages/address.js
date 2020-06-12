@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {isAuth} from '../function/auth';
 import ShowAlert from '../function/alert';
 import { Radio } from 'antd';
+import Config from '../Config';
 class Address extends Component {
   
     state={

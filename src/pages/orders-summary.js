@@ -13,6 +13,7 @@ import orderPlus from '../images/order-plus.png'
 import productThumb1 from '../images/product-thumb1.png'
 import $ from "jquery";
 import { userAuth } from '../function/auth';
+import Config from '../Config';
 import { withRouter,NavLink } from 'react-router-dom';
 import ShowAlert from '../function/alert';
 class OrdersSummary extends Component {

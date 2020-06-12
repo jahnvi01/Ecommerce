@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import dawabagLogo1 from '../images/dawabag-logo1.png';
 import { withRouter,NavLink } from 'react-router-dom';
 import ShowAlert from '../function/alert';
-
+import Config from '../Config';
 
 class Login extends Component {
 	state={

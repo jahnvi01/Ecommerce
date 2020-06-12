@@ -15,7 +15,7 @@ import honoerThumb3 from '../images/honoer-thumb3.jpg'
 import KnowerWrapp from '../include/knower-wrapp';
 import { NavLink } from 'react-router-dom';
 import Footer from '../include/footer';
-import $ from 'jquery';
+import Config from '../Config';
 import OwlCarousel from 'react-owl-carousel';
 import Slider from 'react-slick-slider';
 

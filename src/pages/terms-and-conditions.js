@@ -7,7 +7,7 @@ import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import { NavLink } from 'react-router-dom';
-
+import Config from '../Config';
 class Terms extends Component {
   
   render() {

@@ -18,6 +18,7 @@ import ShowAlert from '../function/alert';
 import {connect} from 'react-redux';
 import { isAuth } from '../function/auth';
 import 'antd/dist/antd.css';
+import Config from '../Config';
 import { NavLink } from 'react-router-dom';
 import { notification } from 'antd';
 class ProductsInner extends Component {

@@ -12,7 +12,7 @@ import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
-import $ from 'jquery';
+import Config from '../Config';
 
 
 class Profile extends Component {

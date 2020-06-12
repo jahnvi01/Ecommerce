@@ -19,6 +19,8 @@ import {connect} from 'react-redux';
 import { isAuth } from '../function/auth';
 import 'antd/dist/antd.css';
 import { notification } from 'antd';
+import { NavLink } from 'react-router-dom';
+import Config from '../Config';
 class Products extends Component {
 state={
     message:"",
@@ -87,7 +89,7 @@ addCart=(medicine)=>{
        var medicines=   this.state.medicines.map(medicine=>{
               return(
                 <div className="product-row2" key={medicine.id}>
-                <Link to={`/products-inner/${medicine.id}`}>
+                <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>
                 <div className="product-bar1">
                     <div className="slide-post owl-carousel">
                     <OwlCarousel margin={3} items={1} {...this.state.options} > 

@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 import {isAuth} from '../function/auth';
 import 'antd/dist/antd.css';
 import { notification } from 'antd';
+import Config from '../Config';
 
 class Cart extends Component {
     state={
@@ -115,7 +116,7 @@ localStorage.setItem('bill',JSON.stringify(data))
                   
                  
                     	<div className="product-bar1">
-                        <Link to={`/products-inner/${medicine.id}`}>
+                        <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>
                         	<div className="slide-post owl-carousel">
                             <OwlCarousel margin={3} items={1} {...this.state.options} > 
                                 <div>

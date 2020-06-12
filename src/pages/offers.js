@@ -11,6 +11,7 @@ import offersThumb5 from '../images/offers-thumb5.png';
 import offersThumb4 from '../images/offers-thumb4.png';
 import offersThumb3 from '../images/offers-thumb3.png';
 import offersThumb2 from '../images/offers-thumb2.png';
+import Config from '../Config';
 import { NavLink } from 'react-router-dom';
 class Offers extends Component {
 

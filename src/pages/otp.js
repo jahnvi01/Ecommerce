@@ -3,6 +3,8 @@ import dawabagLogo2 from '../images/dawabag-logo2.png';
 import {authentication,isAuth} from '../function/auth';
 import { withRouter } from 'react-router-dom';
 import ShowAlert from '../function/alert';
+import Config from '../Config';
+import { NavLink } from 'react-router-dom';
 class Otp extends Component {
 
 	state={

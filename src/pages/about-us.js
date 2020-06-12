@@ -12,7 +12,7 @@ import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import $ from 'jquery';
 import { NavLink } from 'react-router-dom';
-
+import Config from '../Config';
 class About extends Component {
   
   render() {

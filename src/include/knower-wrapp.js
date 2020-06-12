@@ -6,7 +6,7 @@ import linkerIcon1 from '../images/linker-icon1.png';
 import linkerIcon2 from '../images/linker-icon2.png';
 import linkerIcon3 from '../images/linker-icon3.png';
 import linkerIcon4 from '../images/linker-icon4.png';
-
+import Config from '../Config';
 
 
 class KnowerWrapp extends Component {
