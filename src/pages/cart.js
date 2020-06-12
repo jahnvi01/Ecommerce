@@ -20,7 +20,7 @@ class Cart extends Component {
     state={
         message:"",
         error:"",
-    
+        orders:this.props.items,
         options:{
             items: 1,
             margin: 0,
@@ -52,6 +52,42 @@ class Cart extends Component {
             }
         }
     }
+    componentDidMount(){
+        this.countBill()
+    }
+    total=(e,rs,id)=>{
+     
+var qnt=parseInt(e.target.value);
+var amount=qnt*parseInt(rs);
+e.target.parentNode.nextSibling.nextSibling.childNodes[2].innerHTML=`${amount}`;
+this.state.orders.map(order=>{
+    var item=order;
+    if(order.medicineId===id){
+       item.quantity=qnt
+    }
+    return item
+})
+this.countBill();
+    }
+
+countBill=()=>{
+    var total=0;
+    var products=document.getElementsByClassName("subtotal");
+for(var i=0;i<products.length;i++){
+   total=total+ parseInt(products[i].innerHTML);
+}
+document.getElementById("totalBill").innerHTML=total;
+var delivery=parseInt(document.getElementById("delivery").innerHTML);
+var discount=parseInt(document.getElementById("discount1").innerHTML);
+var bill=total+delivery-discount
+document.getElementById("bill1").innerHTML=bill;
+document.getElementById("bill2").innerHTML=bill;
+var data={
+    total:total,
+    bill:bill
+}
+localStorage.setItem('bill',JSON.stringify(data))
+}
     remove=(id)=>{
         const args = {
             message: "Removed From Cart",
@@ -121,13 +157,13 @@ class Cart extends Component {
                                 <a href="#" className="product-btn2">100 grams</a>
 							</div>
                             <h4>Recommended retail price</h4>
-                        <h5><span>&#8377;</span>17packka</h5>
+                        <h5><span>&#8377;</span>17</h5>
                             <div className="product-bar3">
-                            	<div className="product-bar44">QTY :    1</div>
+                       <div className="product-bar44"> QTY :	<input style={{width:"30px"}} onClick={(event)=>{this.total(event,17,medicine.id)}}  id="quantity" defaultValue="1" type="number" placeholder="1"/></div> 
                                 <button className="product-btn1" onClick={()=>{this.remove(medicine.id)}}>Remove CART</button>
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
-                            		<h5><span>&#8377;</span>17.96</h5>
+                        <h5 className="subtotal">17</h5>
                                 </div>
                             </div>
                      
@@ -215,27 +251,27 @@ payment options.</span></label>
                     <h2>Payment Details</h2>
                     <div className="sidbar-bar3">
                     	<div className="payment-lt">MRP Total</div>
-                        <div className="payment-rt">&#8377;265.00</div>
+                        <div className="payment-rt" id="totalBill"></div>
                     </div>
                     <div className="sidbar-bar3">
-                    	<div className="payment-lt">Delivery Charges</div>
-                        <div className="payment-rt">&#8377;25.00</div>
+                    	<div className="payment-lt">+ Delivery Charges</div>
+                        <div className="payment-rt" id="delivery">25.00</div>
                     </div>
                     <div className="sidbar-bar3">
-                    	<div className="payment-lt">DawaBag Discount</div>
-                        <div className="payment-rt">- &#8377;53.00</div>
+                    	<div className="payment-lt">- DawaBag Discount</div>
+                        <div className="payment-rt" id="discount1">53.00</div>
                     </div>
                     <div className="sidbar-bar3">
                     	<div className="payment-lt"><span>Total Amount *</span></div>
-                        <div className="payment-rt"><span>&#8377;237.00</span></div>
+                        <div className="payment-rt" id="bill1"></div>
                     </div>
                     
-                    <div className="savings">TOTAL SAVINGS &#8377;63.00</div>
+                    <div className="savings" id="discount2">53.00</div>
                     
                     <div className="payment-row1">
                         <div className="payment-bar1">
                             <h6>TOTAL AMOUNT</h6><br />
-                            <h5><span>&#8377;</span>207.00</h5>
+                            <h5 id="bill2"></h5>
                         </div>
                         <a href="/address" className="sidbar-btn1">Proceed</a>
                     </div>
@@ -258,16 +294,28 @@ payment options.</span></label>
   }
 }
 function mapStateToProps(state){
-console.log(state.cart)
+var items=JSON.parse(state.cart);
+var orders=[];
+
+items.map(item=>{
+  var  order={
+        medicineId:item.id,
+        quantity:1
+    }
+    orders.push(order)
+})
     return {
 message:state.message,
         cart:JSON.parse(state.cart),
+        items:orders
     }
   
 }
   function mapDispatchToStates(dispatch){
     return{
    
+      
+
         remove:(id)=>{
 
             dispatch({type:"remove",payload:{id:id,message:"Removed From Cart"}})
