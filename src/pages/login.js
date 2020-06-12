@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import dawabagLogo1 from '../images/dawabag-logo1.png';
-import { withRouter } from 'react-router-dom';
+import { withRouter,NavLink } from 'react-router-dom';
 import ShowAlert from '../function/alert';
 
 
@@ -50,7 +50,7 @@ else{
 		<div className="container-login100">
         <ShowAlert message={this.state.message} error={this.state.error} />
         	<div className="login-logo">
-            	<div className="logo-bar1"><a href="/"><img src={dawabagLogo1}/></a></div>
+            	<div className="logo-bar1"><NavLink to={Config.BASE_URL}><img src={dawabagLogo1}/></NavLink></div>
                 <p> 2000+ medicines</p>
             </div>
             
@@ -87,12 +87,12 @@ else{
 
 					<div className="p-t-50 sign">
                     	<h2>Or sign in as</h2>
-						<a className="txt1" href="/signup">
+						<NavLink to={Config.BASE_URL+'/signu'} className="txt1">
 							Doctor
-						</a>
-                        <a className="txt1" href="/signup">
+						</NavLink>
+                        <NavLink to={Config.BASE_URL+'/signup'} className="txt1">
 							Pharmacy
-						</a>
+						</NavLink>
 					</div>
 				</form>
 			</div>

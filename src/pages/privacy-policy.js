@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';
+import { NavLink } from 'react-router-dom';
 import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
@@ -20,7 +21,7 @@ class Privacy extends Component {
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="#">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>Privacy Policy</li>
             </ul>

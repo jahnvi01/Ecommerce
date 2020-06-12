@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link,NavLink } from 'react-router-dom'
 import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';
@@ -159,9 +159,9 @@ state={
                     <h3>{medicine.unitInBox} Units in box</h3>
                     <h3>Other Variants</h3>
                     <div className="product-varian">
-                        <a href="#" className="product-btn2">40 grams</a>
-                        <a href="#" className="product-btn2">80 grams</a>
-                        <a href="#" className="product-btn2">100 grams</a>
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink> 
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink> 
                     </div>
                     <h4>Recommended retail price</h4>
                     <h5 className="underline"><span>&#8377;</span>{medicine.totalPriceToRetailer}</h5>
@@ -195,7 +195,7 @@ state={
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink> </li>
                 <li>/</li>
                 <li>Medicines</li>
             </ul>
@@ -236,23 +236,23 @@ state={
                             <h3><strong>company name</strong></h3>
                             <h3>10 Tablet(s) in Strip</h3>
                             <div className="product-varian">
-                            	<a href="#" className="product-btn2">10 mg</a>
-                                <a href="#" className="product-btn2">20 mg</a>
-                                <a href="#" className="product-btn2">30 mg</a>
+                            	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">10 mg</NavLink> 
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">20 mg</NavLink> 
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">30 mg</NavLink> 
 							</div>
                             <h4>Recommended retail price</h4>
                             <h5 className="underline"><span>&#8377;</span>20.96</h5>
                             <h5><span>&#8377;</span>17.96</h5>
                             <div className="product-bar3">
                             	<div className="product-bar44">QTY :    1</div>
-                                <a href="#" className="product-btn1">ADD TO CART</a>
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn1">ADD TO CART</NavLink> 
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
                             		<h5><span>&#8377;</span>17.96</h5>
                                 </div>
                             </div>
                         </div>
-                        </a>
+                        </NavLink> 
                     </div>
                     
                     <div className="product-row2">
@@ -274,22 +274,22 @@ state={
                             <h3>10 Sachets</h3>
                             <h3>Other Variants</h3>
                             <div className="product-varian">
-                            	<a href="#" className="product-btn2">40 grams</a>
-                                <a href="#" className="product-btn2">80 grams</a>
-                                <a href="#" className="product-btn2">100 grams</a>
+                            	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink> 
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink> 
 							</div>
                             <h4>Recommended retail price</h4>
                             <h5><span>&#8377;</span>17.96</h5>
                             <div className="product-bar3">
                             	<div className="product-bar44">QTY :    1</div>
-                                <a href="#" className="product-btn1">ADD TO CART</a>
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn1">ADD TO CART</NavLink> 
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
                             		<h5><span>&#8377;</span>17.96</h5>
                                 </div>
                             </div>
                         </div>
-                        </a>
+                        </NavLink> 
                     </div> */}
                     {this.shhowMedicines()}
                     

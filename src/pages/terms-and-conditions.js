@@ -6,6 +6,7 @@ import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
+import { NavLink } from 'react-router-dom';
 
 class Terms extends Component {
   
@@ -20,7 +21,7 @@ class Terms extends Component {
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="#">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL+"#"}>Home</NavLink></li>
                 <li>/</li>
                 <li>Terms & Conditions</li>
             </ul>

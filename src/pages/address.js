@@ -8,7 +8,7 @@ import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
-import { withRouter} from 'react-router-dom';
+import { withRouter,NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {isAuth} from '../function/auth';
 import ShowAlert from '../function/alert';
@@ -63,7 +63,7 @@ return(
         
 <h3>{address.u_fname} {address.u_lname}</h3>
 <p>{address.addressLine1}, {address.addressLine2},{address.addressLine3} <span>{address.city}- {address.pincode}, {address.state}</span> {address.country}</p>
-        <h4><a href="#">MODIFY</a></h4>
+        <h4><NavLink to={Config.BASE_URL+"#"}>MODIFY</NavLink></h4>
     </div>
 </div>
 )
@@ -116,7 +116,7 @@ items:this.props.items
     <ShowAlert error={this.state.error} message={this.state.message} />
     	<div class="inner-row1">
         	<ul class="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <div className="product-bar44"> QTY :	<input style={{width:"30px"}} id="quantity" defaultValue="1" type="number" placeholder="1"/></div> 
                     
@@ -150,7 +150,7 @@ items:this.props.items
                     <div class="adress-row2">
                         <div class="adress-bar1"><img src={addressIcon2} alt="address icon2"/></div>
                         <div class="adress-bar2">
-                            <h3><a href="/new-address">Add New Address</a></h3>
+                            <h3><NavLink to={Config.BASE_URL+"new-address"}>Add New Address</NavLink></h3>
                         </div>
                     </div>
                     

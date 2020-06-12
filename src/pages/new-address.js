@@ -14,7 +14,7 @@ import ImpoerWrapp from '../include/impoer-wrapp';
 import $ from 'jquery';
 import { userAuth } from '../function/auth';
 import ShowAlert from '../function/alert';
-import { withRouter } from 'react-router-dom';
+import { withRouter,NavLink } from 'react-router-dom';
 
 class NewAddress extends Component {
 
@@ -90,7 +90,7 @@ class NewAddress extends Component {
 	<div class="margin">
     	<div class="inner-row1">
         	<ul class="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>New Address</li>
             </ul>
@@ -216,7 +216,7 @@ class NewAddress extends Component {
                             <h6>TOTAL AMOUNT</h6><br />
                             <h5><span>Rs.</span>207.00</h5>
                         </div>
-                        <a href="#" class="sidbar-btn2">PROCEED TO PAYMENT</a>
+                        <NavLink to={Config.BASE_URL+"#"} class="sidbar-btn2">PROCEED TO PAYMENT</NavLink>
                     </div>
                     
                 </div>

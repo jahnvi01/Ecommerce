@@ -7,6 +7,7 @@ import ordersIcon5 from '../images/orders-icon5.png';
 import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';
+import { NavLink } from 'react-router-dom';
 import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
@@ -56,7 +57,7 @@ class Profile extends Component {
 	<div class="margin">
     	<div class="inner-row1">
         	<ul class="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink> </li>
                 <li>/</li>
                 <li>Profile</li>
             </ul>
@@ -124,9 +125,9 @@ class Profile extends Component {
                             <div class="sidbar-rt">
                             	<h3>YOUR ORDERS</h3>
                             	<ul>
-                            	    <a href="/orders">
+                            	    <NavLink to={Config.BASE_URL+"orders"}>
                                 	<li>Medicine/Healthcare</li>
-                                	</a>
+                                	</NavLink> 
                                     {/* <!--<li>Diagnostics</li>--> */}
                                 </ul>
                             </div>
@@ -145,13 +146,13 @@ class Profile extends Component {
                             <div class="sidbar-rt">
                             	<h3>PROFILE SETTINGS</h3>
                             	<ul>
-                            	    <a href="/profile">
+                            	    <NavLink to={Config.BASE_URL+"profile"}>
                                 	<li>Edit Profile</li>
-                                	</a>
+                                	</NavLink> 
                                     <li>Manage Patients</li>
-                                    <a href="/address">
+                                    <NavLink to={Config.BASE_URL+"address"}>
                                     <li>Manage Address</li>
-                                    </a>
+                                    </NavLink> 
                                     {/* <!--<li>Manage PRefundsatients</li>--> */}
                                 </ul>
                             </div>

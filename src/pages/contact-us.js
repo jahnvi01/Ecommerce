@@ -7,6 +7,7 @@ import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';
 import OwlCarousel from 'react-owl-carousel';
+import { NavLink } from 'react-router-dom';
 import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
@@ -57,7 +58,7 @@ class Contact extends Component {
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>contact us</li>
             </ul>
@@ -136,11 +137,11 @@ class Contact extends Component {
                         </div>
                         <div className="address-row1">
                         	<div className="address-bar1"><img src={contactIcon2} alt="contact icon2"/></div>
-                            <div className="address-bar2"><p><a href="#">020 7060 2345</a></p></div>
+                            <div className="address-bar2"><p><NavLink to={Config.BASE_URL+"#"}>020 7060 2345</NavLink></p></div>
                         </div>
                         <div className="address-row1">
                         	<div className="address-bar1"><img src={contactIcon3} alt="contact icon3"/></div>
-                            <div className="address-bar2"><p><a href="#">Info@dentazure.com</a></p></div>
+                            <div className="address-bar2"><p><NavLink to={Config.BASE_URL+"#"}>Info@dentazure.com</NavLink></p></div>
                         </div>
                         
                     </div>

@@ -55,16 +55,16 @@ class Orders extends Component {
        var orders=this.state.orders.map(order=>{
 return(
     <div className="orders-bar2" key={order.id}>
-    <a href={`/orders-summary/${order.id}`}>
+    <NavLink to={Config.BASE_URL+`/orders-summary/${order.id}`}>
 <h3>{order.fname} {order.lname}</h3>
     <h4>Order Delivered</h4>
     <ul>
     {this.showDetails(order.details)}
     </ul>
-      </a>
+      </NavLink>
     <div className="orders-bar3">
         <h6>Delivered on 16 jan</h6>
-        <a href="/cart" className="orders-btn1">Reorder</a>
+        <NavLink to={Config.BASE_URL+"cart"} className="orders-btn1">Reorder</NavLink>
     </div>
 </div>
 
@@ -87,7 +87,7 @@ userAuth(this.props);
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>Orders</li>
             </ul>
@@ -134,10 +134,10 @@ userAuth(this.props);
                             <li>lMETOCARD XL 50MG TAB</li>
                         </ul>
                         <h5>+2 more products</h5>
-                        </a>
+                        </NavLink>
                         <div className="orders-bar3">
                         	<h6>Delivered on 16 jan</h6>
-                            <a href="/cart" className="orders-btn1">Reorder</a>
+                            <a href="/cart" className="orders-btn1">Reorder</NavLink>
 						</div>
                     </div>
                     <div className="orders-bar2">
@@ -149,7 +149,7 @@ userAuth(this.props);
                             <li>lMETOCARD XL 50MG TAB</li>
                         </ul>
                         <h5>+2 more products</h5>
-                        </a>
+                        </NavLink>
                         <div className="orders-bar3">
                         	<h6>Cancelled on 16 jan</h6>
 						</div>
@@ -171,9 +171,9 @@ userAuth(this.props);
                         	<div className="sidbar-lt"><img src={ordersIcon1} alt="bag icon"/></div>
                             <div className="sidbar-rt">
                             	<h3>YOUR ORDERS</h3>
-                            	<ul><a href="/orders">
+                            	<ul><NavLink to={Config.BASE_URL+"orders"}>
                                 	<li>Medicine/Healthcare</li>
-                                	</a>
+                                	</NavLink>
                                     {/* <!--<li>Diagnostics</li>--> */}
                                 </ul>
                             </div>
@@ -191,13 +191,13 @@ userAuth(this.props);
                         	<div className="sidbar-lt"><img src={ordersIcon3} alt="bag icon"/></div>
                             <div className="sidbar-rt">
                             	<h3>PROFILE SETTINGS</h3>
-                            	<ul><a href="/profile">
+                            	<ul><NavLink to={Config.BASE_URL+"profile"}>
                                 	<li>Edit Profile</li>
-                                	</a>
+                                	</NavLink>
                                     <li>Manage Patients</li>
-                                    <a href="/address">
+                                    <NavLink to={Config.BASE_URL+"address"}>
                                     <li>Manage Address</li>
-                                    </a>
+                                    </NavLink>
                                     {/* <!--<li>Manage PRefundsatients</li>--> */}
                                 </ul>
                             </div>

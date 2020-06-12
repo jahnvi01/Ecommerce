@@ -13,6 +13,7 @@ import honoerThumb1 from '../images/honoer-thumb1.jpg'
 import honoerThumb2 from '../images/honoer-thumb2.jpg'
 import honoerThumb3 from '../images/honoer-thumb3.jpg'
 import KnowerWrapp from '../include/knower-wrapp';
+import { NavLink } from 'react-router-dom';
 import Footer from '../include/footer';
 import $ from 'jquery';
 import OwlCarousel from 'react-owl-carousel';
@@ -140,7 +141,7 @@ class Home extends Component {
                         <div className="honoer-bar2">
                 <h3>{blog.title}</h3>
                 <p>{blog.description.slice(0,30)}...</p>
-                            <a href="#" className="honoer-btn1">Read more</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="honoer-btn1">Read more</NavLink>
                         </div>
                     </div>
                     </div>
@@ -165,7 +166,7 @@ class Home extends Component {
                                 <h2>COUPONS/ADVERTISEMENTS</h2>
                                 <h3>SILK BED LINEN</h3>
                                 <p>For the ultimate luxury sleeping experience</p>
-                                <a href="#" className="banner-btn1">Shop now!</a>
+                                <NavLink to={Config.BASE_URL+"#"} className="banner-btn1">Shop now!</NavLink>
                             </div>
                         </div>
                         
@@ -182,7 +183,7 @@ class Home extends Component {
                                 <h2>COUPONS/ADVERTISEMENTS</h2>
                                 <h3>SILK BED LINEN</h3>
                                 <p>For the ultimate luxury sleeping experience</p>
-                                <a href="#" className="banner-btn1">Shop now!</a>
+                                <NavLink to={Config.BASE_URL+"#"} className="banner-btn1">Shop now!</NavLink>
                             </div>
                         </div>
                         
@@ -199,7 +200,7 @@ class Home extends Component {
                                 <h2>COUPONS/ADVERTISEMENTS</h2>
                                 <h3>SILK BED LINEN</h3>
                                 <p>For the ultimate luxury sleeping experience</p>
-                                <a href="#" className="banner-btn1">Shop now!</a>
+                                <NavLink to={Config.BASE_URL+"#"} className="banner-btn1">Shop now!</NavLink>
                             </div>
                         </div>
                         
@@ -216,7 +217,7 @@ class Home extends Component {
                                 <h2>COUPONS/ADVERTISEMENTS</h2>
                                 <h3>SILK BED LINEN</h3>
                                 <p>For the ultimate luxury sleeping experience</p>
-                                <a href="#" className="banner-btn1">Shop now!</a>
+                                <NavLink to={Config.BASE_URL+"#"} className="banner-btn1">Shop now!</NavLink>
                             </div>
                         </div>
                         
@@ -249,10 +250,10 @@ class Home extends Component {
 
 <section className="enquer-wrapp">
 	<div className="margin">
-    	
+
         <div className="enquer-row1">
         	<div className="enquer-row2">
-        	    <a href="/products">
+        	    <NavLink to={Config.BASE_URL+"products"}>
                 <div className="enquer-bar1">
                 	<div className="enquer-box1">
 						<img src={enquerIcon1} alt="enquer icon1" />
@@ -262,7 +263,7 @@ class Home extends Component {
                     <h2>Order</h2>
                     <p>Medicines</p>
                 </div>
-                </a>
+                </NavLink>
             </div>
       {/* <!--      <div className="enquer-row2">-->
       <!--          <div className="enquer-bar1">-->
@@ -276,7 +277,7 @@ class Home extends Component {
       <!--          </div>-->
       <!--      </div>--> */}
             <div className="enquer-row2">
-                <a href="/offers">
+                <NavLink to={Config.BASE_URL+"offers"}>
                 <div className="enquer-bar1">
                 	<div className="enquer-box1">
 						<img src={enquerIcon3} alt="enquer icon3" />
@@ -286,10 +287,10 @@ class Home extends Component {
                     <h2>Special</h2>
                     <p>Offers</p>
                 </div>
-                </a>
+                </NavLink>
             </div>
             <div className="enquer-row2">
-                <a href="/orders">
+                <NavLink to={Config.BASE_URL+"orders"}>
                 <div className="enquer-bar1">
                 	<div className="enquer-box1">
 						<img src={enquerIcon4} alt="enquer icon4" />
@@ -299,7 +300,7 @@ class Home extends Component {
                     <h2>My</h2>
                     <p>Orders</p>
                 </div>
-                </a>
+                </NavLink>
             </div>
         </div>
     	
@@ -361,7 +362,7 @@ class Home extends Component {
     	<div className="gester-row1">
         	<h2>Buy Lifesaving And Anti Cancer <span>Drugs At Dawabag.Com Only!</span></h2>
             <p>Lorem Ipsum is simply dummy text of the printing and <span>typesetting industry.</span></p>
-            <a href="#" className="gester-btn1">Shop now!</a>
+            <NavLink to={Config.BASE_URL+"#"} className="gester-btn1">Shop now!</NavLink>
         </div>
     </div>
 </section>
@@ -434,7 +435,7 @@ class Home extends Component {
                 <div className="honoer-bar2">
                 	<h3>Even light drinkers at risk <span>of cancer</span></h3>
                     <p>Lorem ipsum dolor adipisicing amet, <span>consectetur sit elit. Aspernatur incidihil</span> quo officia.</p>
-                    <a href="#" className="honoer-btn1">Read more</a>
+                    <a href="#" className="honoer-btn1">Read more</NavLink>
                 </div>
             </div>
             </div>
@@ -445,7 +446,7 @@ class Home extends Component {
                 <div className="honoer-bar2">
                 	<h3>Even light drinkers at risk <span>of cancer</span></h3>
                     <p>Lorem ipsum dolor adipisicing amet, <span>consectetur sit elit. Aspernatur incidihil</span> quo officia.</p>
-                    <a href="#" className="honoer-btn1">Read more</a>
+                    <a href="#" className="honoer-btn1">Read more</NavLink>
                 </div>
             </div>
             </div>
@@ -456,7 +457,7 @@ class Home extends Component {
                 <div className="honoer-bar2">
                 	<h3>Even light drinkers at risk <span>of cancer</span></h3>
                     <p>Lorem ipsum dolor adipisicing amet, <span>consectetur sit elit. Aspernatur incidihil</span> quo officia.</p>
-                    <a href="#" className="honoer-btn1">Read more</a>
+                    <a href="#" className="honoer-btn1">Read more</NavLink>
                 </div>
             </div>
             

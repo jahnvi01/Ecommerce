@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import headerIcon1 from '../images/header-icon1.png';
 import headerIcon2 from '../images/header-icon2.png';
 import callIcon1 from '../images/call-icon1.png';
+
 class Header extends Component {
   render() {
     return (

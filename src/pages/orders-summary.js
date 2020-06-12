@@ -13,7 +13,7 @@ import orderPlus from '../images/order-plus.png'
 import productThumb1 from '../images/product-thumb1.png'
 import $ from "jquery";
 import { userAuth } from '../function/auth';
-import { withRouter } from 'react-router-dom';
+import { withRouter,NavLink } from 'react-router-dom';
 import ShowAlert from '../function/alert';
 class OrdersSummary extends Component {
     state={
@@ -201,7 +201,7 @@ showOrder=()=>{
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>Select Address</li>
             </ul>
@@ -309,7 +309,7 @@ showOrder=()=>{
                         <div className="payment-rt">Rs.1420</div>
                     </div>
                     
-                    <a href="#" className="sidbar-btn3">Place Order</a>
+                    <NavLink to={Config.BASE_URL+"#"} className="sidbar-btn3">Place Order</NavLink>
                     
                 </div>
                 

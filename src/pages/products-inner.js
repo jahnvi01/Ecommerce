@@ -18,6 +18,7 @@ import ShowAlert from '../function/alert';
 import {connect} from 'react-redux';
 import { isAuth } from '../function/auth';
 import 'antd/dist/antd.css';
+import { NavLink } from 'react-router-dom';
 import { notification } from 'antd';
 class ProductsInner extends Component {
     state={
@@ -116,9 +117,9 @@ class ProductsInner extends Component {
                             <h3>{this.state.product.unitInBox} Units in box</h3>
                             <h3>Variants</h3>
                             <div className="product-varian">
-                            	<a href="#" className="product-btn2">10 mg</a>
-                                <a href="#" className="product-btn2">20 mg</a>
-                                <a href="#" className="product-btn2">30 mg</a>
+                            	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">10 mg</NavLink>
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">20 mg</NavLink>
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">30 mg</NavLink>
 							</div>
                             <h4>Recommended retail price</h4>
                         <h5 className="underline"><span>&#8377;</span>{this.state.product.totalPriceToRetailer}</h5>
@@ -177,9 +178,9 @@ class ProductsInner extends Component {
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="#">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL+"#"}>Home</NavLink></li>
                 <li>/</li>
-                <li><a href="#">Medicines</a></li>
+                <li><NavLink to={Config.BASE_URL+"#"}>Medicines</NavLink></li>
                 <li>/</li>
                 <li>{this.state.product.genericName}</li>
             </ul>
@@ -209,10 +210,10 @@ class ProductsInner extends Component {
 				<div className="sidbar-row4">
                     <h2>Share This</h2>
                     <div className="sidbar-box1">
-                        <a href="#"><img src={linkerIcon1} alt="linker icon1" /></a>
-                        <a href="#"><img src={linkerIcon2} alt="linker icon2" /></a>
-                        <a href="#"><img src={linkerIcon3} alt="linker icon3" /></a>
-                        <a href="#"><img src={linkerIcon4} alt="linker icon4" /></a>
+                        <NavLink to={Config.BASE_URL+"#"}><img src={linkerIcon1} alt="linker icon1" /></NavLink>
+                        <NavLink to={Config.BASE_URL+"#"}><img src={linkerIcon2} alt="linker icon2" /></NavLink>
+                        <NavLink to={Config.BASE_URL+"#"}><img src={linkerIcon3} alt="linker icon3" /></NavLink>
+                        <NavLink to={Config.BASE_URL+"#"}><img src={linkerIcon4} alt="linker icon4" /></NavLink>
                 	</div>
                     <h2>Check Delivery Time</h2>
                     <div className="sidbar-bar4">
@@ -222,7 +223,7 @@ class ProductsInner extends Component {
                         </form>
                     </div>
                     <h2>Please add item</h2>
-                    <a href="/cart" className="savings">VIEW CART</a>
+                    <NavLink to={Config.BASE_URL+'/cart'} className="savings">VIEW CART</NavLink>
                     <div className="sidbar-bar4">
                     	<div className="sidbar-bar5"><img src={delivery} alt="delivery icon"/></div>
                         <div className="sidbar-bar6">

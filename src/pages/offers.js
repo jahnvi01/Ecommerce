@@ -11,6 +11,7 @@ import offersThumb5 from '../images/offers-thumb5.png';
 import offersThumb4 from '../images/offers-thumb4.png';
 import offersThumb3 from '../images/offers-thumb3.png';
 import offersThumb2 from '../images/offers-thumb2.png';
+import { NavLink } from 'react-router-dom';
 class Offers extends Component {
 
   render() {
@@ -25,7 +26,7 @@ class Offers extends Component {
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>Special Offers</li>
             </ul>
@@ -51,7 +52,7 @@ class Offers extends Component {
                         	<h2>15% off on PE + Paytm Cashback</h2>
                             <p>Flat 20% off on Dawabag + Upto Rs.500 cashback on your 1st transaction using Paytm UPI ID on PE. *T&C apply</p>
                             <h3>Expires On 30/04/2020</h3>
-                            <a href="#" className="offers-btn1">view details</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="offers-btn1">view details</NavLink>
                         </div>
                         <div className="offers-rt paytm">
                         	<div className="offers-icon"><img src={offersThumb1} alt="offers thumb1"/></div>
@@ -62,7 +63,7 @@ class Offers extends Component {
                         	<h2>15% off on PE + Paytm Cashback</h2>
                             <p>Flat 20% off on Dawabag + Upto Rs.500 cashback on your 1st transaction using Paytm UPI ID on PE. *T&C apply</p>
                             <h3>Expires On 30/04/2020</h3>
-                            <a href="#" className="offers-btn1">view details</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="offers-btn1">view details</NavLink>
                         </div>
                         <div className="offers-rt paytm">
                         	<div className="offers-icon"><img src={offersThumb1}alt="offers thumb1"/></div>
@@ -89,7 +90,7 @@ class Offers extends Component {
                         	<h2>15% off on PE + Paytm Cashback</h2>
                             <p>Flat 20% off on Dawabag + Upto Rs.500 cashback on your 1st transaction using Paytm UPI ID on PE. *T&C apply</p>
                             <h3>Expires On 30/04/2020</h3>
-                            <a href="#" className="offers-btn1">view details</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="offers-btn1">view details</NavLink>
                         </div>
                         <div className="offers-rt paypal">
                         	<div className="offers-icon"><img src={offersThumb5} alt="offers thumb1"/></div>
@@ -100,7 +101,7 @@ class Offers extends Component {
                         	<h2>15% off on PE + Paytm Cashback</h2>
                             <p>Flat 20% off on Dawabag + Upto Rs.500 cashback on your 1st transaction using Paytm UPI ID on PE. *T&C apply</p>
                             <h3>Expires On 30/04/2020</h3>
-                            <a href="#" className="offers-btn1">view details</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="offers-btn1">view details</NavLink>
                         </div>
                         <div className="offers-rt mobikwik">
                         	<div className="offers-icon"><img src={offersThumb4} alt="offers thumb1"/></div>
@@ -111,7 +112,7 @@ class Offers extends Component {
                         	<h2>15% off on PE + Paytm Cashback</h2>
                             <p>Flat 20% off on Dawabag + Upto Rs.500 cashback on your 1st transaction using Paytm UPI ID on PE. *T&C apply</p>
                             <h3>Expires On 30/04/2020</h3>
-                            <a href="#" className="offers-btn1">view details</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="offers-btn1">view details</NavLink>
                         </div>
                         <div className="offers-rt airtel">
                         	<div className="offers-icon"><img src={offersThumb3} alt="offers thumb1"/></div>
@@ -122,7 +123,7 @@ class Offers extends Component {
                         	<h2>15% off on PE + Paytm Cashback</h2>
                             <p>Flat 20% off on Dawabag + Upto Rs.500 cashback on your 1st transaction using Paytm UPI ID on PE. *T&C apply</p>
                             <h3>Expires On 30/04/2020</h3>
-                            <a href="#" className="offers-btn1">view details</a>
+                            <NavLink to={Config.BASE_URL+"#"} className="offers-btn1">view details</NavLink>
                         </div>
                         <div className="offers-rt freecharge">
                         	<div className="offers-icon"><img src={offersThumb2} alt="offers thumb1"/></div>

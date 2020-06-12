@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import dawabagLogo2 from '../images/dawabag-logo2.png';
-import $ from 'jquery';
+import { NavLink } from 'react-router-dom';
 
 
 class Signup extends Component {
@@ -49,7 +49,7 @@ class Signup extends Component {
 <div className="limiter">
 		<div className="container-login100">
         	<div className="login-logo">
-            	<div className="logo-bar1"><a href="/"><img src={dawabagLogo2}/></a></div>
+            	<div className="logo-bar1"><NavLink to={Config.BASE_URL}><img src={dawabagLogo2}/></NavLink></div>
                 <p>2000+ medicines</p>
             </div>
             
@@ -97,15 +97,15 @@ class Signup extends Component {
 
 					<div className="p-t-50 sign">
                     	<h2>Or sign in as</h2>
-                        <a className="txt2" href="/login">
+                        <NavLink to={Config.BASE_URL+"login"} className="txt2">
 							User 
-						</a>
-						<a className="txt1" href="/signup">
+						</NavLink>
+						<NavLink to={Config.BASE_URL+"signup"} className="txt1" >
 							Doctor 
-						</a>
-                        <a className="txt1" href="/signup">
+						</NavLink>
+                        <NavLink to={Config.BASE_URL+"signup"} className="txt1" >
 							Pharmacy  
-						</a>
+						</NavLink>
 					</div>
 				</form>
 			</div>

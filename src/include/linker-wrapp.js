@@ -38,7 +38,7 @@ this.props.history.push(`/search-products/${name}`)
             
 		<div className="linker-row1">
 			<div className="linker-bar1">
-				<a href="/"><img src={dawabagLogo2} alt="dawabag logo1" /></a>
+				<NavLink to={Config.BASE_URL }><img src={dawabagLogo2} alt="dawabag logo1" /></NavLink>
 			</div>
 		</div>
         <div className="linker-row2">
@@ -62,7 +62,7 @@ this.props.history.push(`/search-products/${name}`)
                     <p><img src={loginThumb1} /></p>
                 </div>)}
                 <div className="cart-box">
-                	<p><a href="/cart">Cart</a></p>
+                	<p><NavLink to={Config.BASE_URL +'cart'}>Cart</NavLink></p>
                     <p><img src={cartThumb1}/></p>
                 </div>
 			</div>

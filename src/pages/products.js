@@ -126,9 +126,9 @@ addCart=(medicine)=>{
                     <h3>{medicine.unitInBox} Units in box</h3>
                     <h3>Other Variants</h3>
                     <div className="product-varian">
-                        <a href="#" className="product-btn2">40 grams</a>
-                        <a href="#" className="product-btn2">80 grams</a>
-                        <a href="#" className="product-btn2">100 grams</a>
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink> 
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink> 
                     </div>
                     <h4>Recommended retail price</h4>
                     <h5 className="underline"><span>&#8377;</span>{medicine.totalPriceToRetailer}</h5>
@@ -163,7 +163,7 @@ addCart=(medicine)=>{
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="/">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink> </li>
                 <li>/</li>
                 <li>Medicines</li>
             </ul>

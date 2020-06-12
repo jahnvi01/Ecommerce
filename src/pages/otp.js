@@ -82,7 +82,7 @@ this.props.history.push("/")
 		<div className="container-login100">
         
         	<div className="login-logo">
-            	<div className="logo-bar1"><a href="/"><img src={dawabagLogo2}/></a></div>
+            	<div className="logo-bar1"><NavLink to={Config.BASE_URL}><img src={dawabagLogo2}/></NavLink></div>
                 <p>2000+ medicines</p>
             </div>
             
@@ -111,8 +111,8 @@ this.props.history.push("/")
                         <input name="number" id="d4" type="text" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
 					</div>
                     
-                    <a href="#" className="hvr-sweep-to-left" onClick={(event)=>{this.send(event)}}>Resend OTP</a>
-                    <a href="#" className="hvr-sweep-to-left2" onClick={(event)=>{this.verify(event)}}>Verify OTP</a>
+                    <NavLink to={Config.BASE_URL+"#"} className="hvr-sweep-to-left" onClick={(event)=>{this.send(event)}}>Resend OTP</NavLink>
+                    <NavLink to={Config.BASE_URL+"#"} className="hvr-sweep-to-left2" onClick={(event)=>{this.verify(event)}}>Verify OTP</NavLink>
 					
 				</form>
 			</div>

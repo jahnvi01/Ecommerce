@@ -10,7 +10,7 @@ import LinkerWrapp from '../include/linker-wrapp';
 import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
-import { withRouter,Link } from 'react-router-dom';
+import { withRouter,Link,NavLink } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {isAuth} from '../function/auth';
 import 'antd/dist/antd.css';
@@ -152,9 +152,9 @@ localStorage.setItem('bill',JSON.stringify(data))
                         <h3>{medicine.tabletPack} Units</h3>
                             <h3>Other Variants</h3>
                             <div className="product-varian">
-                            	<a href="#" className="product-btn2">40 grams</a>
-                                <a href="#" className="product-btn2">80 grams</a>
-                                <a href="#" className="product-btn2">100 grams</a>
+                            	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink>
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink>
+                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink>
 							</div>
                             <h4>Recommended retail price</h4>
                         <h5><span>&#8377;</span>17</h5>
@@ -189,7 +189,7 @@ localStorage.setItem('bill',JSON.stringify(data))
 	<div className="margin">
     	<div className="inner-row1">
         	<ul className="inner-bar1">
-            	<li><a href="#">Home</a></li>
+            	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
                 <li>Your Cart</li>
             </ul>
@@ -273,7 +273,7 @@ payment options.</span></label>
                             <h6>TOTAL AMOUNT</h6><br />
                             <h5 id="bill2"></h5>
                         </div>
-                        <a href="/address" className="sidbar-btn1">Proceed</a>
+                        <NavLink to={Config.BASE_URL+"address"} className="sidbar-btn1">Proceed</NavLink>
                     </div>
                     
                 </div>
