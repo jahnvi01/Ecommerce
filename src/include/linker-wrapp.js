@@ -23,7 +23,7 @@ componentWillMount(){
 
 var name=document.getElementById("myInput").value;
 
-this.props.history.push(`/search-products/${name}`)
+this.props.history.push(`/demo/search-products/${name}`)
 
 	}
 

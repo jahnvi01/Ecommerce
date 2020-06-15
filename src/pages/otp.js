@@ -66,7 +66,7 @@ const data={
 	if(res.result.message==="Correct OTP."){
 		
 		authentication(res.result);
-this.props.history.push("/")
+this.props.history.push("/demo")
 	}	
 	 
 })

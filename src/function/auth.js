@@ -30,7 +30,8 @@ export const authentication=(data)=>{
 export const signout=()=>{
 removeCookie('token');
 removeLocalStorage('user');
-
+removeLocalStorage('cart');
+removeLocalStorage('bill');
 window.location.reload()
 }
 
@@ -57,7 +58,7 @@ export const isAuth=()=>{
 export const userAuth= function(props){
 
     if(!isAuth()){
-        props.history.push('/login')
+        props.history.push('/demo/login')
     }
         
 }

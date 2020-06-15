@@ -18,14 +18,21 @@ import ShowAlert from '../function/alert';
 import {connect} from 'react-redux';
 import { isAuth } from '../function/auth';
 import 'antd/dist/antd.css';
+
 import { notification } from 'antd';
 import { NavLink } from 'react-router-dom';
 import Config from '../Config';
+import { Select } from 'antd';
+
+const { Option } = Select;
+
+
 class Products extends Component {
 state={
     message:"",
     error:"",
     medicines:[],
+selections:[],
     options:{
         items: 1,
         margin: 0,
@@ -57,6 +64,45 @@ state={
         }
     }
 }
+dropdown=(no)=>{
+    var no=parseInt(no);
+    let items = []; 
+  for(var i=1;i<=no;i++){
+
+      items.push(<Option value={i}>{i}</Option> )
+    }
+return items;
+}
+handleChange=(qnt,e,id)=> {
+  
+var selections=this.state.selections.map(selected=>{
+    // var item=selected;
+    if(selected.id===id){
+   
+        selected.quantity=qnt;
+        var total=parseInt(qnt)*parseInt(selected.MRP)
+        selected.total=total
+       console.log(qnt)
+    }
+    return selected
+//    selections.push(item)
+})
+
+   this.setState({selections:selections})
+
+  }
+
+  variant=(items)=>{
+     
+      if(items.length!==0){
+var items=items.map(item=>{
+return(
+<button className="product-btn2">{item.strength}</button> 
+)               
+})
+  }
+return items
+  }
 addCart=(medicine)=>{
     const args = {
         message: "Added To Cart",
@@ -72,9 +118,10 @@ addCart=(medicine)=>{
   componentWillMount(){
      const data={"apiVersion":"1.0",
       "imei":"",
-      "token":""
+      "token":"",
+      medicineName:"crocin"
       }
-      return fetch('http://projects-demo.tk/dawabag/webservices/web/medicines',{
+      return fetch('http://projects-demo.tk/dawabag/webservices/web/search_medicines',{
 		method: "post",
 		headers: {
 		  'Accept': 'application/json, text/plain, */*',
@@ -82,11 +129,75 @@ addCart=(medicine)=>{
 		},body:JSON.stringify(data)
 	  })
 	  .then(res=>res.json())
-	  .then(res=>this.setState({medicines:res.data.medicines,error:res.error||""}))
+      .then(res=>{this.setState({medicines:res.data.medicines,error:res.error||""})
+      var selections=[];
+      res.data.medicines.map(medicine=>{
+          if(medicine.strenghts.length!==0){
+            var data={
+                id:medicine.id,
+                image1:medicine.image1,
+                image2:medicine.image2,
+                image3:medicine.image3,
+                image4:medicine.image4,
+                image5:medicine.image5,
+                image6:medicine.image6,
+                strenghts:medicine.strenghts,
+                genericName:medicine.genericName,
+                tabletPack:medicine.tabletPack,
+                orderQuantityLimit:medicine.orderQuantityLimit,
+                strengthId:medicine.strenghts[0].id,
+                strength:medicine.strenghts[0].strength,
+                totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
+                MRP:medicine.strenghts[0].MRP,
+                quantity:1,
+                total:medicine.strenghts[0].MRP
+                        }
+          }
+          else{
+            var data={
+                id:medicine.id,
+                image1:medicine.image1,
+                image2:medicine.image2,
+                image3:medicine.image3,
+                image4:medicine.image4,
+                image5:medicine.image5,
+                image6:medicine.image6,
+                orderQuantityLimit:medicine.orderQuantityLimit,
+                strenghts:[],
+                genericName:medicine.genericName,
+                tabletPack:medicine.tabletPack,
+                strengthId:"",
+                strength:"",
+                totalPriceToRetailer:0,
+                MRP:0,
+                quantity:1,
+                total:0
+                        }
+          }
+      
+                      selections.push(data)
+      })
+this.setState({selections:selections})
+console.log(this.state.selections)
+     })
   }
+// price=(medicine)=>{
+//     if(medicine){
+//         if(medicine.strenghts.length!==0){
+
+//  return( <div>  
+//                     </div>
+//  )}
+
+//     }
+// }
   shhowMedicines=()=>{
       if(this.state.medicines.length!==0){
-       var medicines=   this.state.medicines.map(medicine=>{
+ 
+     
+       var medicines=   this.state.selections.map(medicine=>{
+      
+           
               return(
                 <div className="product-row2" key={medicine.id}>
                 <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>
@@ -125,29 +236,34 @@ addCart=(medicine)=>{
                 </Link>
                 <div className="product-bar2">
                     <h2>{medicine.genericName}</h2>
-                    <h3>{medicine.unitInBox} Units in box</h3>
+                    <h3>{medicine.tabletPack} Units in box</h3>
                     <h3>Other Variants</h3>
                     <div className="product-varian">
-                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink> 
-                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
-                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink> 
+                        {this.variant(medicine.strenghts)}
+                       {/* <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
+                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink>  */}
                     </div>
+                {/* {this.price(medicine)} */}
+                <h5 className="underline" id="retailPrice">{medicine.totalPriceToRetailer}</h5>
                     <h4>Recommended retail price</h4>
-                    <h5 className="underline"><span>&#8377;</span>{medicine.totalPriceToRetailer}</h5>
                         
-                    <h5><span>&#8377;</span>{medicine.totalCostPurchase}</h5>
-                    <div className="product-bar3">
-                        <div className="product-bar44">QTY :    1</div>
+                    <h5 id="total">{medicine.MRP}</h5>
+                    <div className="product-bar3">                   
+       <Select defaultValue="1" style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
+     {this.dropdown(medicine.orderQuantityLimit)}
+     </Select>
                         <button onClick={()=>{this.addCart(medicine)}} className="product-btn1">ADD TO CART</button>
                         <div className="product-bar4">
                             <h6>TOTAL AMOUNT</h6><br />
-              <h5><span>&#8377;</span>{1*medicine.totalCostPurchase}</h5>
+                    <h5 className="total-amount">{medicine.total}</h5>
                         </div>
                     </div>
                 </div>
                 
             </div>
               )
+                
+                
           })
           return medicines;
       }
@@ -243,6 +359,7 @@ function mapStateToProps(state){
         return{
        
           addCart:(product)=>{
+
             dispatch({type:"add",payload:{product,message:"Added To Cart"}})
             if(isAuth()){
 

@@ -21,11 +21,15 @@ import 'antd/dist/antd.css';
 import Config from '../Config';
 import { NavLink } from 'react-router-dom';
 import { notification } from 'antd';
+import { Select } from 'antd';
+
+const { Option } = Select;
 class ProductsInner extends Component {
     state={
         message:"",
         error:"",
         product:"",
+        selection:"",
         options:{
             items: 1,
             margin: 0,
@@ -72,7 +76,7 @@ class ProductsInner extends Component {
     }
 
     showProduct=()=>{
-        if(this.state.product){
+        if(this.state.selection){
             console.log(this.state.product)
             return(
                 <div className="conten-bar1 product-wrapp">
@@ -89,33 +93,33 @@ class ProductsInner extends Component {
                             <div className="product-thumb"><img src={product2} alt="product thumb2"/></div>
                         </div>
 
-                    {this.state.product.image1 && (<div>
-                            <div className="product-thumb"><img src={this.state.product.image1} alt="product thumb2"/></div>
+                    {this.state.selection.image1 && (<div>
+                            <div className="product-thumb"><img src={this.state.selection.image1} alt="product thumb2"/></div>
                         </div>)}
-                        {this.state.product.image2 && (<div>
-                            <div className="product-thumb"><img src={this.state.product.image2} alt="product thumb2"/></div>
+                        {this.state.selection.image2 && (<div>
+                            <div className="product-thumb"><img src={this.state.selection.image2} alt="product thumb2"/></div>
                         </div>)}
-                        {this.state.product.image3 && (<div>
-                            <div className="product-thumb"><img src={this.state.product.image3} alt="product thumb2"/></div>
+                        {this.state.selection.image3 && (<div>
+                            <div className="product-thumb"><img src={this.state.selection.image3} alt="product thumb2"/></div>
                         </div>)}
-                        {this.state.product.image4 && (
+                        {this.state.selection.image4 && (
                         <div>
-                            <div className="product-thumb"><img src={this.state.product.image4} alt="product thumb2"/></div>
+                            <div className="product-thumb"><img src={this.state.selection.image4} alt="product thumb2"/></div>
                         </div>
                         )}
-                        {this.state.product.image5 && (<div>
-                            <div className="product-thumb"><img src={this.state.product.image5} alt="product thumb2"/></div>
+                        {this.state.selection.image5 && (<div>
+                            <div className="product-thumb"><img src={this.state.selection.image5} alt="product thumb2"/></div>
                         </div>)}
-                        {this.state.product.image6 && (<div>
-                            <div className="product-thumb"><img src={this.state.product.image6} alt="product thumb2"/></div>
+                        {this.state.selection.image6 && (<div>
+                            <div className="product-thumb"><img src={this.state.selection.image6} alt="product thumb2"/></div>
                         </div>)}
                                 </OwlCarousel>
                             </div>
                         </div>
                         <div className="product-bar2">
-                        <h2>{this.state.product.details}</h2>
+                        <h2>{this.state.selection.genericName}</h2>
                             <h3><strong>company name</strong></h3>
-                            <h3>{this.state.product.unitInBox} Units in box</h3>
+                            <h3>{this.state.selection.tabletPack} Units in box</h3>
                             <h3>Variants</h3>
                             <div className="product-varian">
                             	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">10 mg</NavLink>
@@ -123,14 +127,16 @@ class ProductsInner extends Component {
                                 <NavLink to={Config.BASE_URL+"#"} className="product-btn2">30 mg</NavLink>
 							</div>
                             <h4>Recommended retail price</h4>
-                        <h5 className="underline"><span>&#8377;</span>{this.state.product.totalPriceToRetailer}</h5>
-                        <h5><span>&#8377;</span>{this.state.product.totalCostPurchase}</h5>
+                        <h5 className="underline"><span>&#8377;</span>{this.state.selection.PriceToRetailer}</h5>
+                        <h5><span>&#8377;</span>{this.state.selection.MRP}</h5>
                             <div className="product-bar3">
-                            	<div className="product-bar44">QTY :    1</div>
-                                <button onClick={()=>{this.addCart(this.state.product)}} className="product-btn1">ADD TO CART</button>
+                            <Select defaultValue="1" style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event)}}>
+     {this.dropdown(this.state.selection.orderQuantityLimit)}
+     </Select>
+                                <button onClick={()=>{this.addCart(this.state.selection)}} className="product-btn1">ADD TO CART</button>
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
-                            		<h5><span>&#8377;</span>{1*this.state.product.totalCostPurchase}</h5>
+                            		<h5><span>&#8377;</span>{this.state.selection.total}</h5>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +172,56 @@ class ProductsInner extends Component {
       })
       .then(res=>res.json())
       //.then(res=>console.log(res))
-      .then(res=>this.setState({product:res.data.medicine[0]||"",error:res.error||""}))
+      .then(res=>{this.setState({product:res.data.medicine[0]||"",error:res.error||""});
+      var medicine=res.data.medicine[0];
+      var data={
+        id:medicine.id,
+        image1:medicine.image1,
+        image2:medicine.image2,
+        image3:medicine.image3,
+        image4:medicine.image4,
+        image5:medicine.image5,
+        image6:medicine.image6,
+        orderQuantityLimit:medicine.orderQuantityLimit,
+        strenghts:[],
+        genericName:medicine.genericName,
+        tabletPack:medicine.tabletPack,
+        strengthId:"",
+        strength:"",
+        totalPriceToRetailer:medicine.totalPriceToRetailer,
+        MRP:medicine.MRP,
+        quantity:1,
+        total:medicine.MRP
+      }
+  this.setState({selection:data})
+     
+        })
   }
+
+
+
+  dropdown=(no)=>{
+    var no=parseInt(no);
+    let items = []; 
+  for(var i=1;i<=no;i++){
+
+      items.push(<Option value={i}>{i}</Option> )
+    }
+return items;
+}
+handleChange=(qnt)=> {
+  
+var selection=this.state.selection;
+selection.quantity=qnt;
+var total=parseInt(qnt)*parseInt(selection.MRP);
+selection.total=total;
+this.setState({selection:selection})
+
+  }
+
+
+
+
   render() {
  
     return (
@@ -224,7 +278,7 @@ class ProductsInner extends Component {
                         </form>
                     </div>
                     <h2>Please add item</h2>
-                    <NavLink to={Config.BASE_URL+'/cart'} className="savings">VIEW CART</NavLink>
+                    <NavLink to={Config.BASE_URL+'cart'} className="savings">VIEW CART</NavLink>
                     <div className="sidbar-bar4">
                     	<div className="sidbar-bar5"><img src={delivery} alt="delivery icon"/></div>
                         <div className="sidbar-bar6">
@@ -251,7 +305,7 @@ function mapStateToProps(state){
     console.log(state.cart)
         return {
     
-            cart:state.cart,
+            cart:JSON.parse(state.cart),
         }
       
     }
@@ -259,27 +313,36 @@ function mapStateToProps(state){
         return{
        
           addCart:(product)=>{
-            dispatch({type:"add",payload:{product,message:"Added To Cart"}})
-            if(isAuth()){
-
-        	const data={
-                apiVersion:"1.0",
-                token:"",
-                userId:isAuth().userId,
-                medicineId:product.id,
-                quantity:1,
-                imei:""
-        	}
-        	// return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
-        	//   method: "post",
-         	//   headers: {
-        	// 	'Accept': 'application/json, text/plain, */*',
-        	// 	'Content-Type': 'application/json'
-        	//   },body:JSON.stringify(data)
-        	// })
-        	// .then(res=>res.json())
-        	// .then(res=>console.log(res)) 
-          }
+              var flag=0;
+              this.props.cart.map(item=>{
+                if(item.id===product.id){
+                    flag=1;
+                }
+              })
+              if(flag===0){
+                dispatch({type:"add",payload:{product,message:"Added To Cart"}})
+                if(isAuth()){
+    
+                const data={
+                    apiVersion:"1.0",
+                    token:"",
+                    userId:isAuth().userId,
+                    medicineId:product.id,
+                    quantity:1,
+                    imei:""
+                }
+                // return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+                //   method: "post",
+                 //   headers: {
+                // 	'Accept': 'application/json, text/plain, */*',
+                // 	'Content-Type': 'application/json'
+                //   },body:JSON.stringify(data)
+                // })
+                // .then(res=>res.json())
+                // .then(res=>console.log(res)) 
+              } 
+              }
+           
         }
     }
       }

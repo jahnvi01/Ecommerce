@@ -119,8 +119,7 @@ items:this.props.items
         	<ul class="inner-bar1">
             	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
-                <div className="product-bar44"> QTY :	<input style={{width:"30px"}} id="quantity" defaultValue="1" type="number" placeholder="1"/></div> 
-                    
+              
                 <li>Select Address</li>
             </ul>
         </div>

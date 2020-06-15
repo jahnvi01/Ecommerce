@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import dawabagLogo1 from '../images/dawabag-logo1.png';
+import user from '../images/user11.png';
 import { withRouter,NavLink } from 'react-router-dom';
 import ShowAlert from '../function/alert';
 import Config from '../Config';
@@ -33,7 +34,7 @@ send=(e)=>{
 	 .then(res=>res.json())
 	// .then(res=>console.log(res))
 	.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
-		this.props.history.push(`/otp/${mobile}`)
+		this.props.history.push(`/demo/otp/${mobile}`)
 					 
 					 
 	})
@@ -71,8 +72,9 @@ else{
                     <p>Please enter your phone number to continue</p>
 
 					<div className="wrap-input100 validate-input" data-validate = "Enter username">
-						<input className="input100" type="text" id="mobile" name="phone number" placeholder="phone number" />
-						<span className="focus-input100" data-placeholder="&#xf207;"></span>
+						<input className="input100" style={{margin:"0 5px 0 38px"}} type="text" id="mobile" name="phone number" placeholder="phone number" />
+					<span className="focus-input100">	<img src={user} alt="user" style={{width:"20px",height:"17px",margin:"12px"}} />
+					</span>
 					</div>
 					
 					<div className="container-login100-form-btn">
@@ -87,7 +89,7 @@ else{
 
 					<div className="p-t-50 sign">
                     	<h2>Or sign in as</h2>
-						<NavLink to={Config.BASE_URL+'/signu'} className="txt1">
+						<NavLink to={Config.BASE_URL+'/signup'} className="txt1">
 							Doctor
 						</NavLink>
                         <NavLink to={Config.BASE_URL+'/signup'} className="txt1">

@@ -56,7 +56,7 @@ class Orders extends Component {
        var orders=this.state.orders.map(order=>{
 return(
     <div className="orders-bar2" key={order.id}>
-    <NavLink to={Config.BASE_URL+`/orders-summary/${order.id}`}>
+    <NavLink to={Config.BASE_URL+`orders-summary/${order.id}`}>
 <h3>{order.fname} {order.lname}</h3>
     <h4>Order Delivered</h4>
     <ul>

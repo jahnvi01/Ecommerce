@@ -16,6 +16,9 @@ import {isAuth} from '../function/auth';
 import 'antd/dist/antd.css';
 import { notification } from 'antd';
 import Config from '../Config';
+import { Select } from 'antd';
+
+const { Option } = Select;
 
 class Cart extends Component {
     state={
@@ -56,27 +59,30 @@ class Cart extends Component {
     componentDidMount(){
         this.countBill()
     }
-    total=(e,rs,id)=>{
+//     total=(e,rs,id)=>{
      
-var qnt=parseInt(e.target.value);
-var amount=qnt*parseInt(rs);
-e.target.parentNode.nextSibling.nextSibling.childNodes[2].innerHTML=`${amount}`;
-this.state.orders.map(order=>{
-    var item=order;
-    if(order.medicineId===id){
-       item.quantity=qnt
-    }
-    return item
-})
-this.countBill();
-    }
+// var qnt=parseInt(e.target.value);
+// var amount=qnt*parseInt(rs);
+// e.target.parentNode.nextSibling.nextSibling.childNodes[2].innerHTML=`${amount}`;
+// this.state.orders.map(order=>{
+//     var item=order;
+//     if(order.medicineId===id){
+//        item.quantity=qnt
+//     }
+//     return item
+// })
+// this.countBill();
+//     }
 
 countBill=()=>{
     var total=0;
-    var products=document.getElementsByClassName("subtotal");
-for(var i=0;i<products.length;i++){
-   total=total+ parseInt(products[i].innerHTML);
-}
+    this.props.cart.map(item=>{
+        total=total+item.total
+    })
+//     var products=document.getElementsByClassName("subtotal");
+// for(var i=0;i<products.length;i++){
+//    total=total+ parseInt(products[i].innerHTML);
+// }
 document.getElementById("totalBill").innerHTML=total;
 var delivery=parseInt(document.getElementById("delivery").innerHTML);
 var discount=parseInt(document.getElementById("discount1").innerHTML);
@@ -89,6 +95,19 @@ var data={
 }
 localStorage.setItem('bill',JSON.stringify(data))
 }
+onFileChange = event => { 
+
+    const formData = new FormData(); 
+ 
+    formData.append( 
+      "file", 
+      event.target.files[0], 
+   
+    ); 
+    console.log(formData); 
+  }; 
+   
+
     remove=(id)=>{
         const args = {
             message: "Removed From Cart",
@@ -102,13 +121,52 @@ localStorage.setItem('bill',JSON.stringify(data))
               notification.error(args);
               this.props.remove(id)
     }
- 
+    dropdown=(no)=>{
+        var no=parseInt(no);
+        let items = []; 
+      for(var i=1;i<=no;i++){
+    
+          items.push(<Option value={i}>{i}</Option> )
+        }
+    return items;
+    }
+    handleChange=(qnt,e,id)=> {
+      
+    var selections=this.props.cart.map(selected=>{
+        // var item=selected;
+        if(selected.id===id){
+       
+            selected.quantity=qnt;
+            var total=parseInt(qnt)*parseInt(selected.MRP)
+            selected.total=total
+           console.log(qnt)
+        }
+        return selected
+    //    selections.push(item)
+    })
+    localStorage.setItem('cart',JSON.stringify(selections))
+    //   this.setState({selections:selections})
+    this.countBill();
+    this.props.history.push('cart');
+      }
+    
+      variant=(items)=>{
+         
+          if(items.length!==0){
+    var items=items.map(item=>{
+    return(
+    <button className="product-btn2">{item.strength}</button> 
+    )               
+    })
+      }
+    return items
+      }
       showMedicines=()=>{
        
         if(this.props.cart.length!==0){
             console.log(this.props.cart)
          var medicines= this.props.cart.map(medicine=>{
-            console.log(medicine)
+        
             return(
                    
                  
@@ -153,18 +211,20 @@ localStorage.setItem('bill',JSON.stringify(data))
                         <h3>{medicine.tabletPack} Units</h3>
                             <h3>Other Variants</h3>
                             <div className="product-varian">
-                            	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink>
-                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink>
-                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink>
-							</div>
+                            {this.variant(medicine.strenghts)}
+                            	</div>
                             <h4>Recommended retail price</h4>
                         <h5><span>&#8377;</span>17</h5>
                             <div className="product-bar3">
-                       <div className="product-bar44"> QTY :	<input style={{width:"30px"}} onClick={(event)=>{this.total(event,17,medicine.id)}}  id="quantity" defaultValue="1" type="number" placeholder="1"/></div> 
+                     
+                       <Select defaultValue={medicine.quantity} style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
+     {this.dropdown(medicine.orderQuantityLimit)}
+     </Select>
+                    
                                 <button className="product-btn1" onClick={()=>{this.remove(medicine.id)}}>Remove CART</button>
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
-                        <h5 className="subtotal">17</h5>
+                        <h5 className="subtotal">{medicine.total}</h5>
                                 </div>
                             </div>
                      
@@ -222,7 +282,7 @@ localStorage.setItem('bill',JSON.stringify(data))
 								<div className="sample"><img src={sample}/></div>
 								<div className="sample"><img src={sample}/></div>
 								<div className="sample"><img src={sample}/></div>
-								<div className="sample"><span className="hiddenFileInput"><input type="file" name="theFile"/></span></div>
+								<div className="sample"><span className="hiddenFileInput"><input type="file" name="theFile" onChange={(event)=>{this.onFileChange(event)}}/></span></div>
 							</div>
 						</div>
 					</div>
@@ -267,7 +327,7 @@ payment options.</span></label>
                         <div className="payment-rt" id="bill1"></div>
                     </div>
                     
-                    <div className="savings" id="discount2">53.00</div>
+                    <div className="savings" id="discount2">Savings 53.00</div>
                     
                     <div className="payment-row1">
                         <div className="payment-bar1">

@@ -20,7 +20,10 @@ class OrdersSummary extends Component {
     state={
         message:"",
         error:"",
-        orders:[]
+        orders:"",
+        user:"",
+        quantity:0,
+        subTotal:0
     }
 componentWillMount(){
     this.updateData();
@@ -40,8 +43,18 @@ componentWillMount(){
      })
      .then(res=>res.json())
 //.then(res=>console.log(res))
-     .then(res=>{this.setState({orders:res.data.order_details[0]||"",error:res.error||""})
-     console.log(this.state)       })
+     .then(res=>{this.setState({orders:res.data.order_details[0]||"",user:res.data.user[0],error:res.error||""})
+    var qnt=0;
+    var total=0;
+    if(res.data.order_details[0].items.length!==0){
+        res.data.order_details[0].items.map(item=>{
+            qnt=qnt+parseInt(item.quantity);
+            total=total+parseInt(item.subTotal);
+        }) 
+
+    }
+this.setState({quantity:qnt,subTotal:total})
+    })
 
 
 
@@ -114,28 +127,19 @@ return orders;
 }
 showOrder=()=>{
 
-    if(this.state.orders.length!==0){
-        var orders=this.state.orders;
+    if(this.state.user && this.state.orders){
+        var user=this.state.user;
+        var orders=this.state.orders
         return(
-    <div className="summary-row1">
-    <div className="summary-bar1">
-            
-            <ul className="tab-row1">
-                <li className="active" rel="tab1">Items</li>
-                <li rel="tab2">Order Summary</li>
-            </ul>
-            <div className="tab-row2">
-                <div id="tab1" className="tab-bar2">
-                                                    
-                    <div className="summary-row2">
-                        <div className="summary-row3">
+    <div>
+               <div className="summary-row3">
                             <div className="summary-bar2"><img src={orderIcon1} alt="order icon1"/></div>
                             <div className="summary-bar3"><h6>Delivery Date: <span>saturday 10 / Feb / 2020</span></h6></div>
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
                             <div className="summary-bar33"><h5><span>Patient:</span> 
-                            </h5></div>
+                     {user.firstName} {user.lastName}       </h5></div>
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
@@ -143,7 +147,7 @@ showOrder=()=>{
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Status:</span> Order Process........</h5></div>
+        <div className="summary-bar33"><h5><span>Status:</span> {orders.status}</h5></div>
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
@@ -155,7 +159,8 @@ showOrder=()=>{
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
                             <div className="summary-bar33"><h5><span>Pharmacy Details:</span></h5>
                                 <h3>Pharmacist Name:</h3>
-                                <h4>Axelia Healthcare</h4>
+                                <h4>{user.clinicName}</h4>
+                
                                 <h3>Address:</h3>
                                 <h4>Yogita, Manoj, Shop No.5, Ratnadeep Colony, Opp. <span>Bhaichand Teatile, LBS Marg, Mumbai - 400078</span></h4>
                             </div>
@@ -170,21 +175,6 @@ showOrder=()=>{
                             <div className="sample"><div className="plus"><img src={orderPlus}/></div></div>
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
-              
-                <div id="tab2" className="tab-bar2">
-                    
-                    <div className="product-row1">
-                    
-                        </div>
-                    
-                </div>
-              
-            </div>
-            
-        </div>
     </div>
          ) }
          return orders;
@@ -233,48 +223,7 @@ showOrder=()=>{
                 <div id="tab1" className="tab-bar2">
                                                     
                     <div className="summary-row2">
-                        <div className="summary-row3">
-                            <div className="summary-bar2"><img src={orderIcon1} alt="order icon1"/></div>
-                            <div className="summary-bar3"><h6>Delivery Date: <span>saturday 10 / Feb / 2020</span></h6></div>
-                        </div>
-                        <div className="summary-row3 border1">
-                            <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Patient:</span> 
-                            </h5></div>
-                        </div>
-                        <div className="summary-row3 border1">
-                            <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Order No:</span> M121999</h5></div>
-                        </div>
-                        <div className="summary-row3 border1">
-                            <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Status:</span> Order Process........</h5></div>
-                        </div>
-                        <div className="summary-row3 border1">
-                            <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Delivery Address:</span> Mahaveer Sancheti</h5>
-                                <p>Arihant Collection, Gitavandan Soc, Near Akash Petrol Pump, <span>Dindori Road, Panchavati, Nashik - 422003</span></p>
-                            </div>
-                        </div>
-                        <div className="summary-row3 border1">
-                            <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Pharmacy Details:</span></h5>
-                                <h3>Pharmacist Name:</h3>
-                                <h4>Axelia Healthcare</h4>
-                                <h3>Address:</h3>
-                                <h4>Yogita, Manoj, Shop No.5, Ratnadeep Colony, Opp. <span>Bhaichand Teatile, LBS Marg, Mumbai - 400078</span></h4>
-                            </div>
-                        </div>
-                        <div className="summary-row3 border1">
-                            <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Prescriptions Uploded By You:</span></h5></div>
-                            <div className="sample-row1">
-                            <div className="sample"><img src={sample}/></div>
-                            <div className="sample"><img src={sample}/></div>
-                            <div className="sample"><img src={sample}/></div>
-                            <div className="sample"><div className="plus"><img src={orderPlus}/></div></div>
-                            </div>
-                        </div>
+             {this.showOrder()}
                     </div>
                     
                 </div>
@@ -303,11 +252,11 @@ showOrder=()=>{
                     <h2>Bill Details</h2>
                     <div className="sidbar-bar3">
                     	<div className="payment-lt">Ordered Items:</div>
-                        <div className="payment-rt">18 items</div>
+                        <div className="payment-rt">{this.state.quantity} items</div>
                     </div>
                     <div className="sidbar-bar3">
                     	<div className="payment-lt">Order Total:</div>
-                        <div className="payment-rt">Rs.1420</div>
+                        <div className="payment-rt">Rs.{this.state.subTotal}</div>
                     </div>
                     
                     <NavLink to={Config.BASE_URL+"#"} className="sidbar-btn3">Place Order</NavLink>

@@ -13,13 +13,14 @@ import Products from './pages/products'
 import SearchProducts from './pages/search-products'
 import ProductsInner from './pages/products-inner'
 import Profile from './pages/profile';
-import { Switch, Route, Redirect} from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import Contact from './pages/contact-us'
 import About from './pages/about-us'
 import  './css/index';
 import Address from './pages/address';
 import NewAddress from './pages/new-address';
 import Config from './Config';
+
 
 class App extends Component {
   
