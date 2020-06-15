@@ -348,30 +348,40 @@ function mapStateToProps(state){
         return{
        
           addCart:(product)=>{
-            dispatch({type:"add",payload:{product,message:"Added To Cart"}})
-            if(isAuth()){
-
-        	const data={
-                apiVersion:"1.0",
-                token:"",
-                userId:isAuth().userId,
-                medicineId:product.id,
-                quantity:1,
-                imei:""
-        	}
-        	// return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
-        	//   method: "post",
-         	//   headers: {
-        	// 	'Accept': 'application/json, text/plain, */*',
-        	// 	'Content-Type': 'application/json'
-        	//   },body:JSON.stringify(data)
-        	// })
-        	// .then(res=>res.json())
-        	// .then(res=>console.log(res)) 
-          }
-        }
-    }
+            var flag=0;
+            this.props.cart.map(item=>{
+              if(item.id===product.id){
+                  flag=1;
+              }
+            })
+            if(flag===0){
+              dispatch({type:"add",payload:{product,message:"Added To Cart"}})
+              if(isAuth()){
+  
+              const data={
+                  apiVersion:"1.0",
+                  token:"",
+                  userId:isAuth().userId,
+                  medicineId:product.id,
+                  quantity:1,
+                  imei:""
+              }
+              // return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+              //   method: "post",
+               //   headers: {
+              // 	'Accept': 'application/json, text/plain, */*',
+              // 	'Content-Type': 'application/json'
+              //   },body:JSON.stringify(data)
+              // })
+              // .then(res=>res.json())
+              // .then(res=>console.log(res)) 
+            } 
+            }
+         
       }
+  }
+    }
+  
     
       export default connect(mapStateToProps,mapDispatchToStates)(SearchProducts);
 
