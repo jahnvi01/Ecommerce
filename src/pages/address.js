@@ -25,12 +25,12 @@ class Address extends Component {
     componentWillMount(){
     
         const data={
-            apiVersion:"1.0",
+            apiVersion:Config.APIVERSION,
             userId:1,
             token:"",
             
          }
-       fetch('http://projects-demo.tk/dawabag/webservices/web/user_locations',{
+       fetch(Config.API+'/user_locations',{
            method: "post",
            headers: {
              'Accept': 'application/json, text/plain, */*',
@@ -79,8 +79,8 @@ return(
 
     
     const data={
-        apiVersion:"1.0",
-        imei:"",
+        apiVersion:Config.APIVERSION,
+        imei:Config.IMEI,
         token:"",
         userId:1,
         userAddressId:this.state.value,
@@ -91,7 +91,7 @@ payable:this.props.bill,
 copounId:"FLAT50",
 items:this.props.items
         }
-            return fetch('http://projects-demo.tk/dawabag/webservices/web/place_order',{
+            return fetch(Config.API+'/place_order',{
                 method: "post",
                 headers: {
                   'Accept': 'application/json, text/plain, */*',

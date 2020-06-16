@@ -91,18 +91,18 @@ class Home extends Component {
       componentWillMount(){
     
          const data={
-             apiVersion:"1.0",
+             apiVersion:Config.APIVERSION,
              token:""
           }
-        fetch('http://projects-demo.tk/dawabag/webservices/web/home_data',{
+        fetch(Config.API+'/home_data',{
             method: "post",
             headers: {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json'
             },body:JSON.stringify({
-                apiVersion:"1.0",
+                apiVersion:Config.APIVERSION,
              token:"",
-             imei:""
+             imei:Config.IMEI
              })
           })
           .then(res=>res.json())
@@ -111,15 +111,15 @@ class Home extends Component {
           console.log(this.state)       })
   
 
-        //   fetch('http://projects-demo.tk/dawabag/webservices/web/banners',{
+        //   fetch(Config.API+'/banners',{
         //     method: "post",
         //     headers: {
         //       'Accept': 'application/json, text/plain, */*',
         //       'Content-Type': 'application/json'
         //     },body:JSON.stringify({
-        //         apiVersion:"1.0",
+        //         apiVersion:Config.APIVERSION,
         //      token:"",
-        //      imei:""
+        //      imei:Config.IMEI
         //      })
         //   })
         //   .then(res=>res.json())

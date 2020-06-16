@@ -19,12 +19,16 @@ import { isAuth } from '../function/auth';
 import 'antd/dist/antd.css';
 import { notification } from 'antd';
 import Config from '../Config';
+import { Select } from 'antd';
+
+const { Option } = Select;
+
 class SearchProducts extends Component {
 state={
     message:"",
     error:"",
     medicines:[],
-
+    selections:[],
     options:{
         items: 1,
         margin: 0,
@@ -57,30 +61,82 @@ state={
     }
 }
 
-  componentWillMount(){
-    var name=this.props.match.params.name; 
-    console.log(name)
-     const data={
-         apiVersion:"1.0",
-         medicineName:this.props.match.params.name,
-      token:""
-      }
-      fetch('http://projects-demo.tk/dawabag/webservices/web/search_medicines',{
-		method: "post",
-		headers: {
-		  'Accept': 'application/json, text/plain, */*',
-		  'Content-Type': 'application/json'
-		},body:JSON.stringify({
-            apiVersion:"1.0",
-            medicineName:this.props.match.params.name,
-         token:""
-         })
-	  })
-	  .then(res=>res.json())
-	  .then(res=>this.setState({medicines:res.data.medicines,error:res.error||""}))
+
+dropdown=(no)=>{
+    var no=parseInt(no);
+    let items = []; 
+  for(var i=1;i<=no;i++){
+
+      items.push(<Option value={i}>{i}</Option> )
+    }
+return items;
+}
+handleChange=(qnt,e,id)=> {
+  
+var selections=this.state.selections.map(selected=>{
+    // var item=selected;
+    if(selected.id===id){
+   
+        selected.quantity=qnt;
+        var total=parseInt(qnt)*parseInt(selected.MRP)
+        selected.total=total
+       console.log(qnt)
+    }
+    return selected
+//    selections.push(item)
+})
+
+   this.setState({selections:selections})
+
+  }
+changeStrength=(strength,id)=>{
+  
+        var selections=this.state.selections.map(selected=>{
+      
+            if(selected.id===id){
+           
+var totalPriceToRetailer=selected.totalPriceToRetailer;
+var MRP=selected.MRP;
+selected.strenghts.map(item=>{
+    if(item.strength===strength){
+    totalPriceToRetailer=item.totalPriceToRetailer;
+    MRP=item.MRP
+    }
+})
+var total=parseInt(selected.quantity) *parseInt(MRP);
+selected.strength=strength;
+selected.totalPriceToRetailer=totalPriceToRetailer;
+selected.MRP=MRP;
+selected.total=total;
+        
+            }
+            return selected
+      
+        })
+        
+           this.setState({selections:selections})
+        
+    }
+
+
+
+  variant=(items,id)=>{
+     
+      if(items.length!==0){
+var items=items.map(item=>{
+return(
+<button className="product-btn2" key={item.strength} onClick={()=>this.changeStrength(item.strength,id)}>{item.strength}</button> 
+)               
+})
+  }
+return items
   }
 
-  addCart=(medicine)=>{
+  componentWillMount(){
+ this.searchProducts();
+  }
+
+  addCart=(product)=>{
     const args = {
         message: "Added To Cart",
       style:{
@@ -90,100 +146,171 @@ state={
     
        
           notification.success(args);
-    this.props.addCart(medicine) 
+          var flag=0;
+
+          if(this.props.cart.length!==0){
+              console.log(this.props.cart.length)
+              this.props.cart.map(item=>{
+                  if(item.id===product.id){
+                      flag=1;
+                  }
+                })
+                if(flag===0){
+                    this.props.addCart(product)
+                }
+          }
+          else{
+              this.props.addCart(product)  
+          }
 }
 
 
   searchProducts=()=>{
-    var name=this.props.match.params.name; 
+   
   
     const data={
-        apiVersion:"1.0",
+        apiVersion:Config.APIVERSION,
         medicineName:this.props.match.params.name,
      token:""
      }
-      fetch('http://projects-demo.tk/dawabag/webservices/web/search_medicines',{
+      fetch(Config.API+'/search_medicines',{
        method: "post",
        headers: {
          'Accept': 'application/json, text/plain, */*',
          'Content-Type': 'application/json'
-       },body:JSON.stringify({
-        apiVersion:"1.0",
-        medicineName:this.props.match.params.name,
-     token:""
-     })
+       },body:JSON.stringify(data)
      })
      .then(res=>res.json())
-     .then(res=>this.setState({medicines:res.data.medicines,error:res.error||""}))     
-  }
-  shhowMedicines=()=>{
-      if(this.state.medicines.length!==0){
-       var medicines=   this.state.medicines.map(medicine=>{
-              return(
-                <div className="product-row2" key={medicine.id}>
-                <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>
-                <div className="product-bar1">
-                    <div className="slide-post owl-carousel">
-                    <OwlCarousel margin={3} items={1} {...this.state.options} > 
-                    <div>
-                            <div className="product-thumb"><img src={product1} alt="product thumb2"/></div>
-                        </div>
-                        <div>
-                            <div className="product-thumb"><img src={product2} alt="product thumb2"/></div>
-                        </div>
+     .then(res=>{this.setState({medicines:res.data.medicines,error:res.error||""})
+     var selections=[];
+     res.data.medicines.map(medicine=>{
+         if(medicine.strenghts.length!==0){
+           var data={
+               id:medicine.id,
+               image1:medicine.image1,
+               image2:medicine.image2,
+               image3:medicine.image3,
+               image4:medicine.image4,
+               image5:medicine.image5,
+               image6:medicine.image6,
+               strenghts:medicine.strenghts,
+               genericName:medicine.genericName,
+               tabletPack:medicine.tabletPack,
+               orderQuantityLimit:medicine.orderQuantityLimit,
+            
+               strength:medicine.strenghts[0].strength,
+               totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
+               MRP:medicine.strenghts[0].MRP,
+               quantity:1,
+               total:medicine.strenghts[0].MRP
+                       }
+         }
+         else{
+           var data={
+               id:medicine.id,
+               image1:medicine.image1,
+               image2:medicine.image2,
+               image3:medicine.image3,
+               image4:medicine.image4,
+               image5:medicine.image5,
+               image6:medicine.image6,
+               orderQuantityLimit:medicine.orderQuantityLimit,
+               strenghts:[],
+               genericName:medicine.genericName,
+               tabletPack:medicine.tabletPack,
+           
+               strength:"",
+               totalPriceToRetailer:0,
+               MRP:0,
+               quantity:1,
+               total:0
+                       }
+         }
+     
+                     selections.push(data)
+     })
+this.setState({selections:selections})
+console.log(this.state.selections)
+    })
+ }
+ shhowMedicines=()=>{
+    if(this.state.medicines.length!==0){
 
-                    {medicine.image1 && (<div>
-                            <div className="product-thumb"><img src={medicine.image1} alt="product thumb2"/></div>
-                        </div>)}
-                        {medicine.image2 && (<div>
-                            <div className="product-thumb"><img src={medicine.image2||product2} alt="product thumb2"/></div>
-                        </div>)}
-                        {medicine.image3 && (<div>
-                            <div className="product-thumb"><img src={medicine.image3} alt="product thumb2"/></div>
-                        </div>)}
-                        {medicine.image4 && (<div>
-                            <div className="product-thumb"><img src={medicine.image4} alt="product thumb2"/></div>
-                        </div>)}
-                        {medicine.image5 && (<div>
-                            <div className="product-thumb"><img src={medicine.image5} alt="product thumb2"/></div>
-                        </div>)}
-                        {medicine.image6 && (<div>
-                            <div className="product-thumb"><img src={medicine.image6} alt="product thumb2"/></div>
-                        </div>)}
+   
+     var medicines=   this.state.selections.map(medicine=>{
+    
+         
+            return(
+              <div className="product-row2" key={medicine.id}>
+              <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>
+              <div className="product-bar1">
+                  <div className="slide-post owl-carousel">
+                  <OwlCarousel margin={3} items={1} {...this.state.options} > 
+                  <div>
+                          <div className="product-thumb"><img src={product1} alt="product thumb2"/></div>
+                      </div>
+                      <div>
+                          <div className="product-thumb"><img src={product2} alt="product thumb2"/></div>
+                      </div>
+
+                  {medicine.image1 && (<div>
+                          <div className="product-thumb"><img src={medicine.image1} alt="product thumb2"/></div>
+                      </div>)}
+                      {medicine.image2 && (<div>
+                          <div className="product-thumb"><img src={medicine.image2||product2} alt="product thumb2"/></div>
+                      </div>)}
+                      {medicine.image3 && (<div>
+                          <div className="product-thumb"><img src={medicine.image3} alt="product thumb2"/></div>
+                      </div>)}
+                      {medicine.image4 && (<div>
+                          <div className="product-thumb"><img src={medicine.image4} alt="product thumb2"/></div>
+                      </div>)}
+                      {medicine.image5 && (<div>
+                          <div className="product-thumb"><img src={medicine.image5} alt="product thumb2"/></div>
+                      </div>)}
+                      {medicine.image6 && (<div>
+                          <div className="product-thumb"><img src={medicine.image6} alt="product thumb2"/></div>
+                      </div>)}
+                    
+                      </OwlCarousel>
+                  </div>
+              </div>
+              </Link>
+              <div className="product-bar2">
+                  <h2>{medicine.genericName}</h2>
+                  <h3>{medicine.tabletPack} Units in box</h3>
+                  <h3>Other Variants</h3>
+                  <div className="product-varian">
+                      {this.variant(medicine.strenghts,medicine.id)}
+                     {/* <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
+                      <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink>  */}
+                  </div>
+              {/* {this.price(medicine)} */}
+              <h5 className="underline" id="retailPrice">{medicine.totalPriceToRetailer}</h5>
+                  <h4>Recommended retail price</h4>
                       
-                        </OwlCarousel>
-                    </div>
-                </div>
-                </Link>
-                <div className="product-bar2">
-                    <h2>{medicine.genericName}</h2>
-                    <h3>{medicine.unitInBox} Units in box</h3>
-                    <h3>Other Variants</h3>
-                    <div className="product-varian">
-                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">40 grams</NavLink> 
-                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
-                        <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink> 
-                    </div>
-                    <h4>Recommended retail price</h4>
-                    <h5 className="underline"><span>&#8377;</span>{medicine.totalPriceToRetailer}</h5>
-                        
-                    <h5><span>&#8377;</span>{medicine.totalCostPurchase}</h5>
-                    <div className="product-bar3">
-                        <div className="product-bar44">QTY :    1</div>
-                        <button onClick={()=>{this.addCart(medicine)}} className="product-btn1">ADD TO CART</button>
-                        <div className="product-bar4">
-                            <h6>TOTAL AMOUNT</h6><br />
-              <h5><span>&#8377;</span>{1*medicine.totalCostPurchase}</h5>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-              )
-          })
-          return medicines;
-      }
-  }
+                  <h5 id="total">{medicine.MRP}</h5>
+                  <div className="product-bar3">                   
+     <Select defaultValue="1" style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
+   {this.dropdown(medicine.orderQuantityLimit)}
+   </Select>
+                      <button onClick={()=>{this.addCart(medicine)}} className="product-btn1">ADD TO CART</button>
+                      <div className="product-bar4">
+                          <h6>TOTAL AMOUNT</h6><br />
+                  <h5 className="total-amount">{medicine.total}</h5>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+            )
+              
+              
+        })
+        return medicines;
+    }
+}
+
   render() {
 
 //  this.searchProducts()
@@ -340,7 +467,7 @@ function mapStateToProps(state){
     console.log(state.cart)
         return {
     
-            cart:state.cart,
+            cart:JSON.parse(state.cart),
         }
       
     }
@@ -348,25 +475,19 @@ function mapStateToProps(state){
         return{
        
           addCart:(product)=>{
-            var flag=0;
-            this.props.cart.map(item=>{
-              if(item.id===product.id){
-                  flag=1;
-              }
-            })
-            if(flag===0){
+      
               dispatch({type:"add",payload:{product,message:"Added To Cart"}})
               if(isAuth()){
   
               const data={
-                  apiVersion:"1.0",
+                  apiVersion:Config.APIVERSION,
                   token:"",
                   userId:isAuth().userId,
                   medicineId:product.id,
                   quantity:1,
-                  imei:""
+                  imei:Config.IMEI
               }
-              // return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+              // return fetch(Config.API+'/add_item_in_cart',{
               //   method: "post",
                //   headers: {
               // 	'Accept': 'application/json, text/plain, */*',
@@ -380,7 +501,7 @@ function mapStateToProps(state){
          
       }
   }
-    }
+
   
     
       export default connect(mapStateToProps,mapDispatchToStates)(SearchProducts);

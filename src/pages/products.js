@@ -91,19 +91,49 @@ var selections=this.state.selections.map(selected=>{
    this.setState({selections:selections})
 
   }
+changeStrength=(strength,id)=>{
+  
+        var selections=this.state.selections.map(selected=>{
+      
+            if(selected.id===id){
+           
+var totalPriceToRetailer=selected.totalPriceToRetailer;
+var MRP=selected.MRP;
+selected.strenghts.map(item=>{
+    if(item.strength===strength){
+    totalPriceToRetailer=item.totalPriceToRetailer;
+    MRP=item.MRP
+    }
+})
+var total=parseInt(selected.quantity) *parseInt(MRP);
+selected.strength=strength;
+selected.totalPriceToRetailer=totalPriceToRetailer;
+selected.MRP=MRP;
+selected.total=total;
+        
+            }
+            return selected
+      
+        })
+        
+           this.setState({selections:selections})
+        
+    }
 
-  variant=(items)=>{
+
+
+  variant=(items,id)=>{
      
       if(items.length!==0){
 var items=items.map(item=>{
 return(
-<button className="product-btn2">{item.strength}</button> 
+<button className="product-btn2" key={item.strength} onClick={()=>this.changeStrength(item.strength,id)}>{item.strength}</button> 
 )               
 })
   }
 return items
   }
-addCart=(medicine)=>{
+addCart=(product)=>{
     const args = {
         message: "Added To Cart",
       style:{
@@ -113,15 +143,30 @@ addCart=(medicine)=>{
     
        
           notification.success(args);
-    this.props.addCart(medicine) 
+          var flag=0;
+
+          if(this.props.cart.length!==0){
+              console.log(this.props.cart.length)
+              this.props.cart.map(item=>{
+                  if(item.id===product.id){
+                      flag=1;
+                  }
+                })
+                if(flag===0){
+                    this.props.addCart(product)
+                }
+          }
+          else{
+              this.props.addCart(product)  
+          }
 }
   componentWillMount(){
-     const data={"apiVersion":"1.0",
-      "imei":"",
+     const data={"apiVersion":Config.APIVERSION,
+      "imei":Config.IMEI,
       "token":"",
-      medicineName:"crocin"
+      medicineName:"eco"
       }
-      return fetch('http://projects-demo.tk/dawabag/webservices/web/search_medicines',{
+      return fetch(Config.API+'/search_medicines',{
 		method: "post",
 		headers: {
 		  'Accept': 'application/json, text/plain, */*',
@@ -145,7 +190,7 @@ addCart=(medicine)=>{
                 genericName:medicine.genericName,
                 tabletPack:medicine.tabletPack,
                 orderQuantityLimit:medicine.orderQuantityLimit,
-                strengthId:medicine.strenghts[0].id,
+             
                 strength:medicine.strenghts[0].strength,
                 totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
                 MRP:medicine.strenghts[0].MRP,
@@ -166,7 +211,7 @@ addCart=(medicine)=>{
                 strenghts:[],
                 genericName:medicine.genericName,
                 tabletPack:medicine.tabletPack,
-                strengthId:"",
+            
                 strength:"",
                 totalPriceToRetailer:0,
                 MRP:0,
@@ -191,6 +236,8 @@ console.log(this.state.selections)
 
 //     }
 // }
+
+
   shhowMedicines=()=>{
       if(this.state.medicines.length!==0){
  
@@ -239,7 +286,7 @@ console.log(this.state.selections)
                     <h3>{medicine.tabletPack} Units in box</h3>
                     <h3>Other Variants</h3>
                     <div className="product-varian">
-                        {this.variant(medicine.strenghts)}
+                        {this.variant(medicine.strenghts,medicine.id)}
                        {/* <NavLink to={Config.BASE_URL+"#"} className="product-btn2">80 grams</NavLink> 
                         <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink>  */}
                     </div>
@@ -348,10 +395,10 @@ console.log(this.state.selections)
   }
 }
 function mapStateToProps(state){
-    console.log(state.cart)
+
         return {
     
-            cart:state.cart,
+            cart:JSON.parse(state.cart),
         }
       
     }
@@ -360,35 +407,29 @@ function mapStateToProps(state){
        
           addCart:(product)=>{
 
-            var flag=0;
-            this.props.cart.map(item=>{
-              if(item.id===product.id){
-                  flag=1;
-              }
-            })
-            if(flag===0){
+         
               dispatch({type:"add",payload:{product,message:"Added To Cart"}})
               if(isAuth()){
   
               const data={
-                  apiVersion:"1.0",
+                  apiVersion:Config.APIVERSION,
                   token:"",
-                  userId:isAuth().userId,
+                  userId:1,
                   medicineId:product.id,
                   quantity:1,
-                  imei:""
+                  imei:Config.IMEI
               }
-              // return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
-              //   method: "post",
-               //   headers: {
-              // 	'Accept': 'application/json, text/plain, */*',
-              // 	'Content-Type': 'application/json'
-              //   },body:JSON.stringify(data)
-              // })
-              // .then(res=>res.json())
-              // .then(res=>console.log(res)) 
+            //   return fetch(Config.API+'/add_item_in_cart',{
+            //     method: "post",
+            //      headers: {
+            //   	'Accept': 'application/json, text/plain, */*',
+            //   	'Content-Type': 'application/json'
+            //     },body:JSON.stringify(data)
+            //   })
+            //   .then(res=>res.json())
+            //   .then(res=>console.log(res)) 
             } 
-            }
+            
          
       }
   }

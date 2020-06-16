@@ -18,13 +18,13 @@ send=(e)=>{
 	var mobile=document.getElementById("mobile").value;
 	if(mobile){
 	const data={
-		apiVersion:"1.0",
+		apiVersion:Config.APIVERSION,
 		mobile:mobile,
 		userType:"doctor",
-		imei:"",
+		imei:Config.IMEI,
 	
 	 }
-	 fetch('http://projects-demo.tk/dawabag/webservices/web/send_otp',{
+	 fetch(Config.API+'/send_otp',{
 	   method: "post",
 	   headers: {
 		 'Accept': 'application/json, text/plain, */*',

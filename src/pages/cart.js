@@ -150,17 +150,52 @@ onFileChange = event => {
     this.props.history.push('cart');
       }
     
-      variant=(items)=>{
-         
-          if(items.length!==0){
-    var items=items.map(item=>{
-    return(
-    <button className="product-btn2">{item.strength}</button> 
-    )               
-    })
-      }
-    return items
-      }
+      changeStrength=(strength,id)=>{
+  
+        var selections=this.props.cart.map(selected=>{
+      
+            if(selected.id===id){
+           
+var totalPriceToRetailer=selected.totalPriceToRetailer;
+var MRP=selected.MRP;
+selected.strenghts.map(item=>{
+    if(item.strength===strength){
+    totalPriceToRetailer=item.totalPriceToRetailer;
+    MRP=item.MRP
+    }
+})
+var total=parseInt(selected.quantity) *parseInt(MRP);
+selected.strength=strength;
+selected.totalPriceToRetailer=totalPriceToRetailer;
+selected.MRP=MRP;
+selected.total=total;
+        
+            }
+            return selected
+      
+        })
+        
+           
+           localStorage.setItem('cart',JSON.stringify(selections))
+    //   this.setState({selections:selections})
+    this.countBill();
+    this.props.history.push('cart');
+    }
+
+
+
+  variant=(items,id)=>{
+     
+      if(items.length!==0){
+var items=items.map(item=>{
+return(
+<button className="product-btn2" key={item.strength} onClick={()=>this.changeStrength(item.strength,id)}>{item.strength}</button> 
+)               
+})
+  }
+return items
+  }
+
       showMedicines=()=>{
        
         if(this.props.cart.length!==0){
@@ -211,10 +246,10 @@ onFileChange = event => {
                         <h3>{medicine.tabletPack} Units</h3>
                             <h3>Other Variants</h3>
                             <div className="product-varian">
-                            {this.variant(medicine.strenghts)}
+                            {this.variant(medicine.strenghts,medicine.id)}
                             	</div>
                             <h4>Recommended retail price</h4>
-                        <h5><span>&#8377;</span>17</h5>
+                        <h5><span>&#8377;</span>{medicine.MRP}</h5>
                             <div className="product-bar3">
                      
                        <Select defaultValue={medicine.quantity} style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
@@ -383,13 +418,13 @@ message:state.message,
           
             if(isAuth()){
                 	const data={
-            apiVersion:"1.0",
-        	imei:"",
+            apiVersion:Config.APIVERSION,
+        	imei:Config.IMEI,
             token:"",
             userId:1,
             id:id
         	}
-                return fetch('http://projects-demo.tk/dawabag/webservices/web/remove_item_from_cart',{
+                return fetch(Config.API+'/remove_item_from_cart',{
                     method: "post",
                     headers: {
                       'Accept': 'application/json, text/plain, */*',

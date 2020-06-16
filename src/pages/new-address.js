@@ -34,7 +34,7 @@ class NewAddress extends Component {
       var state=document.getElementById("state").value;
       var country=document.getElementById("country").value;
       var postcode=document.getElementById("postcode").value;
-//       apiVersion:"1.0",
+//       apiVersion:Config.APIVERSION,
 //       userId:1,
 // addressLine1:address1,
 // addressLine2:address2,
@@ -46,24 +46,25 @@ class NewAddress extends Component {
 // pincode:postcode,
 // lat:"",
 // lng:"",
-// imei:"",
+// imei:Config.IMEI,
 // token:""
       const data={
-        apiVersion:"1.0",
-        userId:1,  
-        addressLine1:"address1",
-        addressLine2:"address2",
-        addressLine3:"address3",
-        city:"city",
-        state:"state",
-        country:"country",
-        pincode:"pincode",
-        lat:"",
-        lng:"",
-        imei:"",
+        "apiVersion":Config.APIVERSION,
+        "userId":"1",  
+        "addressLine1":"addressLine1",
+        "addressLine2":"addressLine2",
+        "addressLine3":"addressLine3",
+        "city":"city",
+        "state":"state",
+        "country":"country",
+        "pincode":"pincode",
+        "lat":"",
+        "lng":"",
+        "imei":Config.IMEI,
+        "token":""
       }
 
-      fetch('http://projects-demo.tk/dawabag/webservices/web/user_address_insert',{
+      fetch(Config.API+'/user_address_insert',{
         method: "post",
         headers: {
           'Accept': 'application/json, text/plain, */*',

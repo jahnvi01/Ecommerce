@@ -17,13 +17,13 @@ send=(e)=>{
 	e.preventDefault();
 	var mobile=	this.props.match.params.mobile; 
 	const data={
-		apiVersion:"1.0",
+		apiVersion:Config.APIVERSION,
 		mobile:mobile,
 		userType:"doctor",
-		imei:"",
+		imei:Config.IMEI,
 	
 	 }
-	 fetch('http://projects-demo.tk/dawabag/webservices/web/send_otp',{
+	 fetch(Config.API+'/send_otp',{
 	   method: "post",
 	   headers: {
 		 'Accept': 'application/json, text/plain, */*',
@@ -46,14 +46,14 @@ verify=()=>{
 	
 var otp=d1+d2+d3+d4;
 const data={
-	apiVersion:"1.0",
+	apiVersion:Config.APIVERSION,
 	mobile:mobile,
 	userType:"doctor",
 	otp:otp,
-	imei:"",
+	imei:Config.IMEI,
 
  }
- fetch('http://projects-demo.tk/dawabag/webservices/web/verify_otp',{
+ fetch(Config.API+'/verify_otp',{
    method: "post",
    headers: {
 	 'Accept': 'application/json, text/plain, */*',

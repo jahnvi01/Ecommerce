@@ -62,7 +62,7 @@ class ProductsInner extends Component {
         }
     }
 
-    addCart=(medicine)=>{
+    addCart=(product)=>{
         const args = {
             message: "Added To Cart",
           style:{
@@ -72,8 +72,58 @@ class ProductsInner extends Component {
         
            
               notification.success(args);
-        this.props.addCart(medicine) 
+              var flag=0;
+
+              if(this.props.cart.length!==0){
+                  console.log(this.props.cart.length)
+                  this.props.cart.map(item=>{
+                      if(item.id===product.id){
+                          flag=1;
+                      }
+                    })
+                    if(flag===0){
+                        this.props.addCart(product)
+                    }
+              }
+              else{
+                  this.props.addCart(product)  
+              }
     }
+    changeStrength=(strength)=>{
+  
+   var selection=this.state.selection;        
+var totalPriceToRetailer=this.state.selection.totalPriceToRetailer;
+var MRP=this.state.selection.MRP;
+this.state.selection.strenghts.map(item=>{
+    if(item.strength===strength){
+    selection.totalPriceToRetailer=item.totalPriceToRetailer;
+    selection.MRP=item.MRP
+    }
+})
+var total=parseInt(selection.quantity) *parseInt(selection.MRP);
+selection.strength=strength;
+selection.total=total;
+        
+           
+      
+     
+           this.setState({selection:selection})
+        
+    }
+
+
+
+  variant=(items,id)=>{
+     
+      if(items.length!==0){
+var items=items.map(item=>{
+return(
+<button className="product-btn2" key={item.strength} onClick={()=>this.changeStrength(item.strength,id)}>{item.strength}</button> 
+)               
+})
+  }
+return items
+  }
 
     showProduct=()=>{
         if(this.state.selection){
@@ -122,10 +172,8 @@ class ProductsInner extends Component {
                             <h3>{this.state.selection.tabletPack} Units in box</h3>
                             <h3>Variants</h3>
                             <div className="product-varian">
-                            	<NavLink to={Config.BASE_URL+"#"} className="product-btn2">10 mg</NavLink>
-                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">20 mg</NavLink>
-                                <NavLink to={Config.BASE_URL+"#"} className="product-btn2">30 mg</NavLink>
-							</div>
+                            {this.variant(this.state.selection.strenghts,this.state.selection.id)}
+                            	</div>
                             <h4>Recommended retail price</h4>
                         <h5 className="underline"><span>&#8377;</span>{this.state.selection.PriceToRetailer}</h5>
                         <h5><span>&#8377;</span>{this.state.selection.MRP}</h5>
@@ -158,12 +206,12 @@ class ProductsInner extends Component {
   componentWillMount(){
     var id=this.props.match.params.id; 
     const post={
-        apiVersion:"1.0",
+        apiVersion:Config.APIVERSION,
         medicineId:id,
         token:""
 
       }
-    fetch('http://projects-demo.tk/dawabag/webservices/web/medicine_detail',{
+    fetch(Config.API+'/medicine_detail',{
         method: "post",
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -183,15 +231,14 @@ class ProductsInner extends Component {
         image5:medicine.image5,
         image6:medicine.image6,
         orderQuantityLimit:medicine.orderQuantityLimit,
-        strenghts:[],
+        strenghts:medicine.strenghts,
         genericName:medicine.genericName,
         tabletPack:medicine.tabletPack,
-        strengthId:"",
-        strength:"",
-        totalPriceToRetailer:medicine.totalPriceToRetailer,
-        MRP:medicine.MRP,
+        strength:medicine.strenghts[0],
+        totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
+        MRP:medicine.strenghts[0].MRP,
         quantity:1,
-        total:medicine.MRP
+        total:medicine.strenghts[0].MRP
       }
   this.setState({selection:data})
      
@@ -313,25 +360,19 @@ function mapStateToProps(state){
         return{
        
           addCart:(product)=>{
-              var flag=0;
-              this.props.cart.map(item=>{
-                if(item.id===product.id){
-                    flag=1;
-                }
-              })
-              if(flag===0){
+           
                 dispatch({type:"add",payload:{product,message:"Added To Cart"}})
                 if(isAuth()){
     
                 const data={
-                    apiVersion:"1.0",
+                    apiVersion:Config.APIVERSION,
                     token:"",
                     userId:isAuth().userId,
                     medicineId:product.id,
                     quantity:1,
-                    imei:""
+                    imei:Config.IMEI
                 }
-                // return fetch('http://projects-demo.tk/dawabag/webservices/web/add_item_in_cart',{
+                // return fetch(Config.API+'/add_item_in_cart',{
                 //   method: "post",
                  //   headers: {
                 // 	'Accept': 'application/json, text/plain, */*',
@@ -342,8 +383,7 @@ function mapStateToProps(state){
                 // .then(res=>console.log(res)) 
               } 
               }
-           
-        }
+    
     }
       }
     

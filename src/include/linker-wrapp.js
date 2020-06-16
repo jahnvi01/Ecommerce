@@ -88,11 +88,11 @@ this.props.history.push(`/demo/search-products/${name}`)
 //     return{
    
 //       getCart:()=>{
-// 		const data={"apiVersion":"1.0",
-// 		"imei":"",
+// 		const data={"apiVersion":Config.APIVERSION,
+// 		"imei":Config.IMEI,
 // 		"token":""
 // 		}
-// 		return fetch('http://projects-demo.tk/dawabag/webservices/web/medicines',{
+// 		return fetch(Config.API+'/medicines',{
 // 		  method: "post",
 // 		  headers: {
 // 			'Accept': 'application/json, text/plain, */*',

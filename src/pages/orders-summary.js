@@ -28,13 +28,13 @@ class OrdersSummary extends Component {
 componentWillMount(){
     this.updateData();
     const data={
-        apiVersion:"1.0",
+        apiVersion:Config.APIVERSION,
         userId:1,
         orderId:1,
-        imei:"",
+        imei:Config.IMEI,
         token:""
      }
-   fetch('http://projects-demo.tk/dawabag/webservices/web/order_details',{
+   fetch(Config.API+'/order_details',{
        method: "post",
        headers: {
          'Accept': 'application/json, text/plain, */*',

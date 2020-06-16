@@ -24,12 +24,12 @@ class Orders extends Component {
     componentWillMount(){
     
         const data={
-            apiVersion:"1.0",
+            apiVersion:Config.APIVERSION,
             userId:1,
-            imei:"",
+            imei:Config.IMEI,
             token:""
          }
-       fetch('http://projects-demo.tk/dawabag/webservices/web/orders',{
+       fetch(Config.API+'/orders',{
            method: "post",
            headers: {
              'Accept': 'application/json, text/plain, */*',

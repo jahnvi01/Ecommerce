@@ -1,18 +1,17 @@
 import { isAuth } from "../function/auth";
-
+import Config from '../Config';
 if(localStorage.getItem('cart')===null){
 var value=[];
 localStorage.setItem('cart',JSON.stringify(value)); 
 console.log(localStorage.getItem("cart"));
 if(isAuth()){
-  console.log(isAuth().userId)
   const data={
-     apiVersion:"1.0",
+     apiVersion:Config.APIVERSION,
  userId:"1",
  token:"",
- imei:""
+ imei:Config.IMEI
  }
-  fetch('http://projects-demo.tk/dawabag/webservices/web/get_cart_items',{
+  fetch(Config.API+'/get_cart_items',{
     method: "post",
     headers: {
       'Accept': 'application/json, text/plain, */*',
