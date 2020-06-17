@@ -82,8 +82,8 @@ return(
         apiVersion:Config.APIVERSION,
         imei:Config.IMEI,
         token:"",
-        userId:1,
-        userAddressId:this.state.value,
+        userId:isAuth().id,
+        userAddressId:3,
         total:this.props.total,
 gst:30,
 discount:53,
@@ -218,9 +218,10 @@ items.map(item=>{
     }
     orders.push(order)
 })
+console.log(state)
     return {
         items:orders,
-        total:state.total,
+        total: state.total,
         bill:state.bill
     }
   

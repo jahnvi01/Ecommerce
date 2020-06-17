@@ -11,7 +11,7 @@ import ordersIcon2 from '../images/orders-icon2.png'
 import ordersIcon3 from '../images/orders-icon3.png'
 import ordersIcon4 from '../images/orders-icon4.png'
 import ordersIcon5 from '../images/orders-icon5.png'
-import { userAuth } from '../function/auth';
+import { userAuth, isAuth } from '../function/auth';
 import ShowAlert from '../function/alert';
 import Config from '../Config';
 import { withRouter ,NavLink} from 'react-router-dom';
@@ -25,7 +25,7 @@ class Orders extends Component {
     
         const data={
             apiVersion:Config.APIVERSION,
-            userId:1,
+            userId:isAuth().id,
             imei:Config.IMEI,
             token:""
          }

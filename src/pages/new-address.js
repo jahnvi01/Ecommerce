@@ -12,8 +12,9 @@ import JudgerWrapp from '../include/judger-wrapp';
 import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import Config from '../Config';
-import { userAuth } from '../function/auth';
+import { userAuth, isAuth } from '../function/auth';
 import ShowAlert from '../function/alert';
+import {connect} from 'react-redux';
 import { withRouter,NavLink } from 'react-router-dom';
 
 class NewAddress extends Component {
@@ -24,6 +25,42 @@ class NewAddress extends Component {
         error:"",
       
     }
+
+    placeOrder=()=>{
+
+        if(this.state.value!==0){
+    
+        
+        const data={
+            apiVersion:Config.APIVERSION,
+            imei:Config.IMEI,
+            token:"",
+            userId:isAuth().id,
+            userAddressId:1,
+            total:this.props.total,
+    gst:30,
+    discount:53,
+    payable:this.props.bill,
+    copounId:"FLAT50",
+    items:this.props.items
+            }
+                return fetch(Config.API+'/place_order',{
+                    method: "post",
+                    headers: {
+                      'Accept': 'application/json, text/plain, */*',
+                      'Content-Type': 'application/json'
+                    },body:JSON.stringify(data)
+                  })
+                  .then(res=>res.json())
+                  .then(res=>console.log(res)) 
+                }
+                else{
+                 this.setState({error:"Select Address First"})
+                }
+       }
+    
+
+
   add=(e)=>{
     
       var address1=document.getElementById("address1").value;
@@ -50,14 +87,14 @@ class NewAddress extends Component {
 // token:""
       const data={
         "apiVersion":Config.APIVERSION,
-        "userId":"1",  
-        "addressLine1":"addressLine1",
-        "addressLine2":"addressLine2",
-        "addressLine3":"addressLine3",
-        "city":"city",
-        "state":"state",
-        "country":"country",
-        "pincode":"pincode",
+        "userId":1,  
+        "addressLine1":address1,
+        "addressLine2":address2,
+        "addressLine3":address3,
+        "city":city,
+        "state":state,
+        "country":country,
+        "pincode":postcode,
         "lat":"",
         "lng":"",
         "imei":Config.IMEI,
@@ -86,7 +123,7 @@ class NewAddress extends Component {
 <Header />
 	<LinkerWrapp />
     
-      
+     <ShowAlert message={this.state.message} error={this.state.error}/> 
     <section class="banner-wrapp inner-wrapp">
 	<div class="margin">
     	<div class="inner-row1">
@@ -217,8 +254,8 @@ class NewAddress extends Component {
                             <h6>TOTAL AMOUNT</h6><br />
                             <h5><span>Rs.</span>207.00</h5>
                         </div>
-                        <NavLink to={Config.BASE_URL+"#"} class="sidbar-btn2">PROCEED TO PAYMENT</NavLink>
-                    </div>
+                        <button  onClick={()=>{this.placeOrder()}} class="sidbar-btn2">PROCEED TO PAYMENT</button>
+                   </div>
                     
                 </div>
                 
@@ -238,5 +275,32 @@ class NewAddress extends Component {
     );
   }
 }
+function mapStateToProps(state){
+    var items=JSON.parse(state.cart);
+    var orders=[];
+    
+    items.map(item=>{
+      var  order={
+            medicineId:item.id,
+            quantity:1
+        }
+        orders.push(order)
+    })
+    console.log(state)
+        return {
+            items:orders,
+            total: state.total,
+            bill:state.bill
+        }
+      
+    }
+    
+    function mapDispatchToStates(dispatch){
+        return{
+       
+      
+        }
+      }
+    export default withRouter(connect(mapStateToProps,mapDispatchToStates)(NewAddress));
+    
 
-export default withRouter(NewAddress) ;

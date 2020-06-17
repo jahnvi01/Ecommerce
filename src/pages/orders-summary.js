@@ -12,7 +12,7 @@ import sample from '../images/sample.jpg'
 import orderPlus from '../images/order-plus.png'
 import productThumb1 from '../images/product-thumb1.png'
 import $ from "jquery";
-import { userAuth } from '../function/auth';
+import { userAuth, isAuth } from '../function/auth';
 import Config from '../Config';
 import { withRouter,NavLink } from 'react-router-dom';
 import ShowAlert from '../function/alert';
@@ -29,7 +29,7 @@ componentWillMount(){
     this.updateData();
     const data={
         apiVersion:Config.APIVERSION,
-        userId:1,
+        userId:isAuth().id,
         orderId:1,
         imei:Config.IMEI,
         token:""
