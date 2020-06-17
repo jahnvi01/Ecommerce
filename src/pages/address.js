@@ -82,7 +82,7 @@ return(
         apiVersion:Config.APIVERSION,
         imei:Config.IMEI,
         token:"",
-        userId:isAuth().id,
+        userId:1,
         userAddressId:3,
         total:this.props.total,
 gst:30,
@@ -99,7 +99,7 @@ items:this.props.items
                 },body:JSON.stringify(data)
               })
               .then(res=>res.json())
-              .then(res=>console.log(res)) 
+              .then(res=>this.setState({message:res.result.message})) 
             }
             else{
              this.setState({error:"Select Address First"})

@@ -35,7 +35,7 @@ class NewAddress extends Component {
             apiVersion:Config.APIVERSION,
             imei:Config.IMEI,
             token:"",
-            userId:isAuth().id,
+            userId:1,
             userAddressId:1,
             total:this.props.total,
     gst:30,
@@ -52,7 +52,7 @@ class NewAddress extends Component {
                     },body:JSON.stringify(data)
                   })
                   .then(res=>res.json())
-                  .then(res=>console.log(res)) 
+                  .then(res=>this.setState({message:res.result.message})) 
                 }
                 else{
                  this.setState({error:"Select Address First"})
@@ -109,7 +109,7 @@ class NewAddress extends Component {
         },body:JSON.stringify(data)
       })
       .then(res=>res.json())
-.then(res=>console.log(res))
+.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})})
     //   .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
     //   console.log(this.state)       })
 
@@ -232,7 +232,7 @@ class NewAddress extends Component {
                     <h2>Payment Details</h2>
                     <div class="sidbar-bar3">
                     	<div class="payment-lt">MRP Total</div>
-                        <div class="payment-rt">Rs.265.00</div>
+                        <div class="payment-rt">{this.props.total}</div>
                     </div>
                     <div class="sidbar-bar3">
                     	<div class="payment-lt">Delivery Charges</div>
@@ -244,15 +244,15 @@ class NewAddress extends Component {
                     </div>
                     <div class="sidbar-bar3">
                     	<div class="payment-lt"><span>Total Amount *</span></div>
-                        <div class="payment-rt"><span>Rs.237.00</span></div>
+                        <div class="payment-rt"><span>{this.props.bill}</span></div>
                     </div>
                     
-                    <div class="savings">TOTAL SAVINGS RS.63.00</div>
+                    <div class="savings">TOTAL SAVINGS RS.53.00</div>
                     
                     <div class="payment-row1">
                         <div class="payment-bar1">
                             <h6>TOTAL AMOUNT</h6><br />
-                            <h5><span>Rs.</span>207.00</h5>
+    <h5><span>Rs.</span>{this.props.bill}</h5>
                         </div>
                         <button  onClick={()=>{this.placeOrder()}} class="sidbar-btn2">PROCEED TO PAYMENT</button>
                    </div>
