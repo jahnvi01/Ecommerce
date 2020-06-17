@@ -11,8 +11,28 @@ import { NavLink } from 'react-router-dom';
 
 
 class LinkerWrapp extends Component {
-componentWillMount(){
-//	this.props.getCart()
+
+handleScroll = () => {
+	if (window.scrollY === 0) {
+		document.getElementById("sticky").classList.remove("fixed")
+
+	} else {
+		document.getElementById("sticky").setAttribute("style", "position: fixed !important;");
+		document.getElementById("sticky").setAttribute("style", "top: 0 !important;");
+		document.getElementById("sticky").setAttribute("style", "z-index:999 !important;");
+		document.getElementById("sticky").setAttribute("style", "background:white !important;");
+		document.getElementById("sticky").setAttribute("style", "width: 100%;");
+		document.getElementById("sticky").classList.add("fixed");
+		
+	}
+}
+
+componentDidMount() {
+	window.addEventListener('scroll', this.handleScroll);
+}
+
+componentWillUnmount() {
+	window.removeEventListener('scroll', this.handleScroll);
 }
 	change=()=>{
 		var name=document.getElementById("myInput").value
@@ -33,7 +53,7 @@ this.props.history.push(`/demo/search-products/${name}`)
     return (
 		<React.Fragment>
 <section className="linker-wrapp">
-	<div className="scroll float-panel" data-scroll="0" data-top="0">
+	<div className="float-panel" id="sticky"  data-scroll="0" data-top="0">
 	<div className="margin">
             
 		<div className="linker-row1">

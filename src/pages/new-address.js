@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-// import ordersIcon1 from '../images/orders-icon1.png';
-// import ordersIcon2 from '../images/orders-icon2.png';
-// import ordersIcon3 from '../images/orders-icon3.png';
-// import ordersIcon4 from '../images/orders-icon4.png';
-// import ordersIcon5 from '../images/orders-icon5.png';
 import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';

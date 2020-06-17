@@ -414,7 +414,7 @@ function mapStateToProps(state){
               const data={
                   apiVersion:Config.APIVERSION,
                   token:"",
-                  userId:1,
+                  userId:isAuth().id,
                   medicineId:product.id,
                   quantity:1,
                   imei:Config.IMEI

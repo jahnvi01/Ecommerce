@@ -31,3 +31,19 @@ body{
 float: right;
 
 }
+
+
+
+
+.fixed{
+    position: fixed;
+        top:0;
+        z-index:999;
+        background:white;
+        width: 100%;
+}
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
+
