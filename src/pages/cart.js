@@ -77,7 +77,7 @@ class Cart extends Component {
 countBill=()=>{
     var total=0;
     this.props.cart.map(item=>{
-        total=total+item.total
+        total=total+parseInt(item.total)
     })
 //     var products=document.getElementsByClassName("subtotal");
 // for(var i=0;i<products.length;i++){
@@ -252,7 +252,7 @@ return items
                         <h5><span>&#8377;</span>{medicine.MRP}</h5>
                             <div className="product-bar3">
                      
-                       <Select defaultValue={medicine.quantity} style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
+                       <Select defaultValue={medicine.quantity}  style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
      {this.dropdown(medicine.orderQuantityLimit)}
      </Select>
                     

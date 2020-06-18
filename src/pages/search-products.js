@@ -89,34 +89,38 @@ var selections=this.state.selections.map(selected=>{
    this.setState({selections:selections})
 
   }
-changeStrength=(strength,id)=>{
+  changeStrength=(strength,id)=>{
   
-        var selections=this.state.selections.map(selected=>{
-      
-            if(selected.id===id){
-           
+    var selections=this.state.selections.map(selected=>{
+  
+        if(selected.id===id){
+       
 var totalPriceToRetailer=selected.totalPriceToRetailer;
 var MRP=selected.MRP;
+var medicineStrengthId=selected.medicineStrengthId;
 selected.strenghts.map(item=>{
-    if(item.strength===strength){
-    totalPriceToRetailer=item.totalPriceToRetailer;
-    MRP=item.MRP
-    }
+if(item.strength===strength){
+    medicineStrengthId=item.medicineStrengthId;
+totalPriceToRetailer=item.totalPriceToRetailer;
+MRP=item.MRP
+}
 })
 var total=parseInt(selected.quantity) *parseInt(MRP);
 selected.strength=strength;
+selected.medicineStrengthId=medicineStrengthId;
 selected.totalPriceToRetailer=totalPriceToRetailer;
 selected.MRP=MRP;
 selected.total=total;
-        
-            }
-            return selected
-      
-        })
-        
-           this.setState({selections:selections})
-        
-    }
+    
+        }
+        return selected
+  
+    })
+    
+       this.setState({selections:selections})
+    
+}
+
 
 
 
@@ -197,7 +201,7 @@ return items
                genericName:medicine.genericName,
                tabletPack:medicine.tabletPack,
                orderQuantityLimit:medicine.orderQuantityLimit,
-            
+               medicineStrengthId:medicine.strenghts[0].id,
                strength:medicine.strenghts[0].strength,
                totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
                MRP:medicine.strenghts[0].MRP,
@@ -218,7 +222,7 @@ return items
                strenghts:[],
                genericName:medicine.genericName,
                tabletPack:medicine.tabletPack,
-           
+               medicineStrengthId:"",
                strength:"",
                totalPriceToRetailer:0,
                MRP:0,
@@ -480,12 +484,13 @@ function mapStateToProps(state){
               if(isAuth()){
   
               const data={
-                  apiVersion:Config.APIVERSION,
-                  token:"",
-                  userId:isAuth().userId,
-                  medicineId:product.id,
-                  quantity:1,
-                  imei:Config.IMEI
+                apiVersion:Config.APIVERSION,
+                token:"",
+                userId:isAuth().userId,
+                medicineId:product.id,
+                medicineStrengthId:product.medicineStrengthId,
+                quantity:product.quantity,
+                imei:Config.IMEI
               }
               return fetch(Config.API+'/add_item_in_cart',{
                 method: "post",
