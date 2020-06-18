@@ -26,7 +26,7 @@ class Address extends Component {
     
         const data={
             apiVersion:Config.APIVERSION,
-            userId:1,
+            userId:isAuth().userId,
             token:"",
             
          }
@@ -82,7 +82,7 @@ return(
         apiVersion:Config.APIVERSION,
         imei:Config.IMEI,
         token:"",
-        userId:1,
+        userId:isAuth().userId,
         userAddressId:3,
         total:this.props.total,
 gst:30,

@@ -30,7 +30,7 @@ class NewAddress extends Component {
             apiVersion:Config.APIVERSION,
             imei:Config.IMEI,
             token:"",
-            userId:1,
+            userId:isAuth().userId,
             userAddressId:1,
             total:this.props.total,
     gst:30,
@@ -67,7 +67,7 @@ class NewAddress extends Component {
       var country=document.getElementById("country").value;
       var postcode=document.getElementById("postcode").value;
 //       apiVersion:Config.APIVERSION,
-//       userId:1,
+//       userId:isAuth().userId,
 // addressLine1:address1,
 // addressLine2:address2,
 // addressLine3:address3,

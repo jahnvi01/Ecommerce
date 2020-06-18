@@ -7,7 +7,7 @@ console.log(localStorage.getItem("cart"));
 if(isAuth()){
   const data={
      apiVersion:Config.APIVERSION,
- userId:"1",
+ userId:isAuth().userId,
  token:"",
  imei:Config.IMEI
  }

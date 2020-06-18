@@ -3,8 +3,6 @@ import dawabagLogo2 from '../images/dawabag-logo2.png';
 import loginThumb1 from '../images/login-thumb1.png';
 import cartThumb1 from '../images/cart-thumb1.png';
 import { withRouter } from 'react-router-dom';
-import {autocomplete,countries} from '../js/autocomplete'
-import {connect} from 'react-redux';
 import {signout,isAuth} from '../function/auth';
 import Config from '../Config';
 import { NavLink } from 'react-router-dom';
