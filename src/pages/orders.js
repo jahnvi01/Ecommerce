@@ -25,7 +25,7 @@ class Orders extends Component {
     
         const data={
             apiVersion:Config.APIVERSION,
-            userId:isAuth().id,
+            userId:isAuth().userId,
             imei:Config.IMEI,
             token:""
          }

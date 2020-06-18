@@ -410,11 +410,11 @@ function mapStateToProps(state){
          
               dispatch({type:"add",payload:{product,message:"Added To Cart"}})
               if(isAuth()){
-  
+  console.log(isAuth())
               const data={
                   apiVersion:Config.APIVERSION,
                   token:"",
-                  userId:isAuth().id,
+                  userId:isAuth().userId,
                   medicineId:product.id,
                   quantity:1,
                   imei:Config.IMEI

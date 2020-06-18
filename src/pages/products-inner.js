@@ -372,15 +372,15 @@ function mapStateToProps(state){
                     quantity:1,
                     imei:Config.IMEI
                 }
-                // return fetch(Config.API+'/add_item_in_cart',{
-                //   method: "post",
-                 //   headers: {
-                // 	'Accept': 'application/json, text/plain, */*',
-                // 	'Content-Type': 'application/json'
-                //   },body:JSON.stringify(data)
-                // })
-                // .then(res=>res.json())
-                // .then(res=>console.log(res)) 
+                return fetch(Config.API+'/add_item_in_cart',{
+                  method: "post",
+                   headers: {
+                	'Accept': 'application/json, text/plain, */*',
+                	'Content-Type': 'application/json'
+                  },body:JSON.stringify(data)
+                })
+                .then(res=>res.json())
+                .then(res=>console.log(res)) 
               } 
               }
     

@@ -421,7 +421,7 @@ message:state.message,
             apiVersion:Config.APIVERSION,
         	imei:Config.IMEI,
             token:"",
-            userId:isAuth().id,
+            userId:isAuth().userId,
             id:id
         	}
                 return fetch(Config.API+'/remove_item_from_cart',{

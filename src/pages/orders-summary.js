@@ -29,7 +29,7 @@ componentWillMount(){
     this.updateData();
     const data={
         apiVersion:Config.APIVERSION,
-        userId:isAuth().id,
+        userId:isAuth().userId,
         orderId:1,
         imei:Config.IMEI,
         token:""
