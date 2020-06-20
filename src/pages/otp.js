@@ -35,7 +35,8 @@ send=(e)=>{
 	.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})					 
 	})
 }
-verify=()=>{
+verify=(e)=>{
+	e.preventDefault()
 	var d1=document.getElementById("d1").value;
 	var d2=document.getElementById("d2").value;
 	var d3=document.getElementById("d3").value;
@@ -64,7 +65,7 @@ const data={
 //.then(res=>console.log(res))
 .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
 	if(res.result.message==="Correct OTP."){
-		
+console.log(res.result.message)		
 		authentication(res.result);
 this.props.history.push("/demo")
 	}	
@@ -107,15 +108,18 @@ this.props.history.push("/demo")
                     <h5>Enter your 4-digit passcode</h5>
 
 					<div className="wrap-input200 validate-input" data-validate = "Enter username">
-                    	<input name="number" id="d1" type="text" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
-						<input name="number" id="d2" type="text" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
-                        <input name="number"id="d3"  type="text" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
-                        <input name="number" id="d4" type="text" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
+                    	<input name="number" id="d1"  type="text" maxLength="1" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
+						<input name="number" id="d2" type="text" maxLength="1" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
+                        <input name="number"id="d3"  type="text" maxLength="1" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
+                        <input name="number" id="d4" type="text" maxLength="1" className="judger-fil1 judger-fil4" style={{visibility: "visible"}} />
 					</div>
-                    
-                    <NavLink to={Config.BASE_URL+"#"} className="hvr-sweep-to-left" onClick={(event)=>{this.send(event)}}>Resend OTP</NavLink>
+
+				   <NavLink to={Config.BASE_URL+"#"} className="hvr-sweep-to-left" onClick={(event)=>{this.send(event)}}>Resend OTP</NavLink>
                     <NavLink to={Config.BASE_URL+"#"} className="hvr-sweep-to-left2" onClick={(event)=>{this.verify(event)}}>Verify OTP</NavLink>
-					
+			    
+                    {/* <button className="hvr-sweep-to-left" onClick={(event)=>{this.send(event)}}>Resend OTP</button>
+                    <button className="hvr-sweep-to-left2" onClick={(event)=>{this.verify(event)}}>Verify OTP</button>
+					 */}
 				</form>
 			</div>
 		</div>

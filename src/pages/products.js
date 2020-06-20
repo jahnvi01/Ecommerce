@@ -285,7 +285,7 @@ console.log(this.state.selections)
                 </div>
                 </Link>
                 <div className="product-bar2">
-                    <h2>{medicine.genericName}</h2>
+                <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>   <h2>{medicine.genericName}</h2></Link>
                     <h3>{medicine.tabletPack} Units in box</h3>
                     <h3>Other Variants</h3>
                     <div className="product-varian">

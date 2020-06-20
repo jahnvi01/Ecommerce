@@ -82,7 +82,7 @@ class NewAddress extends Component {
 // token:""
       const data={
         "apiVersion":Config.APIVERSION,
-        "userId":1,  
+        "userId":isAuth().userId,  
         "addressLine1":address1,
         "addressLine2":address2,
         "addressLine3":address3,

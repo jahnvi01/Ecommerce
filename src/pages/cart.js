@@ -59,6 +59,9 @@ class Cart extends Component {
     componentDidMount(){
         this.countBill()
     }
+    componentDidUpdate(){
+        this.countBill()
+    }
 //     total=(e,rs,id)=>{
      
 // var qnt=parseInt(e.target.value);
@@ -120,6 +123,7 @@ onFileChange = event => {
            
               notification.error(args);
               this.props.remove(id)
+              this.countBill();
     }
     dropdown=(no)=>{
         var no=parseInt(no);
@@ -242,7 +246,7 @@ return items
                         </div>
                          
                         <div className="product-bar2">
-                        <h2>{medicine.genericName}</h2>
+                        <Link to={Config.BASE_URL+`products-inner/${medicine.id}`}>    <h2>{medicine.genericName}</h2></Link>
                         <h3>{medicine.tabletPack} Units</h3>
                             <h3>Other Variants</h3>
                             <div className="product-varian">

@@ -34,7 +34,10 @@ send=(e)=>{
 	 .then(res=>res.json())
 	// .then(res=>console.log(res))
 	.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
+	if(this.state.message!=="Please enter correct Mobile Number."){
 		this.props.history.push(`/demo/otp/${mobile}`)
+	}	
+	
 					 
 					 
 	})
@@ -89,10 +92,10 @@ else{
 
 					<div className="p-t-50 sign">
                     	<h2>Or sign in as</h2>
-						<NavLink to={Config.BASE_URL+'/signup'} className="txt1">
+						<NavLink to={Config.BASE_URL+'signup'} className="txt1">
 							Doctor
 						</NavLink>
-                        <NavLink to={Config.BASE_URL+'/signup'} className="txt1">
+                        <NavLink to={Config.BASE_URL+'signup'} className="txt1">
 							Pharmacy
 						</NavLink>
 					</div>
