@@ -143,13 +143,14 @@ onFileChange = event => {
             selected.quantity=qnt;
             var total=parseInt(qnt)*parseInt(selected.MRP)
             selected.total=total
-           console.log(qnt)
+            this.props.addCart(selected)
         }
         return selected
     //    selections.push(item)
     })
     localStorage.setItem('cart',JSON.stringify(selections))
     //   this.setState({selections:selections})
+    
     this.countBill();
     this.props.history.push('cart');
       }
@@ -173,7 +174,7 @@ selected.strength=strength;
 selected.totalPriceToRetailer=totalPriceToRetailer;
 selected.MRP=MRP;
 selected.total=total;
-        
+this.props.addCart(selected)      
             }
             return selected
       
@@ -256,7 +257,7 @@ return items
                         <h5><span>&#8377;</span>{medicine.MRP}</h5>
                             <div className="product-bar3">
                      
-                       <Select defaultValue={medicine.quantity}  style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
+                       <Select defaultValue={medicine.quantity} value={medicine.quantity}  style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
      {this.dropdown(medicine.orderQuantityLimit)}
      </Select>
                     
@@ -394,7 +395,7 @@ payment options.</span></label>
   }
 }
 function mapStateToProps(state){
-var items=JSON.parse(state.cart);
+var items=JSON.parse(localStorage.getItem('cart')||'[]');
 var orders=[];
 
 items.map(item=>{
@@ -406,7 +407,7 @@ items.map(item=>{
 })
     return {
 message:state.message,
-        cart:JSON.parse(state.cart),
+        cart:JSON.parse(localStorage.getItem('cart')||'[]'),
         items:orders
     }
   
@@ -414,8 +415,35 @@ message:state.message,
   function mapDispatchToStates(dispatch){
     return{
    
-      
+        addCart:(product)=>{
 
+      
+            
+             if(isAuth()){
+console.log(product)
+            const data={
+                apiVersion:Config.APIVERSION,
+                token:"",
+                userId:isAuth().userId,
+                medicineId:product.id,
+                medicineStrengthId:product.medicineStrengthId,
+                quantity:product.quantity,
+                imei:Config.IMEI
+            }
+            return fetch(Config.API+'/add_item_in_cart',{
+              method: "post",
+               headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+              },body:JSON.stringify(data)
+            })
+            .then(res=>res.json())
+            .then(res=>console.log(res)) 
+          } 
+         
+       
+    },     
+    
         remove:(id)=>{
 
             dispatch({type:"remove",payload:{id:id,message:"Removed From Cart"}})

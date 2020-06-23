@@ -82,6 +82,12 @@ this.props.history.push(`/demo/search-products/${name}`)
                 <div className="cart-box">
                 	<p><NavLink to={Config.BASE_URL +'cart'}>Cart</NavLink></p>
                     <p><img src={cartThumb1}/></p>
+ {/* content: "02" */}
+
+					<span style={{
+position:"absolute", background: "#9fbd68",color: "#fff",lineHeight:"23px",textAlign:"center",top:"-5px",right:"-13px",
+width:"23px", height:"23px",borderRadius:"30px",fontSize:"10px",boxShadow: "0 2px 5px rgba(0,0,0,.3)", zIndex:"9"
+					}}> {JSON.parse(localStorage.getItem('cart')||'[]').length}</span>
                 </div>
 			</div>
 		</div>

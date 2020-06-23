@@ -221,8 +221,9 @@ items.map(item=>{
 console.log(state)
     return {
         items:orders,
-        total: state.total,
-        bill:state.bill
+        
+        total:JSON.parse(localStorage.getItem('bill')).total ||0,
+        bill:JSON.parse(localStorage.getItem('bill')).bill ||0
     }
   
 }
