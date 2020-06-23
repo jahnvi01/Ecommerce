@@ -139,6 +139,15 @@ return items
   componentWillMount(){
  this.searchProducts();
   }
+componentDidMount(){
+    this.searchProducts()
+}
+
+// componentDidUpdate(){
+//     this.searchProducts();  
+// }
+
+
 
   addCart=(product)=>{
     const args = {
@@ -170,11 +179,12 @@ return items
 
 
   searchProducts=()=>{
-   
-  
+   var name=this.props.match.params.name
+  console.log(name)
+
     const data={
         apiVersion:Config.APIVERSION,
-        medicineName:this.props.match.params.name,
+        medicineName:name,
      token:""
      }
       fetch(Config.API+'/search_medicines',{
@@ -186,6 +196,7 @@ return items
      })
      .then(res=>res.json())
      .then(res=>{this.setState({medicines:res.data.medicines,error:res.error||""})
+
      var selections=[];
      res.data.medicines.map(medicine=>{
          if(medicine.strenghts.length!==0){
@@ -234,7 +245,7 @@ return items
                      selections.push(data)
      })
 this.setState({selections:selections})
-console.log(this.state.selections)
+
     })
  }
  shhowMedicines=()=>{

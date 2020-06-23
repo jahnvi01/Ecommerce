@@ -27,6 +27,7 @@ handleScroll = () => {
 
 componentDidMount() {
 	window.addEventListener('scroll', this.handleScroll);
+	
 }
 
 componentWillUnmount() {
@@ -40,13 +41,13 @@ componentWillUnmount() {
 
 
 var name=document.getElementById("myInput").value;
-
-this.props.history.push(`/demo/search-products/${name}`)
-
+if(name){
+this.props.history.replace(`/demo/search-products/${name}`)
+}
 	}
 
   render() {
-	
+
 	console.log(isAuth())
     return (
 		<React.Fragment>
@@ -60,14 +61,29 @@ this.props.history.push(`/demo/search-products/${name}`)
 			</div>
 		</div>
         <div className="linker-row2">
-			<div className="linker-bar2">
+
+
+		<div className="wrapper1">
+                <div className="search_box">
+                    <div className="dropdown">
+                        <div className="default_option">420003</div>  
+                    </div>
+                    <div className="search_field">
+                      <input type="text" className="input" style={{background:"white"}} id="myInput" placeholder="Search" />
+                      <i className="fas fa-search" onClick={(event)=>this.search(event)} ></i>
+                  </div>
+                </div>
+            </div>
+
+
+			{/* <div className="linker-bar2">
 				<form autoComplete="off" action="/action_page.php">
                   <div className="autocomplete">
                     <input id="myInput" type="text" name="myCountry" onChange={()=>this.change()} placeholder="SEARCH YOUR MEDICINE" className="linker-fil1" />
                   </div>
                   <input type="" onClick={(event)=>this.search(event)} className="linker-btn1" />
                 </form>
-			</div>
+			</div> */}
 		</div>
         <div className="linker-row3">
 			<div className="linker-bar3">

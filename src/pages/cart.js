@@ -90,8 +90,8 @@ document.getElementById("totalBill").innerHTML=total;
 var delivery=parseInt(document.getElementById("delivery").innerHTML);
 var discount=parseInt(document.getElementById("discount1").innerHTML);
 var bill=total+delivery-discount
-document.getElementById("bill1").innerHTML=bill;
-document.getElementById("bill2").innerHTML=bill;
+document.getElementById("bill1").innerHTML="₹"+bill;
+document.getElementById("bill2").innerHTML="₹"+bill;
 var data={
     total:total,
     bill:bill
@@ -264,7 +264,7 @@ return items
                                 <button className="product-btn1" onClick={()=>{this.remove(medicine.id)}}>Remove CART</button>
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
-                        <h5 className="subtotal">{medicine.total}</h5>
+                                    ₹<h5 className="subtotal">{medicine.total}</h5>
                                 </div>
                             </div>
                      
