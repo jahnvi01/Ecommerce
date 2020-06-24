@@ -77,7 +77,8 @@ table {border-collapse: collapse; border-spacing: 0;}
 .linker-wrapp p span { display:block;}
 .linker-wrapp p strong { font-weight:700;}
 .linker-wrapp .linker-row1 { width:190px; float:left; clear:both; margin:0 0 0;}
-.linker-wrapp .linker-row1 img { width:100%; display:block;}
+.linker-wrapp .linker-row1 img { height:88px; display:block;}
+/* .linker-wrapp .linker-row1 img {width:100%; display:block;} */
 .linker-wrapp .linker-row1 .linker-bar1 { width:100%; float:left;}
 .linker-wrapp .linker-row2 { width:52.2%; float:left; margin:35px 49px 0; position:relative;}
 .linker-wrapp .linker-row2 .linker-bar2 { width:100%; float:right;}
@@ -1183,10 +1184,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fb645', end
 
 .linker-wrapp .autocomplete-items {
   position: absolute;
-  border: 2px solid #9fbd68;
+  border: 2px solid lightgray;
   border-bottom: none;
   border-top: none;
-  z-index: 99;
+  z-index: 100;
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
   left: 0;

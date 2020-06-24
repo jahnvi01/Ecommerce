@@ -21,38 +21,38 @@ class NewAddress extends Component {
       
     }
 
-    placeOrder=()=>{
+    // placeOrder=()=>{
 
-        if(this.state.value!==0){
+    //     if(this.state.value!==0){
     
         
-        const data={
-            apiVersion:Config.APIVERSION,
-            imei:Config.IMEI,
-            token:"",
-            userId:isAuth().userId,
-            userAddressId:1,
-            total:this.props.total,
-    gst:30,
-    discount:53,
-    payable:this.props.bill,
-    copounId:"FLAT50",
-    items:this.props.items
-            }
-                return fetch(Config.API+'/place_order',{
-                    method: "post",
-                    headers: {
-                      'Accept': 'application/json, text/plain, */*',
-                      'Content-Type': 'application/json'
-                    },body:JSON.stringify(data)
-                  })
-                  .then(res=>res.json())
-                  .then(res=>this.setState({message:res.result.message})) 
-                }
-                else{
-                 this.setState({error:"Select Address First"})
-                }
-       }
+    //     const data={
+    //         apiVersion:Config.APIVERSION,
+    //         imei:Config.IMEI,
+    //         token:"",
+    //         userId:isAuth().userId,
+    //         userAddressId:1,
+    //         total:this.props.total,
+    // gst:30,
+    // discount:53,
+    // payable:this.props.bill,
+    // copounId:"FLAT50",
+    // items:this.props.items
+    //         }
+    //             return fetch(Config.API+'/place_order',{
+    //                 method: "post",
+    //                 headers: {
+    //                   'Accept': 'application/json, text/plain, */*',
+    //                   'Content-Type': 'application/json'
+    //                 },body:JSON.stringify(data)
+    //               })
+    //               .then(res=>res.json())
+    //               .then(res=>this.setState({message:res.result.message})) 
+    //             }
+    //             else{
+    //              this.setState({error:"Select Address First"})
+    //             }
+    //    }
     
 
 
@@ -249,7 +249,7 @@ class NewAddress extends Component {
                             <h6>TOTAL AMOUNT</h6><br />
     <h5><span>Rs.</span>{this.props.bill}</h5>
                         </div>
-                        <button  onClick={()=>{this.placeOrder()}} class="sidbar-btn2">PROCEED TO PAYMENT</button>
+                       <NavLink to={Config.BASE_URL+"address"} ><button  class="sidbar-btn2">PROCEED TO PAYMENT</button></NavLink>
                    </div>
                     
                 </div>

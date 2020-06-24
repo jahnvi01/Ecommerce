@@ -327,7 +327,7 @@ return items
 						</div>
 					</div>
                 
-            </div>
+                </div>
             
             <div className="conten-bar2 sidbar-wrapp">
 				<div className="sidbar-row2">

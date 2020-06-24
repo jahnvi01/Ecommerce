@@ -10,7 +10,7 @@ import CallusWrapp from '../include/callus-wrapp';
 import ImpoerWrapp from '../include/impoer-wrapp';
 import { withRouter,NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {isAuth} from '../function/auth';
+import {isAuth, removeLocalStorage} from '../function/auth';
 import ShowAlert from '../function/alert';
 import { Radio } from 'antd';
 import Config from '../Config';
@@ -76,14 +76,14 @@ return(
    placeOrder=()=>{
 
     if(this.state.value!==0){
-
+console.log(this.state.value)
     
     const data={
         apiVersion:Config.APIVERSION,
         imei:Config.IMEI,
         token:"",
         userId:isAuth().userId,
-        userAddressId:3,
+        userAddressId:this.state.value,
         total:this.props.total,
 gst:30,
 discount:53,
@@ -99,7 +99,14 @@ items:this.props.items
                 },body:JSON.stringify(data)
               })
               .then(res=>res.json())
-              .then(res=>this.setState({message:res.result.message})) 
+              .then(res=>{this.setState({message:res.result.message})
+            if(res.result.message){
+                removeLocalStorage('cart');
+                removeLocalStorage('bill')
+            }
+
+
+            }) 
             }
             else{
              this.setState({error:"Select Address First"})
