@@ -5,8 +5,8 @@ import cartThumb1 from '../images/cart-thumb1.png';
 import { withRouter } from 'react-router-dom';
 import {signout,isAuth} from '../function/auth';
 import Config from '../Config';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom'; 
+import {autocomplete,countries} from '../js/autocomplete';
 
 class LinkerWrapp extends Component {
 
@@ -34,15 +34,19 @@ componentWillUnmount() {
 	window.removeEventListener('scroll', this.handleScroll);
 }
 	change=()=>{
-		var name=document.getElementById("myInput").value
-		//autocomplete(name,countries)
+		var name=document.getElementById("myInput")
+		autocomplete(name,countries)
+		console.log(name)
 	  }
-	search=(e)=>{
+
+	  search=(e)=>{
 
 
 var name=document.getElementById("myInput").value;
 if(name){
+
 this.props.history.replace(`/demo/search-products/${name}`)
+
 }
 	}
 
@@ -69,7 +73,7 @@ this.props.history.replace(`/demo/search-products/${name}`)
                         <div className="default_option">420003</div>  
                     </div>
                     <div className="search_field">
-                      <input type="text" className="input" style={{background:"white"}} id="myInput" placeholder="Search" />
+                      <input type="text" className="input" style={{background:"white"}} id="myInput" onChange={()=>this.change()} placeholder="Search" />
                       <i className="fas fa-search" onClick={(event)=>this.search(event)} ></i>
                   </div>
                 </div>
@@ -98,7 +102,6 @@ this.props.history.replace(`/demo/search-products/${name}`)
                 <div className="cart-box">
                 	<p><NavLink to={Config.BASE_URL +'cart'}>Cart</NavLink></p>
                     <p><img src={cartThumb1}/></p>
- {/* content: "02" */}
 
 					<span style={{
 position:"absolute", background: "#9fbd68",color: "#fff",lineHeight:"23px",textAlign:"center",top:"-5px",right:"-13px",
@@ -145,3 +148,9 @@ width:"23px", height:"23px",borderRadius:"30px",fontSize:"10px",boxShadow: "0 2p
 //     }
 //   }
 export default withRouter(LinkerWrapp);
+
+
+
+
+
+

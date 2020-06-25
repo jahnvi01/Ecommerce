@@ -30,7 +30,7 @@ componentWillMount(){
     const data={
         apiVersion:Config.APIVERSION,
         userId:isAuth().userId,
-        orderId:1,
+        orderId:this.props.match.params.orderId,
         imei:Config.IMEI,
         token:""
      }
@@ -44,7 +44,8 @@ componentWillMount(){
      .then(res=>res.json())
 //.then(res=>console.log(res))
      .then(res=>{this.setState({orders:res.data.order_details[0]||"",user:res.data.user[0],error:res.error||""})
-    var qnt=0;
+
+     var qnt=0;
     var total=0;
     if(res.data.order_details[0].items.length!==0){
         res.data.order_details[0].items.map(item=>{
@@ -130,6 +131,8 @@ showOrder=()=>{
     if(this.state.user && this.state.orders){
         var user=this.state.user;
         var orders=this.state.orders
+        console.log(user)
+        console.log(orders)
         return(
     <div>
                <div className="summary-row3">
@@ -143,7 +146,7 @@ showOrder=()=>{
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Order No:</span> M121999</h5></div>
+                            <div className="summary-bar33"><h5><span>Order No:</span> {orders.id}</h5></div>
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
@@ -151,8 +154,8 @@ showOrder=()=>{
                         </div>
                         <div className="summary-row3 border1">
                             <div className="summary-bar22"><img src={orderDot1} alt="order icon1"/></div>
-                            <div className="summary-bar33"><h5><span>Delivery Address:</span> Mahaveer Sancheti</h5>
-                                <p>Arihant Collection, Gitavandan Soc, Near Akash Petrol Pump, <span>Dindori Road, Panchavati, Nashik - 422003</span></p>
+                            <div className="summary-bar33"><h5><span>Delivery Address:</span> </h5>
+                                <p>{orders.deliveryAddress[0].addressLine1},{orders.deliveryAddress[0].addressLine2},{orders.deliveryAddress[0].addressLine3} <span>{orders.deliveryAddress[0].city} - {orders.deliveryAddress[0].pincode},{orders.deliveryAddress[0].state}</span></p>
                             </div>
                         </div>
                         <div className="summary-row3 border1">

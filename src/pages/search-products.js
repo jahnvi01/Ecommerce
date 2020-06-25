@@ -143,9 +143,9 @@ componentDidMount(){
     this.searchProducts()
 }
 
-// componentDidUpdate(){
-//     this.searchProducts();  
-// }
+componentDidUpdate(){
+    this.searchProducts();  
+}
 
 
 

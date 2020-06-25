@@ -113,10 +113,10 @@ userAuth(this.props);
                     <div className="orders-bar1">
                         <div className="custom-row1">
                             <form action="xyz" method="get">
-                                <div className="custom-select">
-                                <select name="redirectURL1" className="banner-fild1">
-                                    <option value="fuller lips" selected="">All Orders</option>
-                                    <option value="fuller lips" selected="">Delivered Orders</option>
+                                <div>
+                                <select name="redirectURL1" className="custom-select">
+                                    <option value="fuller lips" id="custom-option" selected="">All Orders</option>
+                                    <option value="fuller lips" id="custom-option" selected="">Delivered Orders</option>
                                 </select>
                                 </div>
                             </form>
