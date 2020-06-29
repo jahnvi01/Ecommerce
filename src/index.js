@@ -7,8 +7,15 @@ import {Provider} from 'react-redux';
 import rootReducer from './reducer/rootReducer';
 import Config from "./Config"
 import { BrowserRouter as Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
 const store=createStore (rootReducer);
-ReactDOM.render(<Router>
-    
-  <Provider store={store}><App /></Provider></Router>, document.getElementById('root'));
-serviceWorker.unregister();
+const history = createBrowserHistory();
+ReactDOM.render(
+    <Provider store={store}>
+        <Router history={history}>
+            <App />
+        </Router>
+    </Provider>
+    , document.getElementById('root'));
+serviceWorker.register();
