@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import {createStore,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import rootReducer from './reducer/rootReducer';
+import Config from "./Config"
 import { BrowserRouter as Router } from 'react-router-dom';
 const store=createStore (rootReducer);
 ReactDOM.render(<Router>

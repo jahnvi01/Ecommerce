@@ -106,7 +106,7 @@ onFileChange = event => {
       "file", 
       event.target.files[0], 
    
-    ); 
+    );  
     console.log(formData); 
   }; 
    
@@ -397,7 +397,7 @@ payment options.</span></label>
 function mapStateToProps(state){
 var items=JSON.parse(localStorage.getItem('cart')||'[]');
 var orders=[];
-
+if(items.length!==0){
 items.map(item=>{
   var  order={
         medicineId:item.id,
@@ -405,6 +405,8 @@ items.map(item=>{
     }
     orders.push(order)
 })
+}
+
     return {
 message:state.message,
         cart:JSON.parse(localStorage.getItem('cart')||'[]'),

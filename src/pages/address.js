@@ -215,16 +215,18 @@ items:this.props.items
   }
 }
 function mapStateToProps(state){
-var items=JSON.parse(state.cart);
-var orders=[];
-
-items.map(item=>{
-  var  order={
-        medicineId:item.id,
-        quantity:1
+    var items=JSON.parse(localStorage.getItem('cart')||'[]');
+    var orders=[];
+    if(items.length!==0){
+    items.map(item=>{
+      var  order={
+            medicineId:item.id,
+            quantity:1
+        }
+        orders.push(order)
+    })
     }
-    orders.push(order)
-})
+    
 console.log(state)
     return {
         items:orders,

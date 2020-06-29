@@ -271,9 +271,9 @@ class NewAddress extends Component {
   }
 }
 function mapStateToProps(state){
-    var items=JSON.parse(state.cart);
+    var items=JSON.parse(localStorage.getItem('cart')||'[]');
     var orders=[];
-    
+    if(items.length!==0){
     items.map(item=>{
       var  order={
             medicineId:item.id,
@@ -281,6 +281,8 @@ function mapStateToProps(state){
         }
         orders.push(order)
     })
+    }
+    
     console.log(state)
         return {
             items:orders,

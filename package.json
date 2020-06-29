@@ -18,6 +18,7 @@
     "react-stripe-checkout": "^2.6.3",
     "redux": "^4.0.5"
   },
+  "proxy": "http://projects-demo.tk/demo/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
