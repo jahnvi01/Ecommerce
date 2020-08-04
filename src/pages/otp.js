@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import dawabagLogo2 from '../images/dawabag-logo2.png';
 import {authentication,isAuth} from '../function/auth';
-import { withRouter } from 'react-router-dom';
 import ShowAlert from '../function/alert';
 import Config from '../Config';
-import { NavLink } from 'react-router-dom';
+import { withRouter,Link,NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
 class Otp extends Component {
 
 	state={
@@ -67,6 +67,14 @@ const data={
 	if(res.result.message==="Correct OTP."){
 console.log(res.result.message)		
 		authentication(res.result);
+
+		if(this.props.cart.length!==0){
+			this.props.cart.map(product=>this.props.addCart(product))
+			this.props.getCart()
+		}
+else{
+	this.props.getCart()
+}
 this.props.history.push("/demo")
 	}	
 	 
@@ -128,5 +136,66 @@ this.props.history.push("/demo")
     );
   }
 }
+function mapStateToProps(state){
+	
+	
+		return {
 
-export default withRouter(Otp);
+			cart:JSON.parse(localStorage.getItem('cart')||'[]'),
+	
+		}
+	  
+	}
+function mapDispatchToStates(dispatch){
+    return{
+   
+        getCart:()=>{
+
+      
+
+            const data={
+                apiVersion:Config.APIVERSION,
+                token:"",
+                userId:isAuth().userId,
+                     imei:Config.IMEI
+            }
+			fetch(Config.API+'/get_cart_items',{
+				method: "post",
+				headers: {
+				  'Accept': 'application/json, text/plain, */*',
+				  'Content-Type': 'application/json'
+				},body:JSON.stringify(data)
+			  })
+			  .then(res=>res.json())
+            .then(res=>dispatch({type:"get",payload:res.data.medicines})) 
+		  } ,
+		  addCart:(product)=>{
+      console.log(product)
+			
+			if(isAuth()){
+
+			const data={
+			  apiVersion:Config.APIVERSION,
+			  token:"",
+			  userId:isAuth().userId,
+			  medicineId:product.id,
+			  medicineStrengthId:product.medicineStrengthId,
+			  quantity:product.quantity,
+			  imei:Config.IMEI
+			}
+			return fetch(Config.API+'/add_item_in_cart',{
+			  method: "post",
+			   headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			  },body:JSON.stringify(data)
+			})
+			.then(res=>res.json())
+			.then(res=>console.log(res)) 
+		  } 
+		  }
+	
+
+    }
+  }
+export default withRouter(connect(mapStateToProps,mapDispatchToStates)(Otp));

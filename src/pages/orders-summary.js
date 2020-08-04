@@ -98,7 +98,7 @@ updateData=()=>{
 showDetails=(details)=>{
     if(details){
         if(details.items){
-
+console.log(details.items)
  
 var orders=details.items.map(order=>{
 return(  <div className="product-row2" key={order.medicineId}>
@@ -197,7 +197,7 @@ showOrder=()=>{
         	<ul className="inner-bar1">
             	<li><NavLink to={Config.BASE_URL}>Home</NavLink></li>
                 <li>/</li>
-                <li>Select Address</li>
+                <li>Order Summary</li>
             </ul>
         </div>
     </div>
@@ -205,7 +205,7 @@ showOrder=()=>{
 
 <section className="inner-head">
 	<div className="margin">
-    	<h2>Select Address</h2>
+    	<h2>Order Summary</h2>
     </div>
 </section>
 
@@ -262,7 +262,7 @@ showOrder=()=>{
                         <div className="payment-rt">Rs.{this.state.subTotal}</div>
                     </div>
                     
-                    <NavLink to={Config.BASE_URL+"#"} className="sidbar-btn3">Place Order</NavLink>
+                    <NavLink to={Config.BASE_URL+"#"} className="sidbar-btn3">Reorder</NavLink>
                     
                 </div>
                 

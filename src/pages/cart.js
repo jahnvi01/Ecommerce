@@ -111,7 +111,7 @@ onFileChange = event => {
   }; 
    
 
-    remove=(id)=>{
+    remove=(medicineId,id)=>{
         const args = {
             message: "Removed From Cart",
            duration: 3,
@@ -122,7 +122,7 @@ onFileChange = event => {
         
            
               notification.error(args);
-              this.props.remove(id)
+              this.props.remove(medicineId,id)
               this.countBill();
     }
     dropdown=(no)=>{
@@ -190,7 +190,7 @@ this.props.addCart(selected)
 
 
   variant=(items,id)=>{
-     
+     if(items){
       if(items.length!==0){
 var items=items.map(item=>{
 return(
@@ -200,7 +200,7 @@ return(
   }
 return items
   }
-
+  }
       showMedicines=()=>{
        
         if(this.props.cart.length!==0){
@@ -261,7 +261,7 @@ return items
      {this.dropdown(medicine.orderQuantityLimit)}
      </Select>
                     
-                                <button className="product-btn1" onClick={()=>{this.remove(medicine.id)}}>Remove CART</button>
+                                <button className="product-btn1" onClick={()=>{this.remove(medicine.medicineCartId,medicine.id)}}>Remove CART</button>
                                 <div className="product-bar4">
                                 	<h6>TOTAL AMOUNT</h6><br />
                                     ₹<h5 className="subtotal">{medicine.total}</h5>
@@ -446,7 +446,7 @@ console.log(product)
        
     },     
     
-        remove:(id)=>{
+        remove:(medicineId,id)=>{
 
             dispatch({type:"remove",payload:{id:id,message:"Removed From Cart"}})
           
@@ -456,7 +456,7 @@ console.log(product)
         	imei:Config.IMEI,
             token:"",
             userId:isAuth().userId,
-            id:id
+            id:medicineId
         	}
                 return fetch(Config.API+'/remove_item_from_cart',{
                     method: "post",

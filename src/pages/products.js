@@ -183,9 +183,11 @@ addCart=(product)=>{
           if(medicine.strenghts.length!==0){
             var data={
                 id:medicine.id,
+                medicineCartId:medicine.id,
                 image1:medicine.image1,
                 image2:medicine.image2,
                 image3:medicine.image3,
+
                 image4:medicine.image4,
                 image5:medicine.image5,
                 image6:medicine.image6,
@@ -201,28 +203,7 @@ addCart=(product)=>{
                 total:medicine.strenghts[0].MRP
                         }
           }
-          else{
-            var data={
-                id:medicine.id,
-                image1:medicine.image1,
-                image2:medicine.image2,
-                image3:medicine.image3,
-                image4:medicine.image4,
-                image5:medicine.image5,
-                image6:medicine.image6,
-                orderQuantityLimit:medicine.orderQuantityLimit,
-                strenghts:[],
-                genericName:medicine.genericName,
-                tabletPack:medicine.tabletPack,
-                medicineStrengthId:"",
-                strength:"",
-                totalPriceToRetailer:0,
-                MRP:0,
-                quantity:1,
-                total:0
-                        }
-          }
-      
+         
                       selections.push(data)
       })
 this.setState({selections:selections})

@@ -35,7 +35,37 @@ componentWillUnmount() {
 }
 	change=()=>{
 		var name=document.getElementById("myInput")
-		autocomplete(name,countries)
+
+var value=document.getElementById("myInput").value
+
+
+		const data={
+			apiVersion:Config.APIVERSION,
+			medicineName:value,
+		 token:""
+		 }
+		  fetch(Config.API+'/search_medicines',{
+		   method: "post",
+		   headers: {
+			 'Accept': 'application/json, text/plain, */*',
+			 'Content-Type': 'application/json'
+		   },body:JSON.stringify(data)
+		 })
+		 .then(res=>res.json())
+		 .then(res=>{
+	var names=[]
+	if(res.data.medicines.length!==0){
+		 res.data.medicines.map(medicine=>{
+		names.push(medicine.genericName)
+		 })
+
+	autocomplete(name,names)
+			 }
+			 
+			})
+
+
+		
 		console.log(name)
 	  }
 
@@ -45,7 +75,10 @@ componentWillUnmount() {
 var name=document.getElementById("myInput").value;
 if(name){
 
-this.props.history.replace(`/demo/search-products/${name}`)
+// window.location.replace(`/demo/search-products/${name}`)
+
+
+	this.props.history.push(`/demo/search-products/${name}`,{id:""})
 
 }
 	}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,NavLink } from 'react-router-dom'
+import { Link,NavLink ,withRouter} from 'react-router-dom'
 import KnowerWrapp from '../include/knower-wrapp';
 import Footer from '../include/footer';
 import Header from '../include/header';
@@ -27,6 +27,7 @@ class SearchProducts extends Component {
 state={
     message:"",
     error:"",
+    name:"",
     medicines:[],
     selections:[],
     options:{
@@ -139,12 +140,15 @@ return items
   componentWillMount(){
  this.searchProducts();
   }
-componentDidMount(){
-    this.searchProducts()
-}
+// componentDidMount(){
+//     this.searchProducts()
+// }
 
 componentDidUpdate(){
-    this.searchProducts();  
+    var name=this.props.match.params.name
+  if(this.state.name!==name){
+window.location.reload()
+  }
 }
 
 
@@ -180,6 +184,7 @@ componentDidUpdate(){
 
   searchProducts=()=>{
    var name=this.props.match.params.name
+   this.setState({name:name})
   console.log(name)
 
     const data={
@@ -202,6 +207,7 @@ componentDidUpdate(){
          if(medicine.strenghts.length!==0){
            var data={
                id:medicine.id,
+               medicineCartId:medicine.id,
                image1:medicine.image1,
                image2:medicine.image2,
                image3:medicine.image3,
@@ -220,28 +226,7 @@ componentDidUpdate(){
                total:medicine.strenghts[0].MRP
                        }
          }
-         else{
-           var data={
-               id:medicine.id,
-               image1:medicine.image1,
-               image2:medicine.image2,
-               image3:medicine.image3,
-               image4:medicine.image4,
-               image5:medicine.image5,
-               image6:medicine.image6,
-               orderQuantityLimit:medicine.orderQuantityLimit,
-               strenghts:[],
-               genericName:medicine.genericName,
-               tabletPack:medicine.tabletPack,
-               medicineStrengthId:"",
-               strength:"",
-               totalPriceToRetailer:0,
-               MRP:0,
-               quantity:1,
-               total:0
-                       }
-         }
-     
+      
                      selections.push(data)
      })
 this.setState({selections:selections})
@@ -520,6 +505,6 @@ function mapStateToProps(state){
 
   
     
-      export default connect(mapStateToProps,mapDispatchToStates)(SearchProducts);
+      export default withRouter(connect(mapStateToProps,mapDispatchToStates)(SearchProducts));
 
 

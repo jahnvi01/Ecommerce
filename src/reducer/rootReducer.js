@@ -29,6 +29,31 @@ console.log(localStorage.getItem("cart"));
 
 }
 
+
+if(isAuth()){
+  const data={
+     apiVersion:Config.APIVERSION,
+ userId:isAuth().userId,
+ token:"",
+ imei:Config.IMEI
+ }
+  fetch(Config.API+'/get_cart_items',{
+    method: "post",
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },body:JSON.stringify(data)
+  })
+  .then(res=>res.json())
+ // .then(res=>console.log(res))
+  .then(res=>{
+     localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
+console.log(localStorage.getItem("cart"));
+})
+}
+
+
+
 if(localStorage.getItem('bill')===null){
   var data={
     total:0,
@@ -53,6 +78,7 @@ const rootReducer =(state=initState,action)=>{
 
     switch(action.type){
 
+      case "get":    localStorage.setItem('cart',JSON.stringify(action.payload));  return{...state,cart:localStorage.getItem('cart')||[]}
          case "add":var cart=JSON.parse(state.cart);
          console.log(cart)
           cart=[action.payload.product,...cart];

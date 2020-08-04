@@ -225,6 +225,7 @@ return items
       var medicine=res.data.medicine[0];
       var data={
         id:medicine.id,
+        medicineCartId:medicine.id,
         image1:medicine.image1,
         image2:medicine.image2,
         image3:medicine.image3,
