@@ -33,6 +33,7 @@ class NewAddress extends Component {
     //         userId:isAuth().userId,
     //         userAddressId:1,
     //         total:this.props.total,
+    //           prescriptions:[{id:2}, {id:2}, {id:2}],
     // gst:30,
     // discount:53,
     // payable:this.props.bill,
@@ -66,7 +67,9 @@ class NewAddress extends Component {
       var state=document.getElementById("state").value;
       var country=document.getElementById("country").value;
       var postcode=document.getElementById("postcode").value;
-//       apiVersion:Config.APIVERSION,
+
+if(address1 && address2 && address3 && fullname && city && state && country && postcode && /^(\d{4}|\d{6})$/.test(postcode)){
+      //       apiVersion:Config.APIVERSION,
 //       userId:isAuth().userId,
 // addressLine1:address1,
 // addressLine2:address2,
@@ -95,20 +98,24 @@ class NewAddress extends Component {
         "imei":Config.IMEI,
         "token":""
       }
+      alert("done")
 
-      fetch(Config.API+'/user_address_insert',{
-        method: "post",
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        },body:JSON.stringify(data)
-      })
-      .then(res=>res.json())
-.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})})
-    //   .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
-    //   console.log(this.state)       })
+//       fetch(Config.API+'/user_address_insert',{
+//         method: "post",
+//         headers: {
+//           'Accept': 'application/json, text/plain, */*',
+//           'Content-Type': 'application/json'
+//         },body:JSON.stringify(data)
+//       })
+//       .then(res=>res.json())
+// .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})})
+//     //   .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
+//     //   console.log(this.state)       })
 
-      
+    }
+    else{
+        this.setState({error:"Fill up all the fields with valid data"})
+    }
   }
   render() {
     userAuth(this.props);  

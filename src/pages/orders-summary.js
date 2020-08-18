@@ -131,8 +131,7 @@ showOrder=()=>{
     if(this.state.user && this.state.orders){
         var user=this.state.user;
         var orders=this.state.orders
-        console.log(user)
-        console.log(orders)
+
         return(
     <div>
                <div className="summary-row3">

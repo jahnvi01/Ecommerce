@@ -167,7 +167,15 @@ function mapDispatchToStates(dispatch){
 				},body:JSON.stringify(data)
 			  })
 			  .then(res=>res.json())
-            .then(res=>dispatch({type:"get",payload:res.data.medicines})) 
+			.then(res=>{
+				if(res.data.medicines!==null){
+					dispatch({type:"get",payload:res.data.medicines})
+				}
+else{
+	dispatch({type:"get",payload:[]})}
+}			
+			
+			) 
 		  } ,
 		  addCart:(product)=>{
       console.log(product)
@@ -180,6 +188,7 @@ function mapDispatchToStates(dispatch){
 			  userId:isAuth().userId,
 			  medicineId:product.id,
 			  medicineStrengthId:product.medicineStrengthId,
+			  medicineBatchId:product.medicineStrengthId,
 			  quantity:product.quantity,
 			  imei:Config.IMEI
 			}

@@ -85,8 +85,9 @@ console.log(this.state.value)
         userId:isAuth().userId,
         userAddressId:this.state.value,
         total:this.props.total,
+        prescriptions:[{id:2}, {id:2}, {id:2}],
 gst:30,
-discount:53,
+discount:3,
 payable:this.props.bill,
 copounId:"FLAT50",
 items:this.props.items

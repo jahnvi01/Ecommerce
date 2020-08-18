@@ -99,6 +99,7 @@ this.state.selection.strenghts.map(item=>{
     selection.totalPriceToRetailer=item.totalPriceToRetailer;
     selection.MRP=item.MRP;
     selection.medicineStrengthId=item.id
+    selection.medicineBatchId=item.id
     }
 })
 var total=parseInt(selection.quantity) *parseInt(selection.MRP);
@@ -221,8 +222,8 @@ return items
       })
       .then(res=>res.json())
       //.then(res=>console.log(res))
-      .then(res=>{this.setState({product:res.data.medicine[0]||"",error:res.error||""});
-      var medicine=res.data.medicine[0];
+      .then(res=>{this.setState({product:res.data.medicines[0]||"",error:res.error||""});
+      var medicine=res.data.medicines[0];
       var data={
         id:medicine.id,
         medicineCartId:medicine.id,
@@ -237,6 +238,7 @@ return items
         genericName:medicine.genericName,
         tabletPack:medicine.tabletPack,
         medicineStrengthId:medicine.strenghts[0].id,
+        medicineBatchId:medicine.strenghts[0].id,
         strength:medicine.strenghts[0].strength,
         totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
         MRP:medicine.strenghts[0].MRP,
@@ -373,6 +375,7 @@ function mapStateToProps(state){
                     userId:isAuth().userId,
                     medicineId:product.id,
                     medicineStrengthId:product.medicineStrengthId,
+                    medicineBatchId:product.medicineStrengthId,
                     quantity:product.quantity,
                     imei:Config.IMEI
                 }

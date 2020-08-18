@@ -109,6 +109,7 @@ MRP=item.MRP
 var total=parseInt(selected.quantity) *parseInt(MRP);
 selected.strength=strength;
 selected.medicineStrengthId=medicineStrengthId;
+selected.medicineBatchId=medicineStrengthId;
 selected.totalPriceToRetailer=totalPriceToRetailer;
 selected.MRP=MRP;
 selected.total=total;
@@ -219,6 +220,7 @@ window.location.reload()
                tabletPack:medicine.tabletPack,
                orderQuantityLimit:medicine.orderQuantityLimit,
                medicineStrengthId:medicine.strenghts[0].id,
+               medicineBatchId:medicine.strenghts[0].id,
                strength:medicine.strenghts[0].strength,
                totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
                MRP:medicine.strenghts[0].MRP,
@@ -485,6 +487,7 @@ function mapStateToProps(state){
                 userId:isAuth().userId,
                 medicineId:product.id,
                 medicineStrengthId:product.medicineStrengthId,
+                medicineBatchId:product.medicineStrengthId,
                 quantity:product.quantity,
                 imei:Config.IMEI
               }

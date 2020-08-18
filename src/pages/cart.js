@@ -17,13 +17,14 @@ import 'antd/dist/antd.css';
 import { notification } from 'antd';
 import Config from '../Config';
 import { Select } from 'antd';
-
+let fileUpload = require('fuctbase64');
 const { Option } = Select;
 
 class Cart extends Component {
     state={
         message:"",
         error:"",
+        prescriptions:[],
         orders:this.props.items,
         options:{
             items: 1,
@@ -56,6 +57,31 @@ class Cart extends Component {
             }
         }
     }
+
+componentWillMount(){
+    if(isAuth()){
+    var data={
+        "apiVersion":"1.0",
+"userId":isAuth().userId
+    };  
+    fetch(Config.API+'/getUserPrescriptions',{
+        method: "post",
+         headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },body:JSON.stringify(data)
+      })
+      .then(res=>res.json())
+      .then(res=>{
+          if(res.result.message==="Service completed."){
+        
+        this.setState({prescriptions:res.result.prescriptions})
+     
+      }
+    }
+        ) 
+}
+}
     componentDidMount(){
         this.countBill()
     }
@@ -98,16 +124,58 @@ var data={
 }
 localStorage.setItem('bill',JSON.stringify(data))
 }
-onFileChange = event => { 
+getPrescriptions=()=>{
+console.log(this.state.prescriptions)
+var samples=this.state.prescriptions.map(prescription=>{
+    if(prescription.path){
+    return(
+        <div>
+				<div className="sample"><img src={prescription.path}/></div>
+        </div>
+    )
+    }
+})
 
-    const formData = new FormData(); 
+return samples
+
+}
+onFileChange = event => { 
+    let result = fileUpload(event).then(result => {
+        var data={
+            "apiVersion":"1.0",
+	"userId":isAuth().userId,
+	"prescription":result.base64
+        };  
+        fetch(Config.API+'/uploadPrescription',{
+            method: "post",
+             headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },body:JSON.stringify(data)
+          })
+          .then(res=>res.json())
+          .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
+          const args = {
+            message: res.result.message,
+           duration: 3,
+           style:{
+            zIndex:1000
+        }
+          };
+        
+           
+              notification.success(args);
+        
+        }) 
+      });
+    // const formData = new FormData(); 
  
-    formData.append( 
-      "file", 
-      event.target.files[0], 
+    // formData.append( 
+    //   "file", 
+    //   event.target.files[0], 
    
-    );  
-    console.log(formData); 
+    // );  
+    // console.log(formData); 
   }; 
    
 
@@ -319,9 +387,9 @@ return items
 						<div className="summary-bar22"><img src={orderdot1} alt="order icon1"/></div>
 						<div className="summary-bar33"><h5><span>Prescriptions Uploded By You:</span></h5></div>
 							<div className="sample-row1">
-								<div className="sample"><img src={sample}/></div>
-								<div className="sample"><img src={sample}/></div>
-								<div className="sample"><img src={sample}/></div>
+                                {this.getPrescriptions()}
+						
+				
 								<div className="sample"><span className="hiddenFileInput"><input type="file" name="theFile" onChange={(event)=>{this.onFileChange(event)}}/></span></div>
 							</div>
 						</div>
@@ -429,6 +497,7 @@ console.log(product)
                 userId:isAuth().userId,
                 medicineId:product.id,
                 medicineStrengthId:product.medicineStrengthId,
+                medicineBatchId:product.medicineStrengthId,
                 quantity:product.quantity,
                 imei:Config.IMEI
             }

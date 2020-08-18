@@ -21,9 +21,16 @@ if(isAuth()){
   .then(res=>res.json())
  // .then(res=>console.log(res))
   .then(res=>{
-     localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
-console.log(localStorage.getItem("cart"));
-})
+
+
+    
+				if(res.data.medicines!==null){
+          localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
+				}
+else{
+  localStorage.setItem('cart','[]'); 
+}
+  })
 }
 
 
@@ -47,13 +54,20 @@ if(isAuth()){
   .then(res=>res.json())
  // .then(res=>console.log(res))
   .then(res=>{
-     localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
-console.log(localStorage.getItem("cart"));
+    if(res.data.medicines!==null && localStorage.getItem('cart')==='[]' ){
+      localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
+    }
+else if(res.data.medicines===null && localStorage.getItem('cart')==='[]' ){
+  localStorage.setItem('cart','[]'); 
+}
+
 })
 }
 
 
-
+if(localStorage.getItem('cart')===null){
+  localStorage.setItem('cart','[]'); 
+}
 if(localStorage.getItem('bill')===null){
   var data={
     total:0,
@@ -78,7 +92,11 @@ const rootReducer =(state=initState,action)=>{
 
     switch(action.type){
 
-      case "get":    localStorage.setItem('cart',JSON.stringify(action.payload));  return{...state,cart:localStorage.getItem('cart')||[]}
+      case "get":   
+      if(action.payload!==null){
+        localStorage.setItem('cart',JSON.stringify(action.payload));
+      }
+       return{...state,cart:localStorage.getItem('cart')||[]}
          case "add":var cart=JSON.parse(state.cart);
          console.log(cart)
           cart=[action.payload.product,...cart];
