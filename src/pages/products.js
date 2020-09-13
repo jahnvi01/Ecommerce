@@ -169,7 +169,7 @@ addCart=(product)=>{
      const data={"apiVersion":Config.APIVERSION,
       "imei":Config.IMEI,
       "token":"",
-      medicineName:"eco"
+      medicineName:"e"
       }
       return fetch(Config.API+'/search_medicines',{
 		method: "post",

@@ -107,7 +107,7 @@ class Home extends Component {
           })
           .then(res=>res.json())
       
-          .then(res=>{this.setState({banners:res.data.banners[0]||[],blogs:res.data.blogs[0]||[],error:res.error||""})
+          .then(res=>{this.setState({banners:res.data.banners||[],blogs:res.data.blogs||[],error:res.error||""})
           console.log(this.state)       })
   
 

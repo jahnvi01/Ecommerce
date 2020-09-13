@@ -95,22 +95,23 @@ if(address1 && address2 && address3 && fullname && city && state && country && p
         "pincode":postcode,
         "lat":"",
         "lng":"",
+        "name":"",
         "imei":Config.IMEI,
         "token":""
       }
-      alert("done")
+    
 
-//       fetch(Config.API+'/user_address_insert',{
-//         method: "post",
-//         headers: {
-//           'Accept': 'application/json, text/plain, */*',
-//           'Content-Type': 'application/json'
-//         },body:JSON.stringify(data)
-//       })
-//       .then(res=>res.json())
-// .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})})
-//     //   .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
-//     //   console.log(this.state)       })
+      fetch(Config.API+'/user_address_insert',{
+        method: "post",
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },body:JSON.stringify(data)
+      })
+      .then(res=>res.json())
+.then(res=>{this.setState({message:res.result.message||"",error:res.error||""})})
+    //   .then(res=>{this.setState({message:res.result.message||"",error:res.error||""})
+    //   console.log(this.state)       })
 
     }
     else{
