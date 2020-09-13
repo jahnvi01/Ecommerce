@@ -79,7 +79,7 @@ var selections=this.state.selections.map(selected=>{
     if(selected.id===id){
    
         selected.quantity=qnt;
-        var total=parseInt(qnt)*parseInt(selected.MRP)
+        var total=parseInt(qnt)*parseInt(selected.offerPrice)
         selected.total=total
        console.log(qnt)
     }
@@ -96,22 +96,22 @@ var selections=this.state.selections.map(selected=>{
   
         if(selected.id===id){
        
-var totalPriceToRetailer=selected.totalPriceToRetailer;
 var MRP=selected.MRP;
+var offerPrice=selected.offerPrice;
 var medicineStrengthId=selected.medicineStrengthId;
 selected.strenghts.map(item=>{
 if(item.strength===strength){
     medicineStrengthId=item.medicineStrengthId;
-totalPriceToRetailer=item.totalPriceToRetailer;
-MRP=item.MRP
+MRP=item.MRP;
+offerPrice=item.offerPrice
 }
 })
-var total=parseInt(selected.quantity) *parseInt(MRP);
+var total=parseInt(selected.quantity) *parseInt(offerPrice);
 selected.strength=strength;
 selected.medicineStrengthId=medicineStrengthId;
 selected.medicineBatchId=medicineStrengthId;
-selected.totalPriceToRetailer=totalPriceToRetailer;
 selected.MRP=MRP;
+selected.offerPrice=offerPrice;
 selected.total=total;
     
         }
@@ -222,10 +222,10 @@ window.location.reload()
                medicineStrengthId:medicine.strenghts[0].id,
                medicineBatchId:medicine.strenghts[0].id,
                strength:medicine.strenghts[0].strength,
-               totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
                MRP:medicine.strenghts[0].MRP,
+               offerPrice:medicine.strenghts[0].offerPrice,
                quantity:1,
-               total:medicine.strenghts[0].MRP
+               total:medicine.strenghts[0].offerPrice
                        }
          }
       
@@ -288,10 +288,10 @@ this.setState({selections:selections})
                       <NavLink to={Config.BASE_URL+"#"} className="product-btn2">100 grams</NavLink>  */}
                   </div>
               {/* {this.price(medicine)} */}
-              <h5 className="underline" id="retailPrice">{medicine.totalPriceToRetailer}</h5>
+              <h5 className="underline" id="retailPrice">{medicine.MRP}</h5>
                   <h4>Recommended retail price</h4>
                       
-                  <h5 id="total">{medicine.MRP}</h5>
+                  <h5 id="total">{medicine.offerPrice}</h5>
                   <div className="product-bar3">                   
      <Select defaultValue="1" style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
    {this.dropdown(medicine.orderQuantityLimit)}

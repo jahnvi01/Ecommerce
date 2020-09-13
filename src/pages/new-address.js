@@ -38,6 +38,7 @@ class NewAddress extends Component {
     // discount:53,
     // payable:this.props.bill,
     // copounId:"FLAT50",
+    //  name:"",
     // items:this.props.items
     //         }
     //             return fetch(Config.API+'/place_order',{

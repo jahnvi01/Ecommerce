@@ -41,6 +41,31 @@ class Address extends Component {
 
          .then(res=>{this.setState({addresses:res.data.user_address||[],error:res.error||""})
          console.log(this.state)       })
+
+
+         fetch(Config.API+'/getUserPrescriptions',{
+            method: "post",
+             headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },body:JSON.stringify(data)
+          })
+          .then(res=>res.json())
+          .then(res=>{
+              if(res.result.message==="Service completed."){
+            if(res.result.prescriptions.length!==0){
+                var prescriptions=[]
+                res.result.prescriptions.map(prescription=>{
+                    prescriptions.push({id:prescription.id})
+                })
+                console.log(prescriptions)
+                this.setState({prescriptions:prescriptions})
+            }
+           
+         
+          }
+        }
+            )
  
    }
 
@@ -85,7 +110,7 @@ console.log(this.state.value)
         userId:isAuth().userId,
         userAddressId:this.state.value,
         total:this.props.total,
-        prescriptions:[{id:2}, {id:2}, {id:2}],
+        prescriptions:this.state.prescriptions,
 gst:30,
 discount:3,
 payable:this.props.bill,

@@ -209,7 +209,7 @@ onFileChange = event => {
         if(selected.id===id){
        
             selected.quantity=qnt;
-            var total=parseInt(qnt)*parseInt(selected.MRP)
+            var total=parseInt(qnt)*parseInt(selected.offerPrice)
             selected.total=total
             this.props.addCart(selected)
         }
@@ -229,18 +229,18 @@ onFileChange = event => {
       
             if(selected.id===id){
            
-var totalPriceToRetailer=selected.totalPriceToRetailer;
 var MRP=selected.MRP;
+var offerPrice=selected.offerPrice;
 selected.strenghts.map(item=>{
     if(item.strength===strength){
-    totalPriceToRetailer=item.totalPriceToRetailer;
-    MRP=item.MRP
+    MRP=item.MRP;
+    offerPrice=item.offerPrice
     }
 })
-var total=parseInt(selected.quantity) *parseInt(MRP);
+var total=parseInt(selected.quantity) *parseInt(offerPrice);
 selected.strength=strength;
-selected.totalPriceToRetailer=totalPriceToRetailer;
 selected.MRP=MRP;
+selected.offerPrice=offerPrice;
 selected.total=total;
 this.props.addCart(selected)      
             }
@@ -322,7 +322,7 @@ return items
                             {this.variant(medicine.strenghts,medicine.id)}
                             	</div>
                             <h4>Recommended retail price</h4>
-                        <h5><span>&#8377;</span>{medicine.MRP}</h5>
+                        <h5><span>&#8377;</span>{medicine.offerPrice}</h5>
                             <div className="product-bar3">
                      
                        <Select defaultValue={medicine.quantity} value={medicine.quantity}  style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event,event,medicine.id)}}>
@@ -442,8 +442,11 @@ payment options.</span></label>
                             <h6>TOTAL AMOUNT</h6><br />
                             <h5 id="bill2"></h5>
                         </div>
-                        <NavLink to={Config.BASE_URL+"address"} className="sidbar-btn1">Proceed</NavLink>
-                    </div>
+                        {this.props.cart.length!==0 &&(
+   <NavLink to={Config.BASE_URL+"address"} className="sidbar-btn1">Proceed</NavLink>
+               
+                        )}
+                          </div>
                     
                 </div>
                 

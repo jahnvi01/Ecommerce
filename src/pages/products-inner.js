@@ -92,17 +92,17 @@ class ProductsInner extends Component {
     changeStrength=(strength)=>{
   
    var selection=this.state.selection;        
-var totalPriceToRetailer=this.state.selection.totalPriceToRetailer;
 var MRP=this.state.selection.MRP;
+var offerPrice=this.state.selection.offerPrice;
 this.state.selection.strenghts.map(item=>{
     if(item.strength===strength){
-    selection.totalPriceToRetailer=item.totalPriceToRetailer;
     selection.MRP=item.MRP;
+    selection.offerPrice=item.offerPrice;
     selection.medicineStrengthId=item.id
     selection.medicineBatchId=item.id
     }
 })
-var total=parseInt(selection.quantity) *parseInt(selection.MRP);
+var total=parseInt(selection.quantity) *parseInt(selection.offerPrice);
 selection.strength=strength;
 selection.total=total;
         
@@ -178,7 +178,7 @@ return items
                             	</div>
                             <h4>Recommended retail price</h4>
                         <h5 className="underline"><span>&#8377;</span>{this.state.selection.PriceToRetailer}</h5>
-                        <h5><span>&#8377;</span>{this.state.selection.MRP}</h5>
+                        <h5><span>&#8377;</span>{this.state.selection.offerPrice}</h5>
                             <div className="product-bar3">
                             <Select defaultValue="1" style={{ width: 50,margin:"0 10px 0 0" }} className="quantity" onChange={(event)=>{this.handleChange(event)}}>
      {this.dropdown(this.state.selection.orderQuantityLimit)}
@@ -240,10 +240,10 @@ return items
         medicineStrengthId:medicine.strenghts[0].id,
         medicineBatchId:medicine.strenghts[0].id,
         strength:medicine.strenghts[0].strength,
-        totalPriceToRetailer:medicine.strenghts[0].totalPriceToRetailer,
         MRP:medicine.strenghts[0].MRP,
+        offerPrice:medicine.strenghts[0].offerPrice,
         quantity:1,
-        total:medicine.strenghts[0].MRP
+        total:medicine.strenghts[0].offerPrice
       }
   this.setState({selection:data})
      
@@ -265,7 +265,7 @@ handleChange=(qnt)=> {
   
 var selection=this.state.selection;
 selection.quantity=qnt;
-var total=parseInt(qnt)*parseInt(selection.MRP);
+var total=parseInt(qnt)*parseInt(selection.offerPrice);
 selection.total=total;
 this.setState({selection:selection})
 

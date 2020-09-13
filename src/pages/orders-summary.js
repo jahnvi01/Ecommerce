@@ -49,8 +49,9 @@ componentWillMount(){
     var total=0;
     if(res.data.order_details[0].items.length!==0){
         res.data.order_details[0].items.map(item=>{
+            console.log(item)
             qnt=qnt+parseInt(item.quantity);
-            total=total+parseInt(item.subTotal);
+            total=total+parseInt(item.offerPrice)*parseInt(item.quantity);
         }) 
 
     }
@@ -115,7 +116,7 @@ return(  <div className="product-row2" key={order.medicineId}>
 <h5>Qty {order.quantity}</h5>
     <div className="product-bar3">
         <div className="product-bar4">
-<h6><span>Rs.</span>{order.subTotal}</h6>
+<h6><span>Rs.</span>{order.offerPrice}</h6>
         </div>
     </div>
 </div>
