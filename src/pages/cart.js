@@ -106,12 +106,14 @@ componentWillMount(){
 countBill=()=>{
     var total=0;
     this.props.cart.map(item=>{
+        console.log(item.total)
         total=total+parseInt(item.total)
     })
 //     var products=document.getElementsByClassName("subtotal");
 // for(var i=0;i<products.length;i++){
 //    total=total+ parseInt(products[i].innerHTML);
 // }
+
 document.getElementById("totalBill").innerHTML=total;
 var delivery=parseInt(document.getElementById("delivery").innerHTML);
 var discount=parseInt(document.getElementById("discount1").innerHTML);
@@ -165,7 +167,7 @@ onFileChange = event => {
         
            
               notification.success(args);
-        
+        window.location.reload()
         }) 
       });
     // const formData = new FormData(); 

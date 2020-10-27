@@ -151,7 +151,7 @@ addCart=(product)=>{
           var flag=0;
 
           if(this.props.cart.length!==0){
-              console.log(this.props.cart.length)
+              console.log(product)
               this.props.cart.map(item=>{
                   if(item.id===product.id){
                       flag=1;
@@ -393,11 +393,11 @@ function mapStateToProps(state){
         return{
        
           addCart:(product)=>{
-
-         
+console.log("1")
+console.log(product)    
               dispatch({type:"add",payload:{product,message:"Added To Cart"}})
               if(isAuth()){
-  console.log(isAuth())
+
               const data={
                   apiVersion:Config.APIVERSION,
                   token:"",
@@ -408,6 +408,7 @@ function mapStateToProps(state){
                   quantity:product.quantity,
                   imei:Config.IMEI
               }
+              console.log("1")
               return fetch(Config.API+'/add_item_in_cart',{
                 method: "post",
                  headers: {

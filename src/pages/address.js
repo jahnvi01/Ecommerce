@@ -128,7 +128,8 @@ items:this.props.items
               .then(res=>{this.setState({message:res.result.message})
             if(res.result.message){
                 removeLocalStorage('cart');
-                removeLocalStorage('bill')
+                removeLocalStorage('bill');
+                this.setState({message:"Order placed"})
             }
 
 

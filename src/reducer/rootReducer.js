@@ -28,6 +28,7 @@ if(isAuth()){
           localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
 				}
 else{
+  
   localStorage.setItem('cart','[]'); 
 }
   })
@@ -58,7 +59,9 @@ if(isAuth()){
       localStorage.setItem('cart',JSON.stringify(res.data.medicines)); 
     }
 else if(res.data.medicines===null && localStorage.getItem('cart')==='[]' ){
-  localStorage.setItem('cart','[]'); 
+  if(localStorage.getItem('cart')===null){
+    localStorage.setItem('cart','[]'); 
+  }
 }
 
 })

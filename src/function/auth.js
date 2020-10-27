@@ -30,7 +30,6 @@ export const authentication=(data)=>{
 export const signout=()=>{
 removeCookie('token');
 removeLocalStorage('user');
-removeLocalStorage('cart');
 removeLocalStorage('bill');
 window.location.reload()
 }
